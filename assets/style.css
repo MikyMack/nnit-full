@@ -1,0 +1,234 @@
+@import "/section-css/reset.css";
+@import "/section-css/mobile-menu.css";
+@import "/section-css/header.css";
+@import "/section-css/hero.css";
+@import "/section-css/about.css";
+@import "/section-css/category.css";
+@import "/section-css/features.css";
+@import "/section-css/course.css";
+@import "/section-css/why-choose.css";
+@import "/section-css/funfact.css";
+@import "/section-css/partner.css";
+@import "/section-css/testimonial.css";
+@import "/section-css/blog.css";
+@import "/section-css/call-action.css";
+@import "/section-css/video.css";
+@import "/section-css/team.css";
+@import "/section-css/faq.css";
+@import "/section-css/breadcrumbs.css";
+@import "/section-css/apply.css";
+@import "/section-css/event.css";
+@import "/section-css/contact.css";
+@import "/section-css/product.css";
+@import "/section-css/error.css";
+@import "/section-css/checkout.css";
+@import "/section-css/sidebars.css";
+@import "/section-css/auth-pages.css";
+@import "/section-css/footer.css";
+
+/* Custom checkbox styling for privacy policy */
+.custom-check {
+    accent-color: #24519a;
+}
+/* fallback for browsers not supporting accent-color */
+.custom-check:checked + strong,
+.custom-check:checked + span,
+.custom-check:checked ~ strong {
+    color: #24519a;
+}
+/* Optional: visually highlight label when checked */
+.form-check-input.custom-check:checked ~ .form-check-label,
+.form-check-input.custom-check:checked + .form-check-label {
+    color: #24519a;
+}
+/* Eye icon hover effect */
+.toggle-password:hover i {
+    color: #24519a;
+}
+/* Spinner for loading in button */
+.spinner-border {
+    vertical-align: middle;
+    margin-right: 4px;
+}
+.ed-btn .btn-loading {
+    display: inline-flex;
+    align-items: center;
+}
+
+.study-abroad-details-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 41, 59, 0.82);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 0 8px;
+    min-height: 100vh;
+    transition: background 0.3s;
+}
+.study-abroad-details-modal {
+    background: #fff;
+    border-radius: 24px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 12px 48px 0 rgba(30, 41, 59, 0.18), 0 2px 12px rgba(99,102,241,0.10);
+    animation: fadeInModal 0.32s cubic-bezier(.68,-0.55,.27,1.55);
+    display: flex;
+    flex-direction: column;
+    max-height: 92vh;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+@keyframes fadeInModal {
+    0% { transform: scale(0.92) translateY(40px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+.study-abroad-details-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 28px 12px 28px;
+    background: linear-gradient(90deg, #1c3e75 0%, #010101 100%);
+    border-radius: 24px 24px 0 0;
+    position: relative;
+    min-height: 56px;
+    box-shadow: 0 2px 12px rgba(99,102,241,0.07);
+}
+.study-abroad-details-header h5 {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin: 0;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    flex: 1;
+    text-align: left;
+}
+.close-btn {
+    background: rgba(255,255,255,0.95);
+    border: none;
+    font-size: 1.7rem;
+    color: #6366f1;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    margin-left: 12px;
+}
+.close-btn:hover {
+    background: #6366f1;
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(99,102,241,0.18);
+}
+.study-abroad-details-body {
+    padding: 24px 24px 20px 24px;
+    overflow-y: auto;
+    max-height: 70vh;
+    background: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.study-abroad-details-img-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 18px;
+}
+.study-abroad-details-img-wrap img {
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(99,102,241,0.10);
+    border: 2px solid #e0e7ff;
+    max-width: 220px;
+    max-height: 180px;
+    object-fit: cover;
+    background: #fff;
+    display: block;
+}
+.study-abroad-details-fields {
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+}
+.study-abroad-details-fields-col {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.study-abroad-details-fields-col .field-label {
+    color: #6366f1;
+    font-weight: 600;
+    font-size: 1.01rem;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    margin-bottom: 2px;
+}
+.study-abroad-details-fields-col .field-value {
+    color: #374151;
+    font-size: 1.04rem;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f1f5f9;
+    border-radius: 7px;
+    padding: 7px 10px;
+    min-height: 32px;
+    word-break: break-word;
+}
+.study-abroad-details-fields-col .field-value:empty::after {
+    content: "-";
+    color: #9ca3af;
+}
+.study-abroad-details-fields-col .field-label + .field-value {
+    margin-bottom: 6px;
+}
+@media (max-width: 700px) {
+    .study-abroad-details-modal {
+        max-width: 99vw;
+    }
+    .study-abroad-details-header,
+    .study-abroad-details-body {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .study-abroad-details-fields {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+@media (max-width: 500px) {
+    .study-abroad-details-modal {
+        border-radius: 10px;
+    }
+    .study-abroad-details-header {
+        border-radius: 10px 10px 0 0;
+        padding: 12px 6px 6px 10px;
+        min-height: 38px;
+    }
+    .study-abroad-details-header h5 {
+        font-size: 1.01rem;
+    }
+    .close-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 1.1rem;
+    }
+    .study-abroad-details-body {
+        padding: 6px 2px 6px 2px;
+    }
+    .study-abroad-details-img-wrap img {
+        max-width: 110px;
+        max-height: 90px;
+    }
+}

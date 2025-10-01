@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <title>IIMF - Admin Dashboard</title>
+
+    <meta name="author" content="trivlogic.com">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Theme Style -->
+    <link rel="stylesheet" type="text/css" href="admin-css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="admin-css/animation.css">
+    <link rel="stylesheet" type="text/css" href="admin-css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="admin-css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="admin-css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Font -->
+    <link rel="stylesheet" href="admin-font/fonts.css">
+
+    <!-- Icon -->
+    <link rel="stylesheet" href="admin-icon/style.css">
+
+    <!-- Favicon and Touch Icons  -->
+    <link rel="shortcut icon" href="/images/iimf/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/images/iimf/logo.png">
+
+</head>
+
+<body>
+
+    <!-- #wrapper -->
+    <div id="wrapper">
+        <!-- #page -->
+        <div id="page" class="">
+            <!-- layout-wrap -->
+            <div class="layout-wrap">
+            
+                <!-- section-menu-left -->
+                <div class="section-menu-left">
+                    <div class="box-logo">
+                        <a href="/dashboard" id="site-logo-inner">
+                            <img style="width:60px;" id="logo_header" alt="Maxtron" src="/images/iimf/logo.png"
+                                data-light="/images/iimf/logo.png" data-dark="/images/iimf/logo.png">
+                        </a>
+                        <div class="button-show-hide">
+                            <i class="icon-chevron-left"></i>
+                        </div>
+                    </div>
+                    <div class="section-menu-left-wrap">
+                        <div class="center">
+                            <div class="center-item">
+                                <ul class="">
+                                    <li class="menu-item">
+                                        <a href="/dashboard" class="">
+                                            <div class="icon">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M12.2652 3.57566C12.1187 3.42921 11.8813 3.42921 11.7348 3.57566L5.25 10.0605V19.8748C5.25 20.0819 5.41789 20.2498 5.625 20.2498H9V16.1248C9 15.0893 9.83947 14.2498 10.875 14.2498H13.125C14.1605 14.2498 15 15.0893 15 16.1248V20.2498H18.375C18.5821 20.2498 18.75 20.0819 18.75 19.8748V10.0605L12.2652 3.57566ZM20.25 11.5605L21.2197 12.5302C21.5126 12.8231 21.9874 12.8231 22.2803 12.5302C22.5732 12.2373 22.5732 11.7624 22.2803 11.4695L13.3258 2.51499C12.5936 1.78276 11.4064 1.78276 10.6742 2.515L1.71967 11.4695C1.42678 11.7624 1.42678 12.2373 1.71967 12.5302C2.01256 12.8231 2.48744 12.8231 2.78033 12.5302L3.75 11.5605V19.8748C3.75 20.9104 4.58947 21.7498 5.625 21.7498H18.375C19.4105 21.7498 20.25 20.9104 20.25 19.8748V11.5605ZM13.5 20.2498H10.5V16.1248C10.5 15.9177 10.6679 15.7498 10.875 15.7498H13.125C13.3321 15.7498 13.5 15.9177 13.5 16.1248V20.2498Z"
+                                                        fill="#111111" />
+                                                </svg>
+                                            </div>
+                                            <div class="text">Course Management</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item ">
+                                        <a href="/admin-gallery" class="menu-item-button">
+                                            <div class="icon"><i class="icon-file-plus"></i></div>
+                                            <div class="text">Gallery Management</div>
+                                        </a>                                   
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="/admin-assesment" class="menu-item-button">
+                                            <div class="icon"><i class="icon-layers"></i></div>
+                                            <div class="text">Assesment Management</div>
+                                        </a>                                   
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="/admin-studyAbroad" class="menu-item-button">
+                                            <div class="icon"><i class="fa fa-users"></i></div>
+                                            <div class="text">StudyAbroad Management</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item active">
+                                        <a href="/admin-events" class="menu-item-button">
+                                            <div class="icon"><i class="fa fa-users"></i></div>
+                                            <div class="text">Events Management</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item ">
+                                        <a href="/admin-testimonials" class="menu-item-button">
+                                            <div class="icon"><i class="fa fa-star-o"></i></div>
+                                            <div class="text">Testimonials Management</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="/admin-blogs" class="menu-item-button">
+                                            <div class="icon"><i class="fa fa-star-o"></i></div>
+                                            <div class="text">Blogs Management</div>
+                                        </a>
+                                       
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="/admin-careers" class="menu-item-button">
+                                            <div class="icon"><i class="fa fa-star-o"></i></div>
+                                            <div class="text">Career Management</div>
+                                        </a>
+                                       
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="/admin-users" class="menu-item-button">
+                                            <div class="icon"><i class="fa fa-star-o"></i></div>
+                                            <div class="text">User Management</div>
+                                        </a>
+                                       
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="/admin-forms" class="menu-item-button">
+                                            <div class="icon"><i class="fa fa-star-o"></i></div>
+                                            <div class="text">Contact Submissions</div>
+                                        </a>
+                                       
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="/logout" class="">
+                                            <div class="icon">
+                                                <svg width="24" height="22" viewBox="0 0 20 20" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M8.125 18.6875C8.125 18.903 8.0394 19.1097 7.88702 19.262C7.73465 19.4144 7.52799 19.5 7.3125 19.5H1.625C1.19402 19.5 0.780698 19.3288 0.475951 19.024C0.171205 18.7193 0 18.306 0 17.875V1.625C0 1.19402 0.171205 0.780698 0.475951 0.475951C0.780698 0.171205 1.19402 0 1.625 0H7.3125C7.52799 0 7.73465 0.0856026 7.88702 0.237976C8.0394 0.390349 8.125 0.597012 8.125 0.8125C8.125 1.02799 8.0394 1.23465 7.88702 1.38702C7.73465 1.5394 7.52799 1.625 7.3125 1.625H1.625V17.875H7.3125C7.52799 17.875 7.73465 17.9606 7.88702 18.113C8.0394 18.2653 8.125 18.472 8.125 18.6875ZM19.2623 9.17516L15.1998 5.11266C15.0474 4.9602 14.8406 4.87455 14.625 4.87455C14.4094 4.87455 14.2026 4.9602 14.0502 5.11266C13.8977 5.26511 13.812 5.47189 13.812 5.6875C13.812 5.90311 13.8977 6.10989 14.0502 6.26234L16.7263 8.9375H7.3125C7.09701 8.9375 6.89035 9.0231 6.73798 9.17548C6.5856 9.32785 6.5 9.53451 6.5 9.75C6.5 9.96549 6.5856 10.1722 6.73798 10.3245C6.89035 10.4769 7.09701 10.5625 7.3125 10.5625H16.7263L14.0502 13.2377C13.8977 13.3901 13.812 13.5969 13.812 13.8125C13.812 14.0281 13.8977 14.2349 14.0502 14.3873C14.2026 14.5398 14.4094 14.6255 14.625 14.6255C14.8406 14.6255 15.0474 14.5398 15.1998 14.3873L19.2623 10.3248C19.3379 10.2494 19.3978 10.1598 19.4387 10.0611C19.4796 9.9625 19.5006 9.85678 19.5006 9.75C19.5006 9.64322 19.4796 9.5375 19.4387 9.43886C19.3978 9.34023 19.3379 9.25062 19.2623 9.17516Z"
+                                                        fill="#111111" />
+                                                </svg>
+                                            </div>
+                                            <div class="text">Log out</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /section-menu-left -->
+                <!-- section-content-right -->
+                <div class="section-content-right">
+                    <!-- header-dashboard -->
+                    <div class="header-dashboard">
+                        <div class="wrap">
+                            <div class="header-left">
+                                <a href="/dashboard">
+                                    <img style="width: 50px;" id="logo_header_mobile" alt="Maxtron" src="/images/iimf/logo.png"
+                                        data-light="img/logo.png" data-dark="img/logo.png">
+                                </a>
+                                <div class="button-show-hide">
+                                    <i class="icon-chevron-left"></i>
+                                </div>
+                               
+                            </div>
+                            <div class="header-grid">
+                                <div class="header-item button-dark-light">
+                                    <i class="icon-moon"></i>
+                                </div>
+
+                                <div class="header-item button-zoom-maximize">
+                                    <div class="">
+                                        <i class="icon-maximize"></i>
+                                    </div>
+                                </div>
+                                <div class="popup-wrap user type-header">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span class="header-user wg-user">
+                                                <span class="image">
+                                                    <img src="admin-images/avatar/user-1.png" alt="Maxtron">
+                                                </span>
+                                                <span class="flex flex-column">
+                                                    <span class="body-text text-main-dark">IIMF</span>
+                                                    <span class="text-tiny">Admin</span>
+                                                </span>
+                                            </span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end has-content"
+                                            aria-labelledby="dropdownMenuButton3">
+
+                                            <li>
+                                                <a href="#" class="user-item">
+                                                    <div class="icon">
+                                                        <i class="icon-headphones"></i>
+                                                    </div>
+                                                    <div class="body-title-2">Support</div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/logout" class="user-item">
+                                                    <div class="icon">
+                                                        <i class="icon-log-out"></i>
+                                                    </div>
+                                                    <div class="body-title-2">Log out</div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /header-dashboard -->
+                    <!-- main-content -->
+                    <div class="main-content">
+                        <!-- main-content-wrap -->
+                        <!-- Gallery Management Section -->
+                         <div class="main-content-inner">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h3 class="mb-0">Events</h3>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal">
+                                    <i class="icon-plus"></i> Create Event
+                                </button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Images</th>
+                                            <th>Date</th>
+                                            <th>Seats</th>
+                                            <th>Tag</th>
+                                            <th>Status</th>
+                                            <th>Created</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% if (events && events.length > 0) { %>
+                                            <% events.forEach(function(event) { %>
+                                                <tr data-event='<%- JSON.stringify(event).replace(/'/g, '&#39;') %>'>
+                                                    <td><%= event.title %></td>
+                                                    <td>
+                                                        <% if (event.images && event.images.length > 0) { %>
+                                                            <div class="d-flex flex-wrap" style="gap:4px;">
+                                                                <% event.images.forEach(function(img) { %>
+                                                                    <img src="<%= img %>" alt="Event Image" style="width:40px;height:40px;object-fit:cover;border-radius:4px;">
+                                                                <% }) %>
+                                                            </div>
+                                                        <% } else { %>
+                                                            <span class="text-muted">No Images</span>
+                                                        <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <span>
+                                                            <%= event.date && event.date.from ? new Date(event.date.from).toLocaleDateString() : '-' %>
+                                                            -
+                                                            <%= event.date && event.date.to ? new Date(event.date.to).toLocaleDateString() : '-' %>
+                                                        </span>
+                                                    </td>
+                                                    <td><%= event.seats %></td>
+                                                    <td><%= event.tag || '-' %></td>
+                                                    <td>
+                                                        <% if (event.isActive) { %>
+                                                            <span class="badge bg-success">Active</span>
+                                                        <% } else { %>
+                                                            <span class="badge bg-secondary">Inactive</span>
+                                                        <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <%= event.createdAt ? new Date(event.createdAt).toLocaleString() : '-' %>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-warning edit-event-btn" title="Edit" data-bs-toggle="modal" data-bs-target="#editEventModal">
+                                                            <i class="icon-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-danger delete-event-btn" title="Delete">
+                                                            <i class="icon-trash"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm <%= event.isActive ? 'btn-secondary' : 'btn-success' %> toggle-status-btn" title="Toggle Status">
+                                                            <i class="icon-power"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            <% }) %>
+                                        <% } else { %>
+                                            <tr>
+                                                <td colspan="8" class="text-center text-muted">No events found.</td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Pagination -->
+                            <% if (totalPages > 1) { %>
+                                <nav aria-label="Event pagination" class="mt-3">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+                                            <a class="page-link" href="?page=<%= currentPage - 1 %>">&laquo;</a>
+                                        </li>
+                                        <% for (let i = 1; i <= totalPages; i++) { %>
+                                            <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+                                                <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+                                            </li>
+                                        <% } %>
+                                        <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+                                            <a class="page-link" href="?page=<%= currentPage + 1 %>">&raquo;</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            <% } %>
+                            <!-- Create Event Modal -->
+                            <div class="modal fade" id="createEventModal" tabindex="-1" aria-labelledby="createEventModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                  <form id="createEventForm" enctype="multipart/form-data">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="createEventModalLabel">Create Event</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="row g-3">
+                                        <div class="col-md-6">
+                                          <label class="form-label">Title</label>
+                                          <input type="text" name="title" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label class="form-label">Tag</label>
+                                          <input type="text" name="tag" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label class="form-label">From Date</label>
+                                          <input type="date" name="date_from" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label class="form-label">To Date</label>
+                                          <input type="date" name="date_to" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label class="form-label">Seats</label>
+                                          <input type="number" name="seats" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label class="form-label">Venue</label>
+                                          <input type="text" name="venue" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label class="form-label">Email</label>
+                                          <input type="email" name="email" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label class="form-label">Number</label>
+                                          <input type="text" name="number" class="form-control">
+                                        </div>
+                                        <div class="col-md-12">
+                                          <label class="form-label">Description</label>
+                                          <textarea name="description" class="form-control" required></textarea>
+                                        </div>
+                                        <div class="col-md-12">
+                                          <label class="form-label">Highlights (comma separated)</label>
+                                          <input type="text" name="highlights" class="form-control">
+                                        </div>
+                                        <div class="col-md-12">
+                                          <label class="form-label">More Details</label>
+                                          <textarea name="moreDetails" class="form-control"></textarea>
+                                        </div>
+                                        <div class="col-md-12">
+                                          <label class="form-label">Images (max 3)</label>
+                                          <input type="file" name="images" class="form-control" accept="image/*" multiple>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                      <button type="submit" class="btn btn-primary">Create</button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- Edit Event Modal -->
+                            <div class="modal fade" id="editEventModal" tabindex="-1" aria-labelledby="editEventModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                  <form id="editEventForm" enctype="multipart/form-data">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="editEventModalLabel">Edit Event</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <input type="hidden" name="eventId" id="editEventId">
+                                      <div class="row g-3">
+                                        <div class="col-md-6">
+                                          <label class="form-label">Title</label>
+                                          <input type="text" name="title" id="editTitle" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label class="form-label">Tag</label>
+                                          <input type="text" name="tag" id="editTag" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label class="form-label">From Date</label>
+                                          <input type="date" name="date_from" id="editDateFrom" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label class="form-label">To Date</label>
+                                          <input type="date" name="date_to" id="editDateTo" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label class="form-label">Seats</label>
+                                          <input type="number" name="seats" id="editSeats" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label class="form-label">Venue</label>
+                                          <input type="text" name="venue" id="editVenue" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label class="form-label">Email</label>
+                                          <input type="email" name="email" id="editEmail" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                          <label class="form-label">Number</label>
+                                          <input type="text" name="number" id="editNumber" class="form-control">
+                                        </div>
+                                        <div class="col-md-12">
+                                          <label class="form-label">Description</label>
+                                          <textarea name="description" id="editDescription" class="form-control" required></textarea>
+                                        </div>
+                                        <div class="col-md-12">
+                                          <label class="form-label">Highlights (comma separated)</label>
+                                          <input type="text" name="highlights" id="editHighlights" class="form-control">
+                                        </div>
+                                        <div class="col-md-12">
+                                          <label class="form-label">More Details</label>
+                                          <textarea name="moreDetails" id="editMoreDetails" class="form-control"></textarea>
+                                        </div>
+                                        <div class="col-md-12">
+                                          <label class="form-label">Images (max 3, will replace all if uploaded)</label>
+                                          <input type="file" name="images" id="editImages" class="form-control" accept="image/*" multiple>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                         </div>
+                         <script>
+                            // Helper: convert date to yyyy-mm-dd
+                            function toDateInputValue(date) {
+                                if (!date) return '';
+                                const d = new Date(date);
+                                d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+                                return d.toISOString().slice(0,10);
+                            }
+
+                            // CREATE EVENT
+                            document.getElementById('createEventForm').addEventListener('submit', async function(e) {
+                                e.preventDefault();
+                                const form = e.target;
+                                const formData = new FormData(form);
+                                // Map highlights to array
+                                if(formData.get('highlights')) {
+                                    formData.set('highlights', formData.get('highlights').split(',').map(s => s.trim()).filter(Boolean));
+                                }
+                                // Map date fields
+                                formData.set('date[from]', formData.get('date_from'));
+                                formData.set('date[to]', formData.get('date_to'));
+                                formData.delete('date_from');
+                                formData.delete('date_to');
+                                try {
+                                    const res = await fetch('/createEvent', {
+                                        method: 'POST',
+                                        body: formData
+                                    });
+                                    if(res.ok) {
+                                        location.reload();
+                                    } else {
+                                        const err = await res.json();
+                                        alert('Failed to create event: ' + (err.message || 'Unknown error'));
+                                    }
+                                } catch (err) {
+                                    alert('Failed to create event');
+                                }
+                            });
+
+                            // EDIT EVENT: open modal and fill form
+                            document.querySelectorAll('.edit-event-btn').forEach(btn => {
+                                btn.addEventListener('click', function() {
+                                    const tr = btn.closest('tr');
+                                    // Use .replace to decode HTML entities for single quotes
+                                    let eventStr = tr.getAttribute('data-event');
+                                    if (eventStr) {
+                                        eventStr = eventStr.replace(/&#39;/g, "'");
+                                    }
+                                    let event;
+                                    try {
+                                        event = JSON.parse(eventStr);
+                                    } catch (err) {
+                                        alert('Failed to parse event data for editing. Please check for invalid characters in event fields.');
+                                        return;
+                                    }
+                                    document.getElementById('editEventId').value = event._id || '';
+                                    document.getElementById('editTitle').value = event.title || '';
+                                    document.getElementById('editTag').value = event.tag || '';
+                                    document.getElementById('editDateFrom').value = toDateInputValue(event.date && event.date.from);
+                                    document.getElementById('editDateTo').value = toDateInputValue(event.date && event.date.to);
+                                    document.getElementById('editSeats').value = event.seats || '';
+                                    document.getElementById('editVenue').value = event.venue || '';
+                                    document.getElementById('editEmail').value = event.email || '';
+                                    document.getElementById('editNumber').value = event.number || '';
+                                    document.getElementById('editDescription').value = event.description || '';
+                                    document.getElementById('editHighlights').value = Array.isArray(event.highlights) ? event.highlights.join(', ') : (event.highlights || '');
+                                    document.getElementById('editMoreDetails').value = event.moreDetails || '';
+                                    document.getElementById('editImages').value = '';
+                                });
+                            });
+
+                            // EDIT EVENT: submit
+                            document.getElementById('editEventForm').addEventListener('submit', async function(e) {
+                                e.preventDefault();
+                                const form = e.target;
+                                const eventId = document.getElementById('editEventId').value;
+                                const formData = new FormData(form);
+                                // Map highlights to array
+                                if(formData.get('highlights')) {
+                                    formData.set('highlights', formData.get('highlights').split(',').map(s => s.trim()).filter(Boolean));
+                                }
+                                // Map date fields
+                                formData.set('date[from]', formData.get('date_from'));
+                                formData.set('date[to]', formData.get('date_to'));
+                                formData.delete('date_from');
+                                formData.delete('date_to');
+                                try {
+                                    const res = await fetch('/updateEvent/' + eventId, {
+                                        method: 'PUT',
+                                        body: formData
+                                    });
+                                    if(res.ok) {
+                                        location.reload();
+                                    } else {
+                                        const err = await res.json();
+                                        alert('Failed to update event: ' + (err.message || 'Unknown error'));
+                                    }
+                                } catch (err) {
+                                    alert('Failed to update event');
+                                }
+                            });
+
+                            // DELETE EVENT
+                            document.querySelectorAll('.delete-event-btn').forEach(btn => {
+                                btn.addEventListener('click', async function() {
+                                    if(!confirm('Are you sure you want to delete this event?')) return;
+                                    const tr = btn.closest('tr');
+                                    let eventStr = tr.getAttribute('data-event');
+                                    if (eventStr) {
+                                        eventStr = eventStr.replace(/&#39;/g, "'");
+                                    }
+                                    let event;
+                                    try {
+                                        event = JSON.parse(eventStr);
+                                    } catch (err) {
+                                        alert('Failed to parse event data for deletion.');
+                                        return;
+                                    }
+                                    try {
+                                        const res = await fetch('/deleteEvent/' + event._id, {
+                                            method: 'DELETE'
+                                        });
+                                        if(res.ok) {
+                                            location.reload();
+                                        } else {
+                                            const err = await res.json();
+                                            alert('Failed to delete event: ' + (err.message || 'Unknown error'));
+                                        }
+                                    } catch (err) {
+                                        alert('Failed to delete event');
+                                    }
+                                });
+                            });
+
+                            // TOGGLE STATUS
+                            document.querySelectorAll('.toggle-status-btn').forEach(btn => {
+                                btn.addEventListener('click', async function() {
+                                    const tr = btn.closest('tr');
+                                    let eventStr = tr.getAttribute('data-event');
+                                    if (eventStr) {
+                                        eventStr = eventStr.replace(/&#39;/g, "'");
+                                    }
+                                    let event;
+                                    try {
+                                        event = JSON.parse(eventStr);
+                                    } catch (err) {
+                                        alert('Failed to parse event data for status toggle.');
+                                        return;
+                                    }
+                                    try {
+                                        const res = await fetch('/toggleEventStatus/' + event._id, {
+                                            method: 'PATCH'
+                                        });
+                                        if(res.ok) {
+                                            location.reload();
+                                        } else {
+                                            const err = await res.json();
+                                            alert('Failed to toggle status: ' + (err.message || 'Unknown error'));
+                                        }
+                                    } catch (err) {
+                                        alert('Failed to toggle status');
+                                    }
+                                });
+                            });
+                         </script>
+                       
+                        <!-- bottom-page -->
+                        <div class="bottom-page">
+                            <div class="body-text">Copyright © 2025 <a href="https://trivlogic.com">Trivlogic</a>.
+                                Design by Trivlogic All rights reserved</div>
+                        </div>
+                        <!-- /bottom-page -->
+                    </div>
+                    <!-- /main-content -->
+                </div>
+                <!-- /section-content-right -->
+            </div>
+            <!-- /layout-wrap -->
+        </div>
+        <!-- /#page -->
+    </div>
+    <!-- /#wrapper -->
+ 
+    <!-- Javascript -->
+    <script src="admin-js/jquery.min.js"></script>
+    <script src="admin-js/bootstrap.min.js"></script>
+    <script src="admin-js/bootstrap-select.min.js"></script>
+    <script src="admin-js/zoom.js"></script>
+    <script src="admin-js/morris.min.js"></script>
+    <script src="admin-js/raphael.min.js"></script>
+    <script src="admin-js/apexcharts/apexcharts.js"></script>
+    <script src="admin-js/apexcharts/line-chart-1.js"></script>
+    <script src="admin-js/apexcharts/line-chart-2.js"></script>
+    <script src="admin-js/apexcharts/line-chart-3.js"></script>
+    <script src="admin-js/apexcharts/line-chart-4.js"></script>
+    <script src="admin-js/apexcharts/line-chart-5.js"></script>
+    <script src="admin-js/apexcharts/line-chart-6.js"></script>
+    <script src="admin-js/apexcharts/line-chart-7.js"></script>
+    <script src="admin-js/switcher.js"></script>
+    <script defer src="admin-js/theme-settings.js"></script>
+    <script src="admin-js/main.js"></script>
+
+</body>
+
+</html>
