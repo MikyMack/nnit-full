@@ -53,260 +53,260 @@
     </div>
     <!-- Custom Cursor End -->
 
-  <!-- Start Mobile Menu Offcanvas -->
-  <div class="modal mobile-menu-modal offcanvas-modal fade" id="offcanvas-modal">
-    <div class="modal-dialog offcanvas-dialog">
-        <div class="modal-content">
-            <div class="modal-header offcanvas-header">
-                <!-- Mobile Menu Logo -->
-                <div class="offcanvas-logo">
-                    <a href="/"><img loading="lazy" src="/images/iimf/logo.png" alt="#" /></a>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="fi fi-ss-cross"></i>
-                </button>
-            </div>
-            <div class="mobile-menu-modal-main-body">
-                <!-- Mobile Menu Navigation -->
-                <nav class="offcanvas__menu">
-                    <ul class="offcanvas__menu_ul">
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item " href="/">Home</a>
-
-                        </li>
-
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item " href="/courses">Courses</a>
-
-                        </li>
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item" href="/assesment">Assessment</a>
-
-                        </li>
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item" href="/studyAbroad">Study Abroad</a>
-
-                        </li>
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item" href="/ielts-pte">Ielts & Pte</a>
-
-                        </li>
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item" href="/languageTraining">Language Training</a>
-
-                        </li>
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item " href="/corporates">Corporates</a>
-
-                        </li>
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item active" href="/school-campus">School To Campus</a>
-
-
-                        </li>
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item" href="/campus-corporates">Campus To Corporates </a>
-
-                        </li>
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item" href="/events">Events</a>
-
-                        </li>
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item" href="/gallery">Gallery</a>
-
-                        </li>
-
-
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item " href="/about">About</a>
-
-                        </li>
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item " href="/blogs">News</a>
-
-                        </li>
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item" href="/career">Find Jobs</a>
-
-                        </li>
-                        <li class="offcanvas__menu_li">
-                            <a class="offcanvas__menu_item" href="/contact">Contact</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Mobile Menu Offcanvas -->
-
-   <!-- Start Topbar Area  -->
-   <div class="ed-topbar">
-    <div class="container ed-container-expand">
-        <div class="ed-topbar__inner">
-            <!-- Logo  -->
-            <div class="ed-topbar__logo">
-                <a href="/">
-                    <img loading="lazy" src="/images/iimf/logo.png" alt="logo" />
-                </a>
-            </div>
-
-            <!-- Category Dropdown -->
-            <div class="ed-topbar__search-widget">
-                <div class="ed-topbar__category">
-                    <form id="categoryForm" action="/courses" method="get" style="margin-bottom:0;">
-                        <select name="category" id="categorySelect" onchange="document.getElementById('categoryForm').submit()">
-                          <option value="">All Categories</option>
-                          <% courseCategories.forEach(function(category) { %>
-                            <option value="<%= category.name %>"><%= category.name %></option>
-                          <% }) %>
-                        </select>
-                      </form>
-                </div>
-                <div class="ed-topbar__search">
-                    <form action="/courses" method="get">
-                        <input type="search" name="search" placeholder="Search your courses..." required />
-                        <button type="submit">Search<i class="fi-rr-search"></i></button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Topbar Info -->
-            <div class="ed-topbar__info">
-                <!-- Topbar Social -->
-                <ul class="ed-topbar__info-social">
-                    <li>
-                        <a href="https://www.facebook.com/" target="_blank"><img loading="lazy"
-                                src="/images/icons/icon-dark-facebook.svg" alt="icon-dark-facebook" /></a>
-                    </li>
-                    <li>
-                        <a href="https://www.twitter.com/" target="_blank"><img loading="lazy" src="/images/iimf/twitter.png"
-                                alt="icon-dark-facebook" /></a>
-                    </li>
-                    <li>
-                        <a href="https://www.dribbble.com/" target="_blank"><img loading="lazy" src="/images/iimf/yt.png"
-                                alt="icon-dark-facebook" /></a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/" target="_blank"><img loading="lazy"
-                                src="/images/icons/icon-dark-instagram.svg" alt="icon-dark-instagram" /></a>
-                    </li>
-                </ul>
-                <!-- Topbar Button -->
-                <% if (user) { %>
-                    <div class="ed-topbar__info-buttons">
-                        <a href="/profile" class="ed-btn my-account-btn">My Account</a>
+    <!-- Start Mobile Menu Offcanvas -->
+    <div class="modal mobile-menu-modal offcanvas-modal fade" id="offcanvas-modal">
+        <div class="modal-dialog offcanvas-dialog">
+            <div class="modal-content">
+                <div class="modal-header offcanvas-header">
+                    <!-- Mobile Menu Logo -->
+                    <div class="offcanvas-logo">
+                        <a href="/"><img loading="lazy" src="/images/iimf/logo.png" alt="#" /></a>
                     </div>
-                <% } else { %>
-                    <div class="ed-topbar__info-buttons">
-                        <button type="button" class="register-btn" data-bs-toggle="modal"
-                            data-bs-target="#registerModal">
-                            Register
-                        </button>
-                        <button type="button" class="login-btn" data-bs-toggle="modal" data-bs-target="#loginModal">
-                            Log In
-                        </button>
-                    </div>
-                <% } %>
-
-                <!-- Mobile Menu Button -->
-                <button type="button" class="mobile-menu-offcanvas-toggler" data-bs-toggle="modal"
-                    data-bs-target="#offcanvas-modal">
-                    <span class="line"></span>
-                    <span class="line"></span>
-                    <span class="line"></span>
-                </button>
-                <!-- End Mobile Menu Button -->
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Topbar Area -->
-
-<!-- Start Header Area -->
-<header class="ed-header">
-    <div class="container ed-container-expand">
-        <div class="ed-header__inner">
-            <div class="row align-items-center justify-center">
-                <div class="col-lg-12 col-12">
-                    <!-- Navigation Menu -->
-                    <nav class="ed-header__navigation flex justify-center text-center">
-                        <ul class="ed-header__menu">
-                            <li >
-                                <a href="/">Home</a>
-
-                            </li>
-                            <li >
-                                <a href="/courses">Courses</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fi fi-ss-cross"></i>
+                    </button>
+                </div>
+                <div class="mobile-menu-modal-main-body">
+                    <!-- Mobile Menu Navigation -->
+                    <nav class="offcanvas__menu">
+                        <ul class="offcanvas__menu_ul">
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item " href="/">Home</a>
 
                             </li>
 
-                            <li>
-                                <a href="/studyAbroad">Study Abroad</a>
-                            </li>
-                            <li>
-                                <a href="/assesment">Skill Challenge</a>
-                            </li>
-
-
-
-                            <li>
-                                <a href="/ielts-pte">IELTS & PTE</a>
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item " href="/courses">Courses</a>
 
                             </li>
-                            <li>
-                                <a href="/languageTraining">Language Training</a>
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item" href="/assesment">Assessment</a>
+
+                            </li>
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item" href="/studyAbroad">Study Abroad</a>
+
+                            </li>
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item" href="/ielts-pte">Ielts & Pte</a>
+
+                            </li>
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item" href="/languageTraining">Language Training</a>
+
+                            </li>
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item " href="/corporates">Corporates</a>
+
+                            </li>
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item active" href="/school-campus">School To Campus</a>
+
+
+                            </li>
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item" href="/campus-corporates">Campus To Corporates </a>
+
+                            </li>
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item" href="/events">Events</a>
+
+                            </li>
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item" href="/gallery">Gallery</a>
 
                             </li>
 
 
-                            <li>
-                                <a href="/corporates"> Corporates </a>
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item " href="/about">About</a>
 
                             </li>
-                            <li class="active">
-                                <a href="javascript:void(0)">Summer Camp<i
-                                        class="fi fi-ss-angle-small-down"></i></a>
-                                <ul class="sub-menu">
-
-
-                                    <li class="active"><a href="/school-campus">School to Campus</a></li>
-                                    <li>
-                                        <a href="/campus-corporates">Campus to Corporate</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="/blogs">News</a>
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item " href="/blogs">News</a>
 
                             </li>
-
-
-                            <li>
-                                <a href="/about">About</a>
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item" href="/career">Find Jobs</a>
 
                             </li>
-                            <li>
-                                <a href="/career">Find Jobs</a>
-
-                            </li>
-
-
-
-                            <li>
-                                <a href="/contact">Contact</a>
+                            <li class="offcanvas__menu_li">
+                                <a class="offcanvas__menu_item" href="/contact">Contact</a>
                             </li>
                         </ul>
                     </nav>
                 </div>
-
             </div>
         </div>
     </div>
-</header>
-<!-- End Header Area -->
+    <!-- End Mobile Menu Offcanvas -->
+
+    <!-- Start Topbar Area  -->
+    <div class="ed-topbar">
+        <div class="container ed-container-expand">
+            <div class="ed-topbar__inner">
+                <!-- Logo  -->
+                <div class="ed-topbar__logo">
+                    <a href="/">
+                        <img loading="lazy" src="/images/iimf/logo.png" alt="logo" />
+                    </a>
+                </div>
+
+                <!-- Category Dropdown -->
+                <div class="ed-topbar__search-widget">
+                    <div class="ed-topbar__category">
+                        <form id="categoryForm" action="/courses" method="get" style="margin-bottom:0;">
+                            <select name="category" id="categorySelect" onchange="document.getElementById('categoryForm').submit()">
+                              <option value="">All Categories</option>
+                              <% courseCategories.forEach(function(category) { %>
+                                <option value="<%= category.name %>"><%= category.name %></option>
+                              <% }) %>
+                            </select>
+                          </form>
+                    </div>
+                    <div class="ed-topbar__search">
+                        <form action="/courses" method="get">
+                            <input type="search" name="search" placeholder="Search your courses..." required />
+                            <button type="submit">Search<i class="fi-rr-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Topbar Info -->
+                <div class="ed-topbar__info">
+                    <!-- Topbar Social -->
+                    <ul class="ed-topbar__info-social">
+                        <li>
+                            <a href="https://www.facebook.com/" target="_blank"><img loading="lazy"
+                                    src="/images/icons/icon-dark-facebook.svg" alt="icon-dark-facebook" /></a>
+                        </li>
+                        <li>
+                            <a href="https://www.twitter.com/" target="_blank"><img loading="lazy" src="/images/iimf/twitter.png"
+                                    alt="icon-dark-facebook" /></a>
+                        </li>
+                        <li>
+                            <a href="https://www.dribbble.com/" target="_blank"><img loading="lazy" src="/images/iimf/yt.png"
+                                    alt="icon-dark-facebook" /></a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/" target="_blank"><img loading="lazy"
+                                    src="/images/icons/icon-dark-instagram.svg" alt="icon-dark-instagram" /></a>
+                        </li>
+                    </ul>
+                    <!-- Topbar Button -->
+                    <% if (user) { %>
+                        <div class="ed-topbar__info-buttons">
+                            <a href="/profile" class="ed-btn my-account-btn">My Account</a>
+                        </div>
+                    <% } else { %>
+                        <div class="ed-topbar__info-buttons">
+                            <button type="button" class="register-btn" data-bs-toggle="modal"
+                                data-bs-target="#registerModal">
+                                Register
+                            </button>
+                            <button type="button" class="login-btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                Log In
+                            </button>
+                        </div>
+                    <% } %>
+
+                    <!-- Mobile Menu Button -->
+                    <button type="button" class="mobile-menu-offcanvas-toggler" data-bs-toggle="modal"
+                        data-bs-target="#offcanvas-modal">
+                        <span class="line"></span>
+                        <span class="line"></span>
+                        <span class="line"></span>
+                    </button>
+                    <!-- End Mobile Menu Button -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Topbar Area -->
+
+    <!-- Start Header Area -->
+    <header class="ed-header">
+        <div class="container ed-container-expand">
+            <div class="ed-header__inner">
+                <div class="row align-items-center justify-center">
+                    <div class="col-lg-12 col-12">
+                        <!-- Navigation Menu -->
+                        <nav class="ed-header__navigation flex justify-center text-center">
+                            <ul class="ed-header__menu">
+                                <li >
+                                    <a href="/">Home</a>
+
+                                </li>
+                                <li >
+                                    <a href="/courses">Courses</a>
+
+                                </li>
+
+                                <li>
+                                    <a href="/studyAbroad">Study Abroad</a>
+                                </li>
+                                <li>
+                                    <a href="/assesment">Skill Challenge</a>
+                                </li>
+
+
+
+                                <li>
+                                    <a href="/ielts-pte">IELTS & PTE</a>
+
+                                </li>
+                                <li>
+                                    <a href="/languageTraining">Language Training</a>
+
+                                </li>
+
+
+                                <li>
+                                    <a href="/corporates"> Corporates </a>
+
+                                </li>
+                                <li class="active">
+                                    <a href="javascript:void(0)">Summer Camp<i
+                                            class="fi fi-ss-angle-small-down"></i></a>
+                                    <ul class="sub-menu">
+
+
+                                        <li class="active"><a href="/school-campus">School to Campus</a></li>
+                                        <li>
+                                            <a href="/campus-corporates">Campus to Corporate</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="/blogs">News</a>
+
+                                </li>
+
+
+                                <li>
+                                    <a href="/about">About</a>
+
+                                </li>
+                                <li>
+                                    <a href="/career">Find Jobs</a>
+
+                                </li>
+
+
+
+                                <li>
+                                    <a href="/contact">Contact</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End Header Area -->
 
     <div id="smooth-wrapper">
         <div id="smooth-content">
@@ -342,16 +342,11 @@
                                     <div class="ed-section-head">
                                         <span class="ed-section-head__sm-title">SCHOOL TO CAMPUS</span>
                                         <h3 class="ed-section-head__title ed-split-text left">
-                                            Prepare for College Life <br />
-                                            with Our Summer Transition Program
+                                            Boot Camp for +2 Students<br />
+                                            School-to-Campus Transition Program
                                         </h3>
                                         <p class="ed-section-head__text">
-                                            Our School-to-Campus program helps students transition smoothly from high
-                                            school to college.
-                                            Through engaging summer camps, skill-building workshops, and mentoring
-                                            sessions, students gain
-                                            confidence, adapt to new academic challenges, and develop essential life
-                                            skills for campus success.
+                                            To empower higher secondary students with the skills, confidence, and clarity they need to make a seamless leap from school to campus life. This summer boot camp builds the vital bridge between the structured world of school and the self-directed freedom of college.
                                         </p>
                                     </div>
 
@@ -362,13 +357,11 @@
                                                 <div class="ed-w-choose__info-icon bg-1">
                                                     <img src="/images/why-choose/why-choose-1/icon-1.svg" alt="icon" />
                                                 </div>
-                                                <h5>Academic Readiness Workshops</h5>
+                                                <h5>Career Compass</h5>
                                             </div>
                                             <div class="ed-w-choose__info-bottom">
                                                 <p>
-                                                    Prepare for college-level subjects through interactive workshops,
-                                                    study strategies, and guidance
-                                                    from experienced mentors to ensure a strong academic start.
+                                                    Guided planning for courses, colleges, and future pathways to help students make informed decisions.
                                                 </p>
                                             </div>
                                         </div>
@@ -378,13 +371,11 @@
                                                 <div class="ed-w-choose__info-icon bg-3">
                                                     <img src="/images/why-choose/why-choose-1/icon-3.svg" alt="icon" />
                                                 </div>
-                                                <h5>Life Skills & Campus Readiness</h5>
+                                                <h5>Power Skills for Life</h5>
                                             </div>
                                             <div class="ed-w-choose__info-bottom">
                                                 <p>
-                                                    Build confidence, communication skills, time management, and
-                                                    teamwork abilities to thrive
-                                                    in campus life and extracurricular activities.
+                                                    Communication, problem-solving, and adaptability for the real world through interactive workshops and activities.
                                                 </p>
                                             </div>
                                         </div>
@@ -424,126 +415,66 @@
                     </div>
                 </section>
 
-
-
-
-
-                <!-- End Why Choose Area -->
-
-                <section class="ed-blog ed-blog--style2 pt-0 section-gap">
+                <!-- Program Overview Section -->
+                <section class="ed-about ed-about--style2 section-gap position-relative">
                     <div class="container ed-container">
-                        <div class="ed-section-head">
-                            <div class="row align-items-center">
-                                <div class="col-lg-6 col-12">
-                                    <div class="ed-section-head__info">
-                                        <span class="ed-section-head__sm-title">CAMPUS TIPS</span>
-                                        <h3 class="ed-section-head__title ed-split-text left m-0">
-                                            Insights for School-to-Campus Transition
-                                        </h3>
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 col-12">
+                                <div class="ed-about__images ed-about__images--style2 position-relative">
+                                    <div class="ed-about__main-img">
+                                        <img src="/images/iimf/camp-3.jpg" alt="program-overview" />
+                                    </div>
+                                    <!-- Shapes Elements -->
+                                    <div class="ed-about__shapes">
+                                        <img class="ed-about__shape-1 updown-ani" src="/images/about/about-2/shape-1.svg" alt="shape-1" />
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-12">
-                                    <div class="ed-section-head__text">
-                                        <p>
-                                            Our Summer Transition Program shares practical advice, skill-building tips,
-                                            and guidance to help students adapt to college life smoothly and
-                                            confidently.
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <div class="ed-about__content">
+                                    <div class="ed-section-head">
+                                        <span class="ed-section-head__sm-title">PROGRAM OVERVIEW</span>
+                                        <h3 class="ed-section-head__title ed-split-text left">
+                                            7-Day Immersive Summer Workshop
+                                        </h3>
+                                        <p class="ed-section-head__text">
+                                            Our School-to-Campus Transition Boot Camp is designed specifically for higher secondary students (ages 17-18) preparing for college/university life. Through a blend of engaging workshops, interactive activities, and real-world practice, students walk away more independent, confident, and future-ready.
                                         </p>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <!-- Tip Card Left Column -->
-                            <div class="col-lg-6 col-12">
-                                <div class="ed-blog__wrapper wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
-                                    <!-- Tip 1 -->
-                                    <div class="ed-blog__card">
-                                        <div class="ed-blog__head">
-                                            <div class="ed-blog__img">
-                                                <img src="/images/iimf/camp-3.jpg" alt="Time Management" />
+                                    <div class="ed-about__info d-flex flex-column gap-2">
+                                        <!-- Single Info  -->
+                                        <div class="ed-about__info-single">
+                                            <div class="ed-about__info-icon d-flex gap-2">
+                                                <i class="ri-group-line"></i>
+                                                        <h6>Target Group</h6>
+                                            </div>
+                                            <div class="ed-about__info-content">
+                                        
+                                                <p>Higher secondary students (ages 17-18)</p>
                                             </div>
                                         </div>
-                                        <div class="ed-blog__content">
-
-                                            <a href="#" class="ed-blog__title">
-                                                <h4>
-                                                    Mastering Time Management for a Successful College Start
-                                                </h4>
-                                            </a>
-                                            <p>
-                                                Learn effective ways to balance classes, assignments, and
-                                                extracurricular activities from day one.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Tip 2 -->
-                                    <div class="ed-blog__card">
-                                        <div class="ed-blog__head">
-                                            <div class="ed-blog__img">
-                                                <img src="/images/iimf/camp-4.jpg" alt="Study Techniques" />
+                                        <!-- Single Info  -->
+                                        <div class="ed-about__info-single">
+                                            <div class="ed-about__info-icon d-flex gap-2">
+                                                <i class="ri-calendar-event-line"></i>
+                                                    <h6>Duration</h6>
+                                            </div>
+                                            <div class="ed-about__info-content">
+                                            
+                                                <p>7-day immersive summer workshop</p>
                                             </div>
                                         </div>
-                                        <div class="ed-blog__content">
-
-                                            <a href="#" class="ed-blog__title">
-                                                <h4>
-                                                    Smart Study Techniques to Excel Academically
-                                                </h4>
-                                            </a>
-                                            <p>
-                                                Discover methods like active recall, group discussions, and note-taking
-                                                to adapt to college-level studies.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Tip 3 -->
-                                    <div class="ed-blog__card">
-                                        <div class="ed-blog__head">
-                                            <div class="ed-blog__img">
-                                                <img src="/images/iimf/camp-5.jpg" alt="Campus Engagement" />
+                                        <!-- Single Info  -->
+                                        <div class="ed-about__info-single">
+                                            <div class="ed-about__info-icon d-flex gap-2">
+                                                <i class="ri-user-line"></i>
+                                                      <h6>Batch Size</h6>
                                             </div>
-                                        </div>
-                                        <div class="ed-blog__content">
-
-                                            <a href="#" class="ed-blog__title">
-                                                <h4>
-                                                    Get Involved: Clubs, Communities, and Networking
-                                                </h4>
-                                            </a>
-                                            <p>
-                                                Engage in extracurriculars and connect with peers to build your campus
-                                                network and skills.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Featured Tip Right Column -->
-                            <div class="col-lg-6 col-12">
-                                <div class="ed-blog__featured-blog wow fadeInUp" data-wow-delay=".5s"
-                                    data-wow-duration="1s">
-                                    <div class="ed-blog__card">
-                                        <div class="ed-blog__head">
-                                            <div class="ed-blog__img">
-                                                <img src="/images/iimf/camp-6.jpg" alt="Confidence Building" />
+                                            <div class="ed-about__info-content">
+                                          
+                                                <p>Limited to 50 students for personalized mentoring</p>
                                             </div>
-                                        </div>
-                                        <div class="ed-blog__content">
-
-                                            <a href="#" class="ed-blog__title">
-                                                <h4>
-                                                    Building Confidence and Well-being for a Smooth College Transition
-                                                </h4>
-                                            </a>
-                                            <p>
-                                                Gain self-confidence, manage stress, and develop life skills to thrive
-                                                socially and academically in your new campus environment.
-                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -552,6 +483,171 @@
                     </div>
                 </section>
 
+                <!-- Program Modules Section -->
+                <section class="ed-courses ed-courses--style2 section-gap position-relative">
+                    <div class="container ed-container">
+                        <div class="ed-section-head text-center">
+                            <span class="ed-section-head__sm-title">PROGRAM STRUCTURE</span>
+                            <h3 class="ed-section-head__title ed-split-text left">
+                                Comprehensive 7-Day Modules
+                            </h3>
+                        </div>
+
+                        <div class="row">
+                            <!-- Module 1 -->
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="ed-courses__card wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                                    <div class="ed-courses__head">
+                                        <div class="ed-courses__img">
+                                            <img src="/images/iimf/camp-4.jpg" alt="orientation" />
+                                        </div>
+                                        <div class="ed-courses__price">
+                                            <span>Day 1</span>
+                                        </div>
+                                    </div>
+                                    <div class="ed-courses__content">
+                                        <h4 class="ed-courses__title">
+                                            <a href="#">Orientation & Foundation</a>
+                                        </h4>
+                                        <p>Welcome, ice-breaking activities, team-building games, and introduction to "Life Beyond School".</p>
+                                        <ul class="ed-courses__list">
+                                            <li>Treasure Hunt / Puzzle Quest</li>
+                                            <li>College Life Blueprint</li>
+                                            <li>Academic expectations & time management</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Module 2 -->
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="ed-courses__card wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1s">
+                                    <div class="ed-courses__head">
+                                        <div class="ed-courses__img">
+                                            <img src="/images/iimf/camp-5.jpg" alt="self-discovery" />
+                                        </div>
+                                        <div class="ed-courses__price">
+                                            <span>Day 2</span>
+                                        </div>
+                                    </div>
+                                    <div class="ed-courses__content">
+                                        <h4 class="ed-courses__title">
+                                            <a href="#">Self-Discovery & Assessments</a>
+                                        </h4>
+                                        <p>Career aptitude testing, personality assessment, and guided reflection with one-on-one counseling.</p>
+                                        <ul class="ed-courses__list">
+                                            <li>Career Aptitude Testing</li>
+                                            <li>Personality & Interest Assessment</li>
+                                            <li>Peer Feedback Circle</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Module 3 -->
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="ed-courses__card wow fadeInUp" data-wow-delay=".7s" data-wow-duration="1s">
+                                    <div class="ed-courses__head">
+                                        <div class="ed-courses__img">
+                                            <img src="/images/iimf/camp-6.jpg" alt="life-skills" />
+                                        </div>
+                                        <div class="ed-courses__price">
+                                            <span>Day 3</span>
+                                        </div>
+                                    </div>
+                                    <div class="ed-courses__content">
+                                        <h4 class="ed-courses__title">
+                                            <a href="#">Life Skills & Soft Skills</a>
+                                        </h4>
+                                        <p>Communication, time management, stress management, teamwork, and critical thinking skills.</p>
+                                        <ul class="ed-courses__list">
+                                            <li>Role-plays & mock interviews</li>
+                                            <li>Outdoor trust-building games</li>
+                                            <li>Group debates & presentations</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Module 4 -->
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="ed-courses__card wow fadeInUp" data-wow-delay=".9s" data-wow-duration="1s">
+                                    <div class="ed-courses__head">
+                                        <div class="ed-courses__img">
+                                            <img src="/images/iimf/camp-7.jpg" alt="career-pathways" />
+                                        </div>
+                                        <div class="ed-courses__price">
+                                            <span>Day 4</span>
+                                        </div>
+                                    </div>
+                                    <div class="ed-courses__content">
+                                        <h4 class="ed-courses__title">
+                                            <a href="#">Academic & Career Pathways</a>
+                                        </h4>
+                                        <p>Course & college selection guidance, understanding new-age programs, and international education opportunities.</p>
+                                        <ul class="ed-courses__list">
+                                            <li>India vs International education</li>
+                                            <li>Study abroad pathways</li>
+                                            <li>Scholarships & funding basics</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Module 5 -->
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="ed-courses__card wow fadeInUp" data-wow-delay="1.1s" data-wow-duration="1s">
+                                    <div class="ed-courses__head">
+                                        <div class="ed-courses__img">
+                                            <img src="/images/iimf/camp-1.jpg" alt="employability" />
+                                        </div>
+                                        <div class="ed-courses__price">
+                                            <span>Day 5</span>
+                                        </div>
+                                    </div>
+                                    <div class="ed-courses__content">
+                                        <h4 class="ed-courses__title">
+                                            <a href="#">Employability Skills Training</a>
+                                        </h4>
+                                        <p>Resume writing, personal branding, professional etiquette, digital skills, and interview preparation.</p>
+                                        <ul class="ed-courses__list">
+                                            <li>Resume Writing & Personal Branding</li>
+                                            <li>Professional Email & Etiquette</li>
+                                            <li>Mock Job Interview + Peer Review</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Module 6 -->
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="ed-courses__card wow fadeInUp" data-wow-delay="1.3s" data-wow-duration="1s">
+                                    <div class="ed-courses__head">
+                                        <div class="ed-courses__img">
+                                            <img src="/images/iimf/camp-2.jpg" alt="creativity" />
+                                        </div>
+                                        <div class="ed-courses__price">
+                                            <span>Day 6</span>
+                                        </div>
+                                    </div>
+                                    <div class="ed-courses__content">
+                                        <h4 class="ed-courses__title">
+                                            <a href="#">Creativity & Future Skills</a>
+                                        </h4>
+                                        <p>Design thinking, innovation lab, creativity through games, and future of work trends.</p>
+                                        <ul class="ed-courses__list">
+                                            <li>Introduction to Design Thinking</li>
+                                            <li>Innovation Lab Mini-projects</li>
+                                            <li>Build a "Vision Board"</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Program Highlights Section -->
                 <section class="ed-features position-relative">
                     <div class="ed-category__shapes">
                         <img class="ed-category__shape-1 updown-ani" src="/images/features/features-1/shape-1.svg"
@@ -560,101 +656,100 @@
                             alt="shape-2" />
                     </div>
                     <div class="container ed-container">
+                        <div class="ed-section-head text-center">
+                            <span class="ed-section-head__sm-title">WHAT WE OFFER</span>
+                            <h3 style="color: white;" class="ed-section-head__title ed-split-text left">
+                                Program Highlights
+                            </h3>
+                        </div>
                         <div class="row">
-                            <!-- Personalized Mentorship -->
+                            <!-- Career Compass -->
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="ed-features__card wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
                                     <div class="ed-features__icon icon-bg bg-1 pr-icons">
-                                        <i class="ri-user-follow-line" style="font-size:2rem;"></i>
+                                        <i class="ri-compass-3-line" style="font-size:2rem;"></i>
                                     </div>
                                     <div class="ed-features__info">
-                                        <h4>Personalized Mentorship</h4>
+                                        <h4>Career Compass</h4>
                                         <p>
-                                            One-on-one guidance from experienced mentors to help students adapt to
-                                            campus life, set goals, and build confidence.
+                                            Guided planning for courses, colleges, and future pathways to help students make informed decisions about their academic and career journey.
                                         </p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Academic Skill Building -->
+                            <!-- Power Skills -->
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="ed-features__card wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1s">
                                     <div class="ed-features__icon icon-bg bg-2 pr-icons">
-                                        <i class="ri-book-2-line" style="font-size:2rem;"></i>
+                                        <i class="ri-user-voice-line" style="font-size:2rem;"></i>
                                     </div>
                                     <div class="ed-features__info">
-                                        <h4>Academic Skill Building</h4>
+                                        <h4>Power Skills for Life</h4>
                                         <p>
-                                            Strengthen core subjects, critical thinking, and problem-solving skills to
-                                            prepare for college-level coursework.
+                                            Communication, problem-solving, and adaptability training for the real world through interactive workshops and practical activities.
                                         </p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Soft Skills & Communication -->
+                            <!-- Smart Strategies -->
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="ed-features__card wow fadeInUp" data-wow-delay=".7s" data-wow-duration="1s">
                                     <div class="ed-features__icon icon-bg bg-3 pr-icons">
-                                        <i class="ri-chat-1-line" style="font-size:2rem;"></i>
+                                        <i class="ri-lightbulb-flash-line" style="font-size:2rem;"></i>
                                     </div>
                                     <div class="ed-features__info">
-                                        <h4>Soft Skills & Communication</h4>
+                                        <h4>Smart Strategies</h4>
                                         <p>
-                                            Build confidence in public speaking, teamwork, and effective communication,
-                                            essential for campus and career success.
+                                            Time management, study techniques, and decision-making skills to excel academically and personally in college life.
                                         </p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Career Orientation -->
+                            <!-- Beyond Classroom -->
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="ed-features__card wow fadeInUp" data-wow-delay=".9s" data-wow-duration="1s">
                                     <div class="ed-features__icon icon-bg bg-4 pr-icons">
-                                        <i class="ri-briefcase-line" style="font-size:2rem;"></i>
+                                        <i class="ri-team-line" style="font-size:2rem;"></i>
                                     </div>
                                     <div class="ed-features__info">
-                                        <h4>Career Orientation</h4>
+                                        <h4>Beyond the Classroom</h4>
                                         <p>
-                                            Explore potential career paths, learn about different degree options, and
-                                            make informed decisions for your academic journey.
+                                            Outdoor activities, team challenges, and experiential learning to develop teamwork, leadership, and practical life skills.
                                         </p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Campus Life Preparedness -->
+                            <!-- Insight & Awareness -->
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="ed-features__card wow fadeInUp" data-wow-delay="1.1s"
                                     data-wow-duration="1s">
                                     <div class="ed-features__icon icon-bg bg-5 pr-icons">
-                                        <i class="ri-hospital-line" style="font-size:2rem;"></i>
-                                        <!-- can be replaced with ri-home-3-line -->
+                                        <i class="ri-eye-line" style="font-size:2rem;"></i>
                                     </div>
                                     <div class="ed-features__info">
-                                        <h4>Campus Life Preparedness</h4>
+                                        <h4>Insight & Awareness</h4>
                                         <p>
-                                            Learn time management, organization, and social skills to smoothly
-                                            transition into college life and activities.
+                                            Reflective assessments to help students discover their strengths, growth areas, and personal development opportunities.
                                         </p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Confidence & Leadership -->
+                            <!-- Family Connect -->
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="ed-features__card wow fadeInUp" data-wow-delay="1.3s"
                                     data-wow-duration="1s">
                                     <div class="ed-features__icon icon-bg bg-6 pr-icons">
-                                        <i class="ri-trophy-line" style="font-size:2rem;"></i>
+                                        <i class="ri-home-heart-line" style="font-size:2rem;"></i>
                                     </div>
                                     <div class="ed-features__info">
-                                        <h4>Confidence & Leadership</h4>
+                                        <h4>Family Connect</h4>
                                         <p>
-                                            Develop leadership abilities, self-confidence, and teamwork skills to thrive
-                                            in academic and social campus environments.
+                                            Parental orientation sessions to ensure strong support at home and alignment between family expectations and student aspirations.
                                         </p>
                                     </div>
                                 </div>
@@ -664,30 +759,19 @@
                     </div>
                 </section>
 
-
-
-
-
-
-
-
-
-                <!-- Start About Area -->
+                <!-- Program Details Section -->
                 <section class="ed-why-choose ed-why-choose--style2 section-gap position-relative">
                     <div class="container ed-container position-relative">
                         <div class="ed-w-choose__content">
                             <div class="row g-0">
                                 <div class="col-lg-6 col-12">
                                     <div class="ed-section-head">
-                                        <span class="ed-section-head__sm-title">WHY CHOOSE US</span>
+                                        <span class="ed-section-head__sm-title">PROGRAM DETAILS</span>
                                         <h3 class="ed-section-head__title ed-split-text right">
-                                            Prepare for College Life <br />
-                                            with Expert Guidance
+                                            Comprehensive Learning Experience
                                         </h3>
                                         <p class="ed-section-head__text">
-                                            Our school-to-campus program equips students with essential skills,
-                                            confidence, and knowledge to transition smoothly from high school to
-                                            college. From academics to life skills, we guide every step of the journey.
+                                            Our 7-day immersive program combines indoor sessions, outdoor camps, educational tours, and assessments to provide a holistic preparation for college life. Students develop essential skills, gain self-awareness, and build confidence for a successful transition.
                                         </p>
                                     </div>
                                 </div>
@@ -699,14 +783,13 @@
                                     data-wow-delay=".3s" data-wow-duration="1s">
                                     <div class="ed-w-choose__info-head">
                                         <div class="ed-w-choose__info-icon bg-1">
-                                            <i class="ri-user-follow-line" style="font-size:2rem;"></i>
+                                            <i class="ri-calendar-check-line" style="font-size:2rem;"></i>
                                         </div>
-                                        <h5>Personal Mentorship</h5>
+                                        <h5>Program Duration</h5>
                                     </div>
                                     <div class="ed-w-choose__info-bottom">
                                         <p>
-                                            One-on-one mentoring to help students set goals, plan their academic path,
-                                            and build confidence for campus life.
+                                            7 core training days + 2 outdoor camp days + 1 educational tour day + 1 parental orientation day + 1 convocation day
                                         </p>
                                     </div>
                                 </div>
@@ -716,14 +799,13 @@
                                     data-wow-delay=".5s" data-wow-duration="1s">
                                     <div class="ed-w-choose__info-head">
                                         <div class="ed-w-choose__info-icon bg-2">
-                                            <i class="ri-book-2-line" style="font-size:2rem;"></i>
+                                            <i class="ri-time-line" style="font-size:2rem;"></i>
                                         </div>
-                                        <h5>Academic Skill Building</h5>
+                                        <h5>Daily Schedule</h5>
                                     </div>
                                     <div class="ed-w-choose__info-bottom">
                                         <p>
-                                            Strengthen essential subjects, critical thinking, and study techniques to
-                                            excel in higher education.
+                                            Sessions: 9:00 AM – 5:00 PM with breaks for meals, reflection, and interaction. Morning training: 2-3 hours, Afternoon activities: 1-2 hours.
                                         </p>
                                     </div>
                                 </div>
@@ -733,14 +815,13 @@
                                     data-wow-delay=".7s" data-wow-duration="1s">
                                     <div class="ed-w-choose__info-head">
                                         <div class="ed-w-choose__info-icon bg-3">
-                                            <i class="ri-chat-1-line" style="font-size:2rem;"></i>
+                                            <i class="ri-wallet-3-line" style="font-size:2rem;"></i>
                                         </div>
-                                        <h5>Life Skills & Communication</h5>
+                                        <h5>Program Fee</h5>
                                     </div>
                                     <div class="ed-w-choose__info-bottom">
                                         <p>
-                                            Develop communication, teamwork, and time management skills to thrive
-                                            socially and academically in college.
+                                            INR 15,000 (includes all materials, assessments, outdoor activities, and excursions)
                                         </p>
                                     </div>
                                 </div>
@@ -750,7 +831,7 @@
                         <div class="ed-w-choose__images ed-w-choose__images--style2">
                             <!-- Why Choose Image -->
                             <div class="ed-w-choose__main-img">
-                                <img src="/images/iimf/camp-7.jpg" alt="school-to-campus" />
+                                <img src="/images/iimf/camp-7.jpg" alt="program-details" />
                             </div>
                             <!-- Shapes Elements -->
                             <div class="ed-w-choose__shapes">
@@ -761,10 +842,118 @@
                     </div>
                 </section>
 
+                <!-- Expected Outcomes Section -->
+                <section class="ed-blog ed-blog--style2 pt-0 section-gap">
+                    <div class="container ed-container">
+                        <div class="ed-section-head">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 col-12">
+                                    <div class="ed-section-head__info">
+                                        <span class="ed-section-head__sm-title">EXPECTED OUTCOMES</span>
+                                        <h3 class="ed-section-head__title ed-split-text left m-0">
+                                            What Students Gain From Our Program
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    <div class="ed-section-head__text">
+                                        <p>
+                                            By the end of our 7-day workshop, students develop essential skills, gain clarity about their future, and build confidence for a successful transition to campus life.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                <!-- End About Area -->
+                        <div class="row">
+                            <!-- Outcome Card Left Column -->
+                            <div class="col-lg-6 col-12">
+                                <div class="ed-blog__wrapper wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                                    <!-- Outcome 1 -->
+                                    <div class="ed-blog__card">
+                                        <div class="ed-blog__head">
+                                            <div class="ed-blog__img">
+                                                <img src="/images/iimf/camp-3.jpg" alt="Self Awareness" />
+                                            </div>
+                                        </div>
+                                        <div class="ed-blog__content">
+                                            <a href="#" class="ed-blog__title">
+                                                <h4>
+                                                    Self-Awareness & Personal Development
+                                                </h4>
+                                            </a>
+                                            <p>
+                                                Understand their aptitude, interests, and personality profile through scientific assessments and guided reflection activities.
+                                            </p>
+                                        </div>
+                                    </div>
 
+                                    <!-- Outcome 2 -->
+                                    <div class="ed-blog__card">
+                                        <div class="ed-blog__head">
+                                            <div class="ed-blog__img">
+                                                <img src="/images/iimf/camp-4.jpg" alt="Career Clarity" />
+                                            </div>
+                                        </div>
+                                        <div class="ed-blog__content">
+                                            <a href="#" class="ed-blog__title">
+                                                <h4>
+                                                    Career & Academic Clarity
+                                                </h4>
+                                            </a>
+                                            <p>
+                                                Gain clarity on course & college selection, understand career planning, and explore international education pathways.
+                                            </p>
+                                        </div>
+                                    </div>
 
+                                    <!-- Outcome 3 -->
+                                    <div class="ed-blog__card">
+                                        <div class="ed-blog__head">
+                                            <div class="ed-blog__img">
+                                                <img src="/images/iimf/camp-5.jpg" alt="Skill Development" />
+                                            </div>
+                                        </div>
+                                        <div class="ed-blog__content">
+                                            <a href="#" class="ed-blog__title">
+                                                <h4>
+                                                    Essential Skill Development
+                                                </h4>
+                                            </a>
+                                            <p>
+                                                Develop life skills, soft skills, and employability skills needed to thrive in college and beyond.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Featured Outcome Right Column -->
+                            <div class="col-lg-6 col-12">
+                                <div class="ed-blog__featured-blog wow fadeInUp" data-wow-delay=".5s"
+                                    data-wow-duration="1s">
+                                    <div class="ed-blog__card">
+                                        <div class="ed-blog__head">
+                                            <div class="ed-blog__img">
+                                                <img src="/images/iimf/camp-6.jpg" alt="Confidence Building" />
+                                            </div>
+                                        </div>
+                                        <div class="ed-blog__content">
+                                            <a href="#" class="ed-blog__title">
+                                                <h4>
+                                                    Confidence & Leadership Development
+                                                </h4>
+                                            </a>
+                                            <p>
+                                                Build confidence, leadership abilities, and adaptability through experiential learning, team challenges, and outdoor activities. Be prepared for a successful transition to campus life with increased independence and future readiness.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
                 <!-- Start Faq Area -->
                 <section class="ed-faq position-relative">
@@ -802,7 +991,7 @@
                                         <div class="ed-section-head m-0">
                                             <span class="ed-section-head__sm-title">FREQUENTLY ASKED QUESTIONS</span>
                                             <h3 class="ed-section-head__title ed-split-text right">
-                                                School-to-Campus Guidance
+                                                School-to-Campus Program
                                             </h3>
                                         </div>
                                         <div class="ed-faq__accordion faq-inner accordion" id="accordionCampus">
@@ -813,16 +1002,14 @@
                                                     <button class="accordion-button" type="button"
                                                         data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                                         aria-expanded="true" aria-controls="collapseOne">
-                                                        What is the School-to-Campus Program?
+                                                        Who is this program designed for?
                                                     </button>
                                                 </h2>
                                                 <div id="collapseOne" class="accordion-collapse collapse show"
                                                     aria-labelledby="headingOne" data-bs-parent="#accordionCampus">
                                                     <div class="ed-faq__accordion-body">
                                                         <p>
-                                                            This program helps students transitioning from high school
-                                                            to college by providing academic support, mentorship, and
-                                                            life skills training for a smooth start.
+                                                            This program is specifically designed for higher secondary students (ages 17-18) who are preparing to transition from school to college/university life.
                                                         </p>
                                                     </div>
                                                 </div>
@@ -834,16 +1021,14 @@
                                                     <button class="accordion-button collapsed" type="button"
                                                         data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                                         aria-expanded="false" aria-controls="collapseTwo">
-                                                        Who can join the program?
+                                                        What is the duration and schedule of the program?
                                                     </button>
                                                 </h2>
                                                 <div id="collapseTwo" class="accordion-collapse collapse"
                                                     aria-labelledby="headingTwo" data-bs-parent="#accordionCampus">
                                                     <div class="ed-faq__accordion-body">
                                                         <p>
-                                                            Students who have completed high school and are preparing to
-                                                            enter college or university can join to enhance academic and
-                                                            life skills for campus readiness.
+                                                            The program is a 7-day immersive summer workshop with daily sessions from 9:00 AM to 5:00 PM. It includes 7 core training days, 2 outdoor camp days, 1 educational tour day, 1 parental orientation day, and 1 convocation day.
                                                         </p>
                                                     </div>
                                                 </div>
@@ -855,16 +1040,14 @@
                                                     <button class="accordion-button collapsed" type="button"
                                                         data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                                         aria-expanded="false" aria-controls="collapseThree">
-                                                        What skills will I gain?
+                                                        What skills will students develop in this program?
                                                     </button>
                                                 </h2>
                                                 <div id="collapseThree" class="accordion-collapse collapse"
                                                     aria-labelledby="headingThree" data-bs-parent="#accordionCampus">
                                                     <div class="ed-faq__accordion-body">
                                                         <p>
-                                                            You will gain study skills, time management, communication,
-                                                            teamwork, and confidence to adapt successfully to college
-                                                            life.
+                                                            Students will develop essential life skills, soft skills, employability skills, communication abilities, problem-solving, time management, study techniques, and decision-making skills for college success.
                                                         </p>
                                                     </div>
                                                 </div>
@@ -876,16 +1059,14 @@
                                                     <button class="accordion-button collapsed" type="button"
                                                         data-bs-toggle="collapse" data-bs-target="#collapseFour"
                                                         aria-expanded="false" aria-controls="collapseFour">
-                                                        Are there mentorship opportunities?
+                                                        Are parents involved in the program?
                                                     </button>
                                                 </h2>
                                                 <div id="collapseFour" class="accordion-collapse collapse"
                                                     aria-labelledby="headingFour" data-bs-parent="#accordionCampus">
                                                     <div class="ed-faq__accordion-body">
                                                         <p>
-                                                            Yes, experienced mentors guide students on academic
-                                                            planning, career orientation, and personal development to
-                                                            ensure a successful college journey.
+                                                            Yes, we have a dedicated Family Connect component with parental orientation sessions to ensure strong support at home and alignment between family expectations and student aspirations.
                                                         </p>
                                                     </div>
                                                 </div>
@@ -897,16 +1078,14 @@
                                                     <button class="accordion-button collapsed" type="button"
                                                         data-bs-toggle="collapse" data-bs-target="#collapseFive"
                                                         aria-expanded="false" aria-controls="collapseFive">
-                                                        How long is the program?
+                                                        What is included in the program fee?
                                                     </button>
                                                 </h2>
                                                 <div id="collapseFive" class="accordion-collapse collapse"
                                                     aria-labelledby="headingFive" data-bs-parent="#accordionCampus">
                                                     <div class="ed-faq__accordion-body">
                                                         <p>
-                                                            The program is typically designed as a 4-6 week summer camp,
-                                                            with flexible schedules to prepare students effectively for
-                                                            college life.
+                                                            The program fee of INR 15,000 includes all training materials, assessments, outdoor activities, excursions, and certification. Everything needed for the 7-day immersive experience is covered.
                                                         </p>
                                                     </div>
                                                 </div>
@@ -920,10 +1099,6 @@
                     </div>
                 </section>
 
-
-
-
-                <!-- End Faq Area -->
                 <!-- Start Testimonial Area -->
                 <section class="ed-testimonial ed-testimonial--style4 section-gap overflow-hidden">
                     <div class="container ed-container">
@@ -933,7 +1108,7 @@
                                     <span class="ed-section-head__sm-title">STUDENT TESTIMONIALS</span>
                                     <h3 class="ed-section-head__title ed-split-text left">
                                         What Students Say About Their <br />
-                                        Study Abroad Experience
+                                        School-to-Campus Experience
                                     </h3>
                                 </div>
                             </div>
@@ -997,9 +1172,6 @@
                 </section>
                 <!-- End Testimonial Area -->
 
-
-                <!-- End Blog Area -->
-
                 <section class="ed-call-action position-relative">
                     <div class="container ed-container">
                         <div class="ed-call-action__inner position-relative">
@@ -1021,19 +1193,17 @@
                                 <div class="col-lg-6 col-12 order-class">
                                     <div class="ed-call-action__content">
                                         <div class="ed-section-head">
-                                            <span class="ed-section-head__sm-title">LEARN WITH US</span>
+                                            <span class="ed-section-head__sm-title">JOIN OUR PROGRAM</span>
                                             <h3 class="ed-section-head__title">
-                                                Start Your Learning Journey Today <br />
-                                                With Expert-Led Courses
+                                                Ready for Your School-to-Campus Transition?<br />
+                                                Register for Our Summer Boot Camp
                                             </h3>
                                             <p class="ed-section-head__text">
-                                                Gain practical knowledge, upgrade your skills, and open doors to new
-                                                opportunities. Join thousands of students who are already learning with
-                                                us.
+                                                Empower yourself with the skills, confidence, and clarity needed for a successful leap from school to campus life. Limited to 50 students per batch for personalized attention.
                                             </p>
                                         </div>
                                         <div class="ed-call-action__content-btn">
-                                            <a href="course.html" class="ed-btn"> Explore Courses <i
+                                            <a href="/contact" class="ed-btn"> Register Now <i
                                                     class="fi fi-rr-arrow-small-right"></i> </a>
                                         </div>
                                     </div>
@@ -1249,7 +1419,7 @@
                     </a>
                     <h3 class="ed-auth__modal-title">Sign In Now</h3>
                     <p class="ed-auth__modal-text">
-                        Didn’t Create an account?
+                        Didn't Create an account?
                         <button type="button" data-bs-toggle="modal" data-bs-target="#registerModal">
                             Sign Up
                         </button>
