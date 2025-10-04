@@ -3,22 +3,30 @@ const Attempt = require("../models/Attempt");
 const Assessment = require("../models/Assessment");
 const Question = require("../models/Question");
 
-// Start an attempt (guest or logged-in user)
+
 exports.startAttempt = async (req, res) => {
   try {
-    const { assessmentId, guestDetails } = req.body;
-    const userId = req.user ? req.user._id : null;
+      const { assessmentId, name, email, phone } = req.body;
+      
+      const guestDetails = {
+          name: name,
+          email: email,
+          phone: phone
+      };
 
-    const newAttempt = new Attempt({
-      user: userId,
-      guestDetails: userId ? null : guestDetails,
-      assessment: assessmentId,
-    });
+      const newAttempt = new Attempt({
+          user: null,
+          guestDetails: guestDetails,
+          assessment: assessmentId,
+      });
 
-    await newAttempt.save();
-    res.status(201).json({ success: true, attempt: newAttempt });
+      await newAttempt.save();
+ 
+      res.redirect('/take-assessment/' + newAttempt._id);
+
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+      console.error("Start Attempt Error:", err);
+      res.status(500).json({ success: false, message: err.message });
   }
 };
 

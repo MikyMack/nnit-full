@@ -8,6 +8,8 @@ const Event = require('../models/Event');
 const Job = require('../models/Job');
 const StudyAbroad = require('../models/StudyAbroad');
 const Testimonial = require('../models/Testimonial');
+const Attempt = require('../models/Attempt');
+const Assessment = require('../models/Assessment');
 
 router.get('/', async (req, res) => {
     try {
@@ -535,20 +537,59 @@ router.get('/assesment', async (req, res) => {
     try {
         const token = req.cookies.token;
         let user = null;
+
         if (token) {
             try {
                 const decoded = jwt.verify(token, process.env.SESSION_SECRET);
-
-                user = await User.findById(decoded.id);
+                user = await User.findById(decoded.id).lean();
             } catch (err) {
                 console.error("JWT Verification Error:", err);
             }
         }
-        res.render('assesment', { title: 'Services', user });
+        const categories = await Assessment.distinct('category');
+        const courseCategories = await Course.getCategoriesWithCount();
+        const testimonials = await Testimonial.find({ toggled: true }).sort({ createdAt: -1 }).limit(10);
+        const selectedCategory = req.query.category;
+
+        let filter = {};
+        if (selectedCategory) {
+            filter.category = selectedCategory;
+        }
+        const assessments = await Assessment.find(filter).lean();
+
+        let attempts = [];
+        if (user) {
+            attempts = await Attempt.find({ user: user._id })
+                .populate('assessment')
+                .lean();
+        }
+
+        res.render('assesment', { 
+            title: 'Services', 
+            user, 
+            assessments, 
+            attempts,
+            categories,
+            selectedCategory,
+            courseCategories,
+            testimonials
+        });
+
     } catch (error) {
-        res.status(500).render('assesment', { title: 'Services', user: null });
+        console.error("Assessment Page Error:", error);
+        res.status(500).render('assesment', { 
+            title: 'Services', 
+            user: null, 
+            assessments: [], 
+            attempts: [],
+            categories: [],
+            selectedCategory: null,
+            courseCategories: [],
+            testimonials: []
+        });
     }
 });
+
 router.get('/ielts-pte', async (req, res) => {
     try {
         const token = req.cookies.token;
