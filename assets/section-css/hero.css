@@ -8,7 +8,9 @@
 .section-bg.hero-bg-2 {
   padding-top: 92px;
 }
-
+.slider-banner-img img{
+  object-fit: contain!important;
+}
 .ed-hero {
   position: relative;
   overflow: hidden;
