@@ -5,6 +5,8 @@ const Question = require("../models/Question");
 
 
 exports.startAttempt = async (req, res) => {
+  console.log(req.body);
+  
   try {
       const { assessmentId, name, email, phone } = req.body;
       
@@ -22,8 +24,14 @@ exports.startAttempt = async (req, res) => {
 
       await newAttempt.save();
  
-      res.redirect('/take-assessment/' + newAttempt._id);
-
+      res.json({ 
+        success: true, 
+        message: "Assessment started successfully",
+        attempt: {
+            _id: newAttempt._id,
+            assessment: newAttempt.assessment
+        }
+    });
   } catch (err) {
       console.error("Start Attempt Error:", err);
       res.status(500).json({ success: false, message: err.message });
@@ -32,6 +40,8 @@ exports.startAttempt = async (req, res) => {
 
 // Submit answers
 exports.submitAttempt = async (req, res) => {
+  console.log(req.body);
+  
   try {
     const { attemptId, answers } = req.body;
     const attempt = await Attempt.findById(attemptId).populate("assessment");

@@ -232,3 +232,137 @@
         max-height: 90px;
     }
 }
+
+.guest-popup-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.45);
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+.guest-popup-form-container {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    padding: 0;
+    min-width: 340px;
+    max-width: 95vw;
+    width: 370px;
+    position: relative;
+    animation: guestPopupIn 0.22s;
+}
+@keyframes guestPopupIn {
+    from { transform: scale(0.95) translateY(30px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+.guest-popup-form {
+    padding: 0;
+    margin: 0;
+}
+.guest-popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.2rem 0.5rem 1.2rem;
+    border-bottom: 1px solid #e9ecef;
+    background: #f8f9fa;
+    border-radius: 14px 14px 0 0;
+}
+.guest-popup-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #222;
+}
+.guest-popup-close {
+    background: none;
+    border: none;
+    font-size: 1.7rem;
+    color: #888;
+    cursor: pointer;
+    line-height: 1;
+    margin-left: 1rem;
+    margin-top: -0.2rem;
+}
+.guest-popup-body {
+    padding: 1.2rem 1.2rem 0.5rem 1.2rem;
+}
+.guest-popup-footer {
+    padding: 0.8rem 1.2rem 1.2rem 1.2rem;
+    border-top: 1px solid #e9ecef;
+    background: #f8f9fa;
+    border-radius: 0 0 14px 14px;
+}
+.guest-popup-body .form-label {
+    font-weight: 500;
+}
+.guest-popup-body input.form-control {
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+@media (max-width: 500px) {
+    .guest-popup-form-container {
+        min-width: 90vw;
+        width: 98vw;
+    }
+}
+/* Keep original assessment styles */
+.ed-category-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.ed-category-btn {
+    background: #f8f9fa;
+    color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.18s;
+    padding: 0.5rem 1.3rem;
+    font-size: 1.05em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.ed-category-btn:hover,
+.ed-category-btn:focus {
+    background: #007bff;
+    color: #fff;
+    border-color: #0056b3;
+}
+
+.ed-category-btn-active,
+.ed-category-btn.ed-category-btn-active {
+    background: #007bff;
+    color: #fff;
+    border-color: #0056b3;
+    box-shadow: 0 4px 16px rgba(0, 123, 255, 0.08);
+}
+
+.ed-assessment__card {
+    transition: box-shadow 0.2s;
+}
+
+.ed-assessment__card:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 767px) {
+    .ed-assessment__section h2 {
+        font-size: 1.5rem;
+    }
+
+    .ed-assessment__card .card-title {
+        font-size: 1.1rem;
+    }
+
+    .ed-category-btn {
+        font-size: 0.98em;
+        padding: 0.45rem 1rem;
+    }
+}
