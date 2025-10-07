@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User =require('../models/User') 
+const Contact = require("../models/contact");
 const authController = require('../controllers/authController'); 
 const blogsController = require('../controllers/blogsController');
 const testimonialController = require('../controllers/testimonialController');
@@ -46,12 +47,29 @@ router.delete('/blogs/delete/:id', blogsController.deleteBlog);                 
 
 
 
+
+
 router.post('/send-contact', async (req, res) => {
     const { name, email, phone, message } = req.body;
     if (!name || !email || !phone || !message) {
         return res.status(400).send('Please fill in all required fields.');
     }
 
+    // Save to MongoDB
+    try {
+        const contact = new Contact({
+            name,
+            email,
+            phone,
+            message
+        });
+        await contact.save();
+    } catch (err) {
+        console.error('Error saving contact to database:', err);
+        return res.status(500).send('Failed to save contact message.');
+    }
+
+    // Send email notification
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: process.env.EMAIL_USER,
