@@ -149,6 +149,12 @@ top: 0%;
   align-items: center;
   gap: 10px;
 }
+
+@media (max-width: 374px) {
+  .ed-topbar__info-buttons {
+    display: none;
+  }
+}
 .ed-topbar__info-buttons button {
   padding: 13px 23px;
   border-radius: 52px;

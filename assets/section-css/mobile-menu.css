@@ -258,7 +258,7 @@
             justify-content: center;
             text-decoration: none;
             color: #152b4f;
-            padding: 8px 12px;
+            padding: 8px 2px;
             border-radius: 12px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
@@ -285,14 +285,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Active State */
-        .cosmic-nav-link.active {
-            background: linear-gradient(135deg, #14305d, #1a4080);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(36, 81, 154, 0.3);
-        }
-
+      
         .cosmic-nav-link.active .constellation-nav-text {
             opacity: 1;
         }
@@ -342,11 +335,55 @@
             }
         }
 
-        /* Extra small mobile optimization */
-        @media (max-width: 480px) {
+        /* Extra small mobile optimization - make everything smaller for 375px and below */
+        @media (max-width: 375px) {
             .stellar-nav-list {
-                height: 65px;
-                padding: 6px 0;
+                height: 52px;
+                padding: 3px 0;
+            }
+            
+            .nebula-nav-icon {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .constellation-nav-text {
+                font-size: 8px;
+            }
+            
+            .cosmic-nav-link {
+                padding: 4px 4px;
+                min-width: 38px;
+            }
+        }
+
+        /* Small mobile screens (376px - 480px) */
+        @media (min-width: 376px) and (max-width: 480px) {
+            .stellar-nav-list {
+                height: 60px;
+                padding: 5px 0;
+            }
+            
+            .nebula-nav-icon {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .constellation-nav-text {
+                font-size: 9px;
+            }
+            
+            .cosmic-nav-link {
+                padding: 5px 6px;
+                min-width: 45px;
+            }
+        }
+
+        /* Large mobile screens */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .stellar-nav-list {
+                height: 70px;
+                padding: 8px 0;
             }
             
             .nebula-nav-icon {
@@ -355,29 +392,7 @@
             }
             
             .constellation-nav-text {
-                font-size: 10px;
-            }
-            
-            .cosmic-nav-link {
-                padding: 6px 8px;
-                min-width: 55px;
-            }
-        }
-
-        /* Large mobile screens */
-        @media (min-width: 481px) and (max-width: 768px) {
-            .stellar-nav-list {
-                height: 75px;
-                padding: 10px 0;
-            }
-            
-            .nebula-nav-icon {
-                width: 26px;
-                height: 26px;
-            }
-            
-            .constellation-nav-text {
-                font-size: 12px;
+                font-size: 11px;
             }
         }
 

@@ -34,11 +34,7 @@
   opacity: 0;
   visibility: hidden;
 }
-.ed-team__card:hover .ed-team__cover::before {
-  opacity: 1;
-  visibility: visible;
-  height: 100%;
-}
+
 .ed-team__social {
   display: flex;
   align-items: center;

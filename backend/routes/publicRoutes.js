@@ -8,6 +8,7 @@ const Event = require('../models/Event');
 const Job = require('../models/Job');
 const StudyAbroad = require('../models/StudyAbroad');
 const Testimonial = require('../models/Testimonial');
+const Gallery = require('../models/Gallery');
 const Attempt = require('../models/Attempt');
 const Assessment = require('../models/Assessment');
 
@@ -297,15 +298,51 @@ router.get('/gallery', async (req, res) => {
         if (token) {
             try {
                 const decoded = jwt.verify(token, process.env.SESSION_SECRET);
-
                 user = await User.findById(decoded.id);
             } catch (err) {
                 console.error("JWT Verification Error:", err);
             }
         }
-        res.render('gallery', { title: 'gallery', user });
+
+        const courseCategories = await Course.getCategoriesWithCount();
+
+        const page = parseInt(req.query.page) > 0 ? parseInt(req.query.page) : 1;
+        const limit = 12; 
+
+        const totalGalleryItems = await Gallery.countDocuments();
+
+        const galleryItems = await Gallery.find()
+            .sort({ createdAt: -1 })
+            .skip((page - 1) * limit)
+            .limit(limit);
+
+        const totalPages = Math.ceil(totalGalleryItems / limit);
+
+        res.render('gallery', {
+            title: 'gallery',
+            user,
+            courseCategories,
+            galleryItems,
+            pagination: {
+                total: totalGalleryItems,
+                page,
+                totalPages,
+                limit
+            }
+        });
     } catch (error) {
-        res.status(500).render('gallery', { title: 'gallery', user: null });
+        res.status(500).render('gallery', {
+            title: 'gallery',
+            user: null,
+            courseCategories: [],
+            galleryItems: [],
+            pagination: {
+                total: 0,
+                page: 1,
+                totalPages: 1,
+                limit: 12
+            }
+        });
     }
 });
 
