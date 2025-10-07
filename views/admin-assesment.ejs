@@ -333,9 +333,29 @@
                                                                     <td><%= attempt.assessment ? attempt.assessment.title : 'N/A' %></td>
                                                                     <td>
                                                                         <% if (attempt.user) { %>
-                                                                            <span class="badge bg-success">User</span>
-                                                                        <% } else if (attempt.guestDetails && attempt.guestDetails.name) { %>
-                                                                            <span class="badge bg-secondary">Guest: <%= attempt.guestDetails.name %></span>
+                                                                            <div>
+                                                                                <span class="badge bg-success mb-1">User</span>
+                                                                                <div style="font-size: 0.95em;">
+                                                                                    <div><strong>Name:</strong> <%= attempt.user.name %></div>
+                                                                                    <div><strong>Email:</strong> <%= attempt.user.email %></div>
+                                                                                    <div><strong>Phone:</strong> <%= attempt.user.mobile %></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        <% } else if (attempt.guestDetails && (attempt.guestDetails.name || attempt.guestDetails.email || attempt.guestDetails.phone)) { %>
+                                                                            <div>
+                                                                                <span class="badge bg-secondary mb-1">Guest</span>
+                                                                                <div style="font-size: 0.95em;">
+                                                                                    <% if (attempt.guestDetails.name) { %>
+                                                                                        <div><strong>Name:</strong> <%= attempt.guestDetails.name %></div>
+                                                                                    <% } %>
+                                                                                    <% if (attempt.guestDetails.email) { %>
+                                                                                        <div><strong>Email:</strong> <%= attempt.guestDetails.email %></div>
+                                                                                    <% } %>
+                                                                                    <% if (attempt.guestDetails.phone) { %>
+                                                                                        <div><strong>Phone:</strong> <%= attempt.guestDetails.phone %></div>
+                                                                                    <% } %>
+                                                                                </div>
+                                                                            </div>
                                                                         <% } else { %>
                                                                             <span class="badge bg-secondary">Guest</span>
                                                                         <% } %>
@@ -529,6 +549,10 @@
                                         <input type="text" class="form-control" name="questions[${idx}][text]" required>
                                     </div>
                                     <div class="mb-2">
+                                        <label>Category</label>
+                                        <input type="text" class="form-control" name="questions[${idx}][category]" placeholder="e.g. Math, Science" required>
+                                    </div>
+                                    <div class="mb-2">
                                         <label>Options</label>
                                         <div class="options-container" id="optionsContainer${idx}">
                                             <div class="input-group mb-1 option-row">
@@ -630,19 +654,21 @@
                             const questionCards = form.querySelectorAll('.question-card');
                             questionCards.forEach(function(card, idx) {
                                 const text = card.querySelector('input[name="questions['+idx+'][text]"]')?.value?.trim();
+                                const qCategory = card.querySelector('input[name="questions['+idx+'][category]"]')?.value?.trim();
                                 const optionInputs = card.querySelectorAll('input[name="questions['+idx+'][options][]"]');
                                 const options = Array.from(optionInputs).map(input => input.value.trim()).filter(Boolean);
                                 const correct = card.querySelector('select[name="questions['+idx+'][correct]"]')?.value?.trim();
-                                if (text && options.length >= 2 && correct) {
+                                if (text && options.length >= 2 && correct && qCategory) {
                                     questions.push({
                                         text,
                                         options,
-                                        correctAnswer: correct
+                                        correctAnswer: correct,
+                                        category: qCategory
                                     });
                                 }
                             });
                             if (!title || !category || questions.length === 0) {
-                                alert('Please fill all fields, add at least one question, and ensure each question has at least 2 options and a correct answer.');
+                                alert('Please fill all fields, add at least one question, and ensure each question has at least 2 options, a correct answer, and a category.');
                                 return false;
                             }
                             // Prepare payload
@@ -758,6 +784,9 @@
                                                         <span class="badge bg-light text-muted small">${new Date(q.createdAt).toLocaleDateString()}</span>
                                                     </div>
                                                     <div class="mb-2 text-break" style="font-size:1.05rem;">${q.questionText}</div>
+                                                    <div class="mb-2">
+                                                        <span class="badge bg-info text-dark">Category: ${q.category || '-'}</span>
+                                                    </div>
                                                     <ul class="list-unstyled mb-0">
                                                         ${
                                                             Array.isArray(q.options) ? q.options.map((opt, idx) => 
@@ -825,16 +854,14 @@
                                     const container = document.getElementById('editQuestionsContainer');
                                     if (a.questions && a.questions.length > 0) {
                                         a.questions.forEach((qObj, idx) => {
-                                     
                                             let q = qObj && qObj.question ? qObj.question : {};
-                                        
                                             const questionData = {
                                                 text: q.questionText || '',
                                                 options: Array.isArray(q.options) ? q.options : [],
-                                             
                                                 correctAnswer: (typeof q.correctAnswer === 'number' && Array.isArray(q.options) && q.options[q.correctAnswer] !== undefined)
                                                     ? q.options[q.correctAnswer]
-                                                    : ''
+                                                    : '',
+                                                category: q.category || ''
                                             };
                                             addEditQuestionField(questionData, idx);
                                         });
@@ -855,11 +882,16 @@
                             const questionText = q && q.text ? q.text.replace(/"/g, '&quot;') : '';
                             const options = q && q.options ? q.options : [];
                             const correct = q && q.correctAnswer ? q.correctAnswer : '';
+                            const qCategory = q && q.category ? q.category.replace(/"/g, '&quot;') : '';
                             let html = `
                                 <div class="card mb-2 p-2 edit-question-card" data-question-idx="${idx}">
                                     <div class="mb-2">
                                         <label>Question</label>
                                         <input type="text" class="form-control" name="questions[${idx}][text]" value="${questionText}" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label>Category</label>
+                                        <input type="text" class="form-control" name="questions[${idx}][category]" value="${qCategory}" placeholder="e.g. Math, Science" required>
                                     </div>
                                     <div class="mb-2">
                                         <label>Options</label>
@@ -972,19 +1004,21 @@
                             const questionCards = form.querySelectorAll('.edit-question-card');
                             questionCards.forEach(function(card, idx) {
                                 const text = card.querySelector('input[name="questions['+idx+'][text]"]')?.value?.trim();
+                                const qCategory = card.querySelector('input[name="questions['+idx+'][category]"]')?.value?.trim();
                                 const optionInputs = card.querySelectorAll('input[name="questions['+idx+'][options][]"]');
                                 const options = Array.from(optionInputs).map(input => input.value.trim()).filter(Boolean);
                                 const correct = card.querySelector('select[name="questions['+idx+'][correct]"]')?.value?.trim();
-                                if (text && options.length >= 2 && correct) {
+                                if (text && options.length >= 2 && correct && qCategory) {
                                     questions.push({
                                         text,
                                         options,
-                                        correctAnswer: correct
+                                        correctAnswer: correct,
+                                        category: qCategory
                                     });
                                 }
                             });
                             if (!title || !category || questions.length === 0) {
-                                alert('Please fill all fields, add at least one question, and ensure each question has at least 2 options and a correct answer.');
+                                alert('Please fill all fields, add at least one question, and ensure each question has at least 2 options, a correct answer, and a category.');
                                 return false;
                             }
                             // Prepare payload

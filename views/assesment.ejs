@@ -1435,7 +1435,45 @@
                         });
                     });
                 </script>
-               
+                <% if (typeof relatedCourses !== 'undefined' && relatedCourses.length > 0) { %>
+                <section class="related-courses-section" style="margin: 2.5rem 0;">
+                    <h4 style="font-weight: 700; margin-bottom: 1.5rem;">Related Courses</h4>
+                    <div class="row">
+                        <% relatedCourses.forEach(function(course) { %>
+                            <div class="col-md-6 col-lg-3 mb-4">
+                                <a href="/course-details/<%= encodeURIComponent(course.title) %>" class="card h-100 shadow-sm text-decoration-none" style="border-radius: 1rem; overflow: hidden;">
+                                    <div style="height: 160px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
+                                        <% if (course.image) { %>
+                                            <img src="<%= course.image %>" alt="<%= course.title %>" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                                        <% } else { %>
+                                            <img src="/images/course-default.png" alt="No image" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                                        <% } %>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="card-title" style="font-weight: 600; color: #222; margin-bottom: 0.5rem;"><%= course.title %></h6>
+                                        <div class="mb-1" style="font-size: 0.95rem; color: #666;">
+                                            <i class="fa fa-tag" style="color: #198754;"></i>
+                                            <%= course.category %>
+                                        </div>
+                                        <% if (course.specialization) { %>
+                                            <div style="font-size: 0.92rem; color: #888;">
+                                                <i class="fa fa-certificate" style="color: #0d6efd;"></i>
+                                                <%= course.specialization %>
+                                            </div>
+                                        <% } %>
+                                        <% if (course.courseInformation && course.courseInformation.duration) { %>
+                                            <div style="font-size: 0.92rem; color: #888;">
+                                                <i class="fa fa-clock" style="color: #ffc107;"></i>
+                                                <%= course.courseInformation.duration %>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </a>
+                            </div>
+                        <% }); %>
+                    </div>
+                </section>
+                <% } %>
                 <!-- Start Course Details Area -->
                 <section class="ed-course__details">
                     <div class="container ed-container">
@@ -1499,41 +1537,26 @@
                                 </div>
                             </div>
 
-                            <!-- Right Sidebar -->
+                            <!-- Demo: How to Start an Assessment -->
                             <div class="col-lg-4 col-12">
                                 <div class="ed-course__sidebar">
                                     <div class="ed-course__sidebar-widget">
-                                        <h4 class="ed-course__sidebar-title">Start Your Assessment</h4>
-                                        <form class="ed-assessment-form" id="assessmentForm">
-                                            <div class="form-group mb-3">
-                                                <label for="name">Full Name</label>
-                                                <input type="text" id="name" class="form-control"
-                                                    placeholder="Enter your name" required />
-                                            </div>
-                                            <div class="form-group mb-3">
-                                                <label for="email">Email Address</label>
-                                                <input type="email" id="email" class="form-control"
-                                                    placeholder="Enter your email" required />
-                                            </div>
-                                            <div class="form-group mb-3">
-                                                <label for="phone number">Phone Number</label>
-                                                <input type="tel" id="tel" class="form-control"
-                                                    placeholder="Enter your Phone Number" required />
-                                            </div>
-                                            <div class="form-group d-flex flex-column mb-3">
-                                                <label for="level">Difficulty Level</label>
-                                                <select id="level" class="form-control " required>
-                                                    <option value="">-- Select --</option>
-                                                    <option value="beginner">Beginner</option>
-                                                    <option value="intermediate">Intermediate</option>
-                                                    <option value="advanced">Advanced</option>
-                                                </select>
-                                            </div>
-                                            <button
-                                                style="background: linear-gradient(135deg, #24519a, #0f1624, #06090f); padding: 10px; color: white;"
-                                                type="submit" class=" assment-btn w-100" id="startAssessmentBtn">Start
-                                                Assessment</button>
-                                        </form>
+                                        <h4 class="ed-course__sidebar-title">Ready to Challenge Yourself?</h4>
+                                        <div class="p-3 border rounded bg-light mb-3">
+                                            <p style="font-size:1.08em;">
+                                                Unlock your true potential! Take our assessment to discover your strengths, identify areas for growth, and see how you stack up against industry standards.
+                                            </p>
+                                            <ul style="margin-bottom:0;">
+                                                <li><img src="/images/icons/icon-check-blue.svg" alt="check" /> Instant results & feedback</li>
+                                                <li><img src="/images/icons/icon-check-blue.svg" alt="check" /> Personalized performance report</li>
+                                                <li><img src="/images/icons/icon-check-blue.svg" alt="check" /> Certificate available after completion</li>
+                                            </ul>
+                                        </div>
+                                        <div class="alert alert-success mt-2" style="font-size: 1em;">
+                                            <i class="fi fi-rr-bulb"></i>
+                                            Take the test now and take a step closer to your goals!
+                                        </div>
+                                      
                                     </div>
                                 </div>
                             </div>

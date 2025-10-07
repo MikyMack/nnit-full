@@ -473,25 +473,98 @@
                                         <form class="ed-assessment-form" id="assessmentForm">
                                             <div class="form-group mb-3">
                                                 <label for="name">Full Name</label>
-                                                <input type="text" id="name" class="form-control"
+                                                <input type="text" id="name" name="name" class="form-control"
                                                     placeholder="Enter your name" required />
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label for="email">Email Address</label>
-                                                <input type="email" id="email" class="form-control"
+                                                <input type="email" id="email" name="email" class="form-control"
                                                     placeholder="Enter your email" required />
                                             </div>
                                             <div class="form-group mb-3">
-                                                <label for="phone number">Phone Number</label>
-                                                <input type="tel" id="tel" class="form-control"
+                                                <label for="phone">Phone Number</label>
+                                                <input type="tel" id="phone" name="phone" class="form-control"
                                                     placeholder="Enter your Phone Number" required />
                                             </div>
-
+                                            <div class="form-group mb-3">
+                                                <label for="message">Message</label>
+                                                <textarea id="message" name="message" class="form-control"
+                                                    placeholder="How can we help you? Feel free to get in touch!"
+                                                    required></textarea>
+                                            </div>
                                             <button
                                                 style="background: linear-gradient(135deg, #24519a, #0f1624, #06090f); padding: 10px; color: white;"
-                                                type="submit" class=" assment-btn w-100" id="startAssessmentBtn">Contact
-                                                Us</button>
+                                                type="submit" class="assment-btn w-100" id="startAssessmentBtn">
+                                                Contact Us
+                                            </button>
                                         </form>
+                                        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+                                        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function () {
+                                                const assessmentForm = document.getElementById('assessmentForm');
+                                                const submitBtn = document.getElementById('startAssessmentBtn');
+                                                if (assessmentForm) {
+                                                    assessmentForm.addEventListener('submit', async function (e) {
+                                                        e.preventDefault();
+                                                        submitBtn.disabled = true;
+                                                        submitBtn.innerHTML = 'Sending... <i class="fi fi-rr-arrow-small-right"></i>';
+
+                                                        const formData = new FormData(assessmentForm);
+                                                        const payload = {
+                                                            name: formData.get('name'),
+                                                            email: formData.get('email'),
+                                                            phone: formData.get('phone'),
+                                                            message: formData.get('message')
+                                                        };
+
+                                                        try {
+                                                            const res = await fetch('/send-contact', {
+                                                                method: 'POST',
+                                                                headers: {
+                                                                    'Content-Type': 'application/json'
+                                                                },
+                                                                body: JSON.stringify(payload)
+                                                            });
+
+                                                            if (res.ok) {
+                                                                Toastify({
+                                                                    text: "Thank you! Your message has been sent successfully.",
+                                                                    duration: 4000,
+                                                                    gravity: "top",
+                                                                    position: "center",
+                                                                    backgroundColor: "#28a745",
+                                                                    stopOnFocus: true
+                                                                }).showToast();
+                                                                assessmentForm.reset();
+                                                            } else {
+                                                                const errorText = await res.text();
+                                                                Toastify({
+                                                                    text: errorText || "Failed to send message.",
+                                                                    duration: 4000,
+                                                                    gravity: "top",
+                                                                    position: "center",
+                                                                    backgroundColor: "#dc3545",
+                                                                    stopOnFocus: true
+                                                                }).showToast();
+                                                            }
+                                                        } catch (err) {
+                                                            Toastify({
+                                                                text: "Something went wrong. Please try again.",
+                                                                duration: 4000,
+                                                                gravity: "top",
+                                                                position: "center",
+                                                                backgroundColor: "#dc3545",
+                                                                stopOnFocus: true
+                                                            }).showToast();
+                                                        } finally {
+                                                            submitBtn.disabled = false;
+                                                            submitBtn.innerHTML = 'Contact Us';
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        </script>
                                     </div>
 
                                 </div>

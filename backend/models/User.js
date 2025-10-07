@@ -11,7 +11,6 @@ const userSchema = new mongoose.Schema({
     otp: { type: String },
     otpExpires: { type: Date },
 
-    // Optional fields
     dateOfBirth: { type: Date },
     address: { type: String },
     studentId: { type: String },

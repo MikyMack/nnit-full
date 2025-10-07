@@ -229,17 +229,22 @@ router.get('/courses', async (req, res) => {
         const search = req.query.search ? req.query.search.trim() : '';
         const category = req.query.category ? req.query.category.trim() : '';
         const page = parseInt(req.query.page) > 0 ? parseInt(req.query.page) : 1;
-        const limit = 9; 
+        const limit = 9;
 
         let query = { isactive: true };
+
+      
         if (search) {
             query.$or = [
                 { title: { $regex: search, $options: 'i' } },
-                { description: { $regex: search, $options: 'i' } }
+                { description: { $regex: search, $options: 'i' } },
+                { category: { $regex: search, $options: 'i' } }
             ];
         }
+
         if (category) {
-            query.category = category;
+      
+            query.category = { $regex: `^${category}$`, $options: 'i' };
         }
 
         const totalCourses = await Course.countDocuments(query);
@@ -645,21 +650,23 @@ router.get('/profile', async (req, res) => {
     try {
         const token = req.cookies.token;
         let user = null;
+        let selectedCourses = [];
         if (token) {
             try {
                 const decoded = jwt.verify(token, process.env.SESSION_SECRET);
-
-                user = await User.findById(decoded.id);
+                user = await User.findById(decoded.id).populate('selectedCourses');
+                if (user && user.selectedCourses) {
+                    selectedCourses = user.selectedCourses;
+                }
             } catch (err) {
                 console.error("JWT Verification Error:", err);
             }
         }
         const courseCategories = await Course.getCategoriesWithCount();
-        const testimonials = await Testimonial.find({ toggled: true }).sort({ createdAt: -1 }).limit(10);
 
-        res.render('profile', { title: 'profile', user, courseCategories, testimonials });
+        res.render('profile', { title: 'profile', user, selectedCourses, courseCategories });
     } catch (error) {
-        res.status(500).render('profile', { title: 'profile', user: null, courseCategories: [], testimonials: [] });
+        res.status(500).render('profile', { title: 'profile', user: null, selectedCourses: [], courseCategories: [] });
     }
 });
 router.get('/blogs', async (req, res) => {
@@ -741,7 +748,6 @@ router.get('/blogs', async (req, res) => {
         });
     }
 });
-
 // Blog Details Page
 router.get('/blog-details/:title', async (req, res) => {
     try {
@@ -806,7 +812,6 @@ router.get('/blog-details/:title', async (req, res) => {
         });
     }
 });
-
 // Contact Page
 router.get('/contact', async (req, res) => {
     try {
@@ -829,8 +834,6 @@ router.get('/contact', async (req, res) => {
         res.status(500).render('contact', { title: 'Contact Us', user: null, courseCategories: [], testimonials: [] });
     }
 });
-
-
 router.post("/payu/failure", (req, res) => {
     res.render("failure");
 });

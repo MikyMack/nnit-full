@@ -22,7 +22,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-router.post("/submit", contactController.submitContact);
+router.post("/contactsubmit", contactController.submitContact);
 router.patch("/replied/:id", contactController.markReplied);
 
 
@@ -55,7 +55,7 @@ router.post('/send-contact', async (req, res) => {
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: process.env.EMAIL_USER,
-        subject: 'Rettic Enquiry Form',
+        subject: 'IIMF Enquiry Form',
         text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`
     };
 
@@ -162,6 +162,7 @@ router.get('/download-user-list', async (req, res) => {
     }
 });
 
+router.put('/edit-profile/:id', authController.editUser);
 
 
 module.exports = router;

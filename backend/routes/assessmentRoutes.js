@@ -5,20 +5,49 @@ const attemptController = require("../controllers/attemptController");
 const couponController = require("../controllers/couponController");
 const Attempt=require("../models/Attempt");
 const Assessment=require("../models/Assessment");
+const Course=require("../models/Course");
 const User=require("../models/User");
 const jwt=require("jsonwebtoken");
+
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
 
 router.post("/createAssessment", assessmentController.createAssessment); 
 router.get("/getAssessments", assessmentController.getAssessments);
 router.get("/getAssessmentById/:id", assessmentController.getAssessmentById);
 router.put("/updateAssessment/:id", assessmentController.updateAssessment);
-router.post("/start", attemptController.startAttempt);
-router.post("/submit", attemptController.submitAttempt);
-router.get("/:id/result", attemptController.getResult);
+
 router.post("/applyCoupon", couponController.applyCoupon);
 router.post("/createCoupon", couponController.createCoupon);
 router.get("/getCoupons", couponController.getCoupons);
 router.patch("/toggleCoupon/:id", couponController.toggleCoupon);
+
+
+router.post("/start", attemptController.startAttempt);
+router.post("/submit", attemptController.submitAttempt);
+router.get("/:id/result", attemptController.getResult);
+
+
+// Helper: send mail async
+async function sendMail({ to, subject, html }) {
+    try {
+        await transporter.sendMail({
+            from: `"IIMF Academy" <${process.env.EMAIL_USER}>`,
+            to,
+            subject,
+            html
+        });
+    } catch (err) {
+        console.error("Email send error:", err);
+    }
+}
 
 router.get('/start/:assessmentId', async (req, res) => {
     try {
@@ -67,6 +96,26 @@ router.get('/start/:assessmentId', async (req, res) => {
 
         await newAttempt.save();
 
+        // Send catchy email to candidate on test start
+        if (user.email) {
+            const subject = `🚀 Your Assessment "${assessment.title}" Has Begun!`;
+            const html = `
+                <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;">
+                    <h2 style="color:#007bff;">Welcome, ${user.name || 'Candidate'}!</h2>
+                    <p>We're excited to see you take the next step in your learning journey with the <strong>${assessment.title}</strong> assessment.</p>
+                    <p>Give it your best shot and unlock new opportunities!</p>
+                    <ul>
+                        <li>Stay focused and manage your time wisely.</li>
+                        <li>Remember, every question is a chance to shine!</li>
+                    </ul>
+                    <p style="margin-top:20px;">Good luck!<br><strong>The IIMF Academy Team</strong></p>
+                    <hr>
+                    <small style="color:#888;">You started this assessment on ${new Date().toLocaleString()}.</small>
+                </div>
+            `;
+            sendMail({ to: user.email, subject, html });
+        }
+
         // Redirect to take assessment
         res.redirect('/take-assessment/' + newAttempt._id);
 
@@ -83,7 +132,8 @@ router.get('/take-assessment/:attemptId', async (req, res) => {
     try {
         const attempt = await Attempt.findById(req.params.attemptId)
             .populate('assessment')
-            .populate('answers.question');
+            .populate('answers.question')
+            .populate('user');
 
         if (!attempt) {
             return res.status(404).render('error', { 
@@ -99,11 +149,13 @@ router.get('/take-assessment/:attemptId', async (req, res) => {
         const assessment = await Assessment.findById(attempt.assessment)
             .populate('questions.question')
             .lean();
-
+        const courseCategories = await Course.getCategoriesWithCount();
         res.render('take-assessment', {
             title: assessment.title,
             assessment,
-            attempt
+            attempt,
+            courseCategories,
+            user: attempt.user, // send user too
         });
 
     } catch (error) {
@@ -116,12 +168,14 @@ router.get('/take-assessment/:attemptId', async (req, res) => {
 
 // Route to view result (with unlock options)
 router.get('/result/:attemptId', async (req, res) => {
-    console.log(req.body);
-    
     try {
         const attempt = await Attempt.findById(req.params.attemptId)
-            .populate('assessment')
+            .populate({
+                path: 'assessment',
+                populate: { path: 'questions.question' }
+            })
             .populate('answers.question')
+            .populate('user')
             .lean();
 
         if (!attempt) {
@@ -130,11 +184,205 @@ router.get('/result/:attemptId', async (req, res) => {
             });
         }
 
+        const courseCategories = await Course.getCategoriesWithCount();
+
+        // Prepare detailed analysis
+        const assessment = attempt.assessment;
+        const answers = attempt.answers || [];
+        const totalQuestions = assessment && assessment.questions ? assessment.questions.length : 0;
+        let correct = 0, incorrect = 0, unanswered = 0;
+        let questionAnalysis = [];
+        let categoryStats = {};
+
+        // Map answers by question id for quick lookup
+        const answerMap = {};
+        answers.forEach(ans => {
+            if (ans.question) {
+                answerMap[String(ans.question._id)] = ans;
+            }
+        });
+
+        if (assessment && assessment.questions) {
+            assessment.questions.forEach((qObj, idx) => {
+                const q = qObj.question || qObj;
+                const ans = answerMap[String(q._id)];
+                let selected = null, isCorrect = false;
+                let category = (q.category && typeof q.category === 'string' && q.category.trim()) ? q.category.trim() : 'Uncategorized';
+
+                if (!categoryStats[category]) {
+                    categoryStats[category] = { total: 0, correct: 0, incorrect: 0, unanswered: 0 };
+                }
+                categoryStats[category].total++;
+
+                if (ans) {
+                    selected = ans.selected;
+                    isCorrect = ans.isCorrect;
+                    if (isCorrect) {
+                        correct++;
+                        categoryStats[category].correct++;
+                    } else {
+                        incorrect++;
+                        categoryStats[category].incorrect++;
+                    }
+                } else {
+                    unanswered++;
+                    categoryStats[category].unanswered++;
+                }
+
+                const optionsForDisplay = q.options ? q.options.map((text, index) => ({
+                    text: text,
+                    index: index
+                })) : [];
+
+                questionAnalysis.push({
+                    index: idx + 1,
+                    questionText: q.questionText,
+                    options: optionsForDisplay,
+                    selected: selected,
+                    isCorrect: isCorrect,
+                    correctOption: q.correctAnswer,
+                    category: q.category || null
+                });
+            });
+        }
+
+        // For graph: Pie chart data
+        const graphData = {
+            correct: correct,
+            incorrect: incorrect,
+            unanswered: unanswered,
+            total: totalQuestions
+        };
+
+        // Prepare category-wise summary
+        const categoryAnalysis = Object.entries(categoryStats).map(([cat, stats]) => {
+            const percent = stats.total > 0 ? (stats.correct / stats.total) * 100 : 0;
+            return {
+                category: cat,
+                total: stats.total,
+                correct: stats.correct,
+                incorrect: stats.incorrect,
+                unanswered: stats.unanswered,
+                percentage: percent
+            };
+        });
+
+        // FIND RELATED COURSES BASED ON ASSESSMENT CATEGORY
+        let relatedCourses = [];
+        if (assessment && assessment.category) {
+            relatedCourses = await Course.find({
+                category: assessment.category,
+                isactive: true
+            })
+            .select('title description category image specialization courseInformation.duration')
+            .limit(4) // Limit to 4 related courses
+            .lean();
+        }
+
+        // If no courses found by exact category match, find courses by weak categories
+        if (relatedCourses.length === 0 && categoryAnalysis.length > 0) {
+            // Find weak categories (below 60% performance)
+            const weakCategories = categoryAnalysis
+                .filter(cat => cat.percentage < 60)
+                .map(cat => cat.category);
+
+            if (weakCategories.length > 0) {
+                relatedCourses = await Course.find({
+                    category: { $in: weakCategories },
+                    isactive: true
+                })
+                .select('title description category image specialization courseInformation.duration')
+                .limit(4)
+                .lean();
+            }
+        }
+
+        // If still no courses, get popular courses
+        if (relatedCourses.length === 0) {
+            relatedCourses = await Course.find({ isactive: true })
+                .select('title description category image specialization courseInformation.duration')
+                .limit(4)
+                .lean();
+        }
+
+        // Generate analysis message
+        let analysisMessage = "";
+        const percentage = totalQuestions > 0 ? (correct / totalQuestions) * 100 : 0;
+        
+        if (percentage >= 80) {
+            analysisMessage = "Excellent work! You have a strong understanding of the material.";
+        } else if (percentage >= 60) {
+            analysisMessage = "Good job! You have a solid foundation with some areas to improve.";
+        } else if (percentage >= 40) {
+            analysisMessage = "You're on the right track. Focus on the areas where you struggled.";
+        } else {
+            analysisMessage = "Keep practicing! Review the material and try again.";
+        }
+
+        const isUnlocked = attempt.isResultUnlocked === undefined ? true : attempt.isResultUnlocked;
+
+        if (attempt.user && attempt.user.email) {
+            if (isUnlocked) {
+                // Send result email
+                let performanceMsg = "";
+                if (percentage >= 80) {
+                    performanceMsg = "🌟 Outstanding! You aced your assessment!";
+                } else if (percentage >= 60) {
+                    performanceMsg = "👏 Great job! You're building a strong foundation.";
+                } else if (percentage >= 40) {
+                    performanceMsg = "💪 Keep going! Every step is progress.";
+                } else {
+                    performanceMsg = "🚀 Don't give up! Every attempt is a step closer to mastery.";
+                }
+                const subject = `🎉 Assessment Completed: "${assessment.title}" - Your Results Are In!`;
+                const html = `
+                    <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;">
+                        <h2 style="color:#28a745;">Congratulations, ${attempt.user.name || 'Candidate'}!</h2>
+                        <p>You have successfully completed the <strong>${assessment.title}</strong> assessment.</p>
+                        <p style="font-size:1.1em;">${performanceMsg}</p>
+                        <ul>
+                            <li><strong>Score:</strong> ${correct} / ${totalQuestions}</li>
+                            <li><strong>Accuracy:</strong> ${percentage.toFixed(1)}%</li>
+                        </ul>
+                        <p>Want to improve further? Check out our recommended courses and keep learning!</p>
+                        <a href="https://iimfacademy.com/courses" style="display:inline-block;margin:16px 0;padding:10px 20px;background:#007bff;color:#fff;text-decoration:none;border-radius:4px;">Explore Courses</a>
+                        <p style="margin-top:20px;">Keep striving for excellence!<br><strong>The IIMF Academy Team</strong></p>
+                        <hr>
+                        <small style="color:#888;">Assessment completed on ${new Date().toLocaleString()}.</small>
+                    </div>
+                `;
+                sendMail({ to: attempt.user.email, subject, html });
+            } else {
+                // Send "unlock to view result" email
+                const subject = `🔒 Unlock Your Assessment Result for "${assessment.title}"`;
+                const html = `
+                    <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;">
+                        <h2 style="color:#ff9800;">Hi ${attempt.user.name || 'Candidate'},</h2>
+                        <p>You've completed the <strong>${assessment.title}</strong> assessment. Your result is ready and waiting for you!</p>
+                        <p style="font-size:1.1em;">But wait... it's locked! 🔒</p>
+                        <p>Unlock your result now to see your score, detailed analysis, and personalized recommendations to boost your learning journey.</p>
+                        <a href="https://iimfacademy.com/result/${attempt._id}" style="display:inline-block;margin:16px 0;padding:10px 20px;background:#28a745;color:#fff;text-decoration:none;border-radius:4px;">Unlock My Result</a>
+                        <p style="margin-top:20px;">Don't miss out on your progress!<br><strong>The IIMF Academy Team</strong></p>
+                        <hr>
+                        <small style="color:#888;">Assessment completed on ${new Date().toLocaleString()}.</small>
+                    </div>
+                `;
+                sendMail({ to: attempt.user.email, subject, html });
+            }
+        }
+
         res.render('result', {
             title: 'Assessment Result',
-            attempt,
+            attempt: attempt,
             score: attempt.score,
-            total: attempt.answers ? attempt.answers.length : 0
+            total: totalQuestions,
+            courseCategories: courseCategories,
+            user: attempt.user,
+            graphData: graphData,
+            questionAnalysis: questionAnalysis,
+            analysisMessage: analysisMessage,
+            categoryAnalysis: categoryAnalysis,
+            relatedCourses: relatedCourses // Pass related courses to the view
         });
 
     } catch (error) {

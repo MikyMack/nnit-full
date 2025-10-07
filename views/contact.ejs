@@ -407,7 +407,7 @@
                                                 with us today
                                             </h3>
                                         </div>
-                                        <form action="#" method="post" class="ed-contact__form-main">
+                                        <form id="contactForm" class="ed-contact__form-main">
                                             <div class="form-group">
                                                 <input type="text" id="name" name="name" placeholder="Full name"
                                                     required />
@@ -416,22 +416,88 @@
                                                 <input type="email" id="email" name="email"
                                                     placeholder="Enter your email" required />
                                             </div>
-
+                                            <div class="form-group">
+                                                <input type="tel" id="phone" name="phone" placeholder="Phone number" required />
+                                            </div>
                                             <div class="form-group">
                                                 <textarea id="message" name="message"
                                                     placeholder="How can we help you? Feel free to get in touch!"
                                                     required></textarea>
                                             </div>
-                                            <div class="form-check">
-                                                <label class="form-check-label" for="flexCheckDefault"> <input
-                                                        class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault" />I agree to the Privacy Policy. </label>
-                                            </div>
+                                        
                                             <div class="ed-contact__form-btn">
-                                                <button type="submit" class="ed-btn">Send Message<i
+                                                <button type="submit" class="ed-btn" id="contactSubmitBtn">Send Message<i
                                                         class="fi fi-rr-arrow-small-right"></i></button>
                                             </div>
                                         </form>
+                                        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+                                        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function () {
+                                                const contactForm = document.getElementById('contactForm');
+                                                const submitBtn = document.getElementById('contactSubmitBtn');
+                                                if (contactForm) {
+                                                    contactForm.addEventListener('submit', async function (e) {
+                                                        e.preventDefault();
+                                                        submitBtn.disabled = true;
+                                                        submitBtn.innerHTML = 'Sending... <i class="fi fi-rr-arrow-small-right"></i>';
+
+                                                        const formData = new FormData(contactForm);
+                                                        const payload = {
+                                                            name: formData.get('name'),
+                                                            email: formData.get('email'),
+                                                            phone: formData.get('phone'),
+                                                            message: formData.get('message')
+                                                        };
+
+                                                        try {
+                                                            const res = await fetch('/send-contact', {
+                                                                method: 'POST',
+                                                                headers: {
+                                                                    'Content-Type': 'application/json'
+                                                                },
+                                                                body: JSON.stringify(payload)
+                                                            });
+
+                                                            if (res.ok) {
+                                                                Toastify({
+                                                                    text: "Thank you! Your message has been sent successfully.",
+                                                                    duration: 4000,
+                                                                    gravity: "top",
+                                                                    position: "center",
+                                                                    backgroundColor: "#28a745",
+                                                                    stopOnFocus: true
+                                                                }).showToast();
+                                                                contactForm.reset();
+                                                            } else {
+                                                                const errorText = await res.text();
+                                                                Toastify({
+                                                                    text: errorText || "Failed to send message.",
+                                                                    duration: 4000,
+                                                                    gravity: "top",
+                                                                    position: "center",
+                                                                    backgroundColor: "#dc3545",
+                                                                    stopOnFocus: true
+                                                                }).showToast();
+                                                            }
+                                                        } catch (err) {
+                                                            Toastify({
+                                                                text: "Something went wrong. Please try again.",
+                                                                duration: 4000,
+                                                                gravity: "top",
+                                                                position: "center",
+                                                                backgroundColor: "#dc3545",
+                                                                stopOnFocus: true
+                                                            }).showToast();
+                                                        } finally {
+                                                            submitBtn.disabled = false;
+                                                            submitBtn.innerHTML = 'Send Message <i class="fi fi-rr-arrow-small-right"></i>';
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        </script>
                                     </div>
                                 </div>
                             </div>

@@ -82,9 +82,14 @@ app.get('/admin-banner', authMiddleware, async (req, res) => {
 });
 app.get('/admin-assesment', authMiddleware, async (req, res) => {
     try {
-
       const assessments = await Assessment.find().populate("questions.question").lean();
-      const attempts = await Attempt.find().populate("assessment").lean();
+      const attempts = await Attempt.find()
+        .populate("assessment")
+        .populate({
+          path: "user",
+          select: "name email mobile"
+        })
+        .lean();
       const coupons = await Coupon.find().lean();
   
       res.render('admin-assesment', { 

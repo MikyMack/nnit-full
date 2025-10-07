@@ -21,10 +21,15 @@ exports.createAssessment = async (req, res) => {
         throw new Error(`Correct answer "${q.correctAnswer}" not found in options for question "${q.text}"`);
       }
 
+      if (!q.category || typeof q.category !== "string" || !q.category.trim()) {
+        throw new Error(`Category is required for question "${q.text}"`);
+      }
+
       return {
         questionText: q.text,
         options: q.options,
-        correctAnswer: correctIndex
+        correctAnswer: correctIndex,
+        category: q.category.trim()
       };
     });
 
@@ -62,7 +67,6 @@ exports.updateAssessment = async (req, res) => {
     if (category !== undefined) assessment.category = category;
 
     if (Array.isArray(questions) && questions.length > 0) {
-  
       const oldQuestionIds = assessment.questions.map(q => q.question);
       await Question.deleteMany({ _id: { $in: oldQuestionIds } });
 
@@ -75,10 +79,16 @@ exports.updateAssessment = async (req, res) => {
           throw new Error(`Correct answer "${q.correctAnswer}" not found in options for question "${q.text}"`);
         }
 
+        // Each question must have its own category
+        if (!q.category || typeof q.category !== "string" || !q.category.trim()) {
+          throw new Error(`Category is required for question "${q.text}"`);
+        }
+
         return {
           questionText: q.text,
           options: q.options,
-          correctAnswer: correctIndex
+          correctAnswer: correctIndex,
+          category: q.category.trim()
         };
       });
 
@@ -95,7 +105,11 @@ exports.updateAssessment = async (req, res) => {
 
 exports.getAssessments = async (req, res) => {
   try {
-    const assessments = await Assessment.find().populate("questions.question");
+    // Populate questions.question and include category field from Question model
+    const assessments = await Assessment.find().populate({
+      path: "questions.question",
+      select: "questionText options correctAnswer category"
+    });
     res.json({ success: true, assessments });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -104,8 +118,15 @@ exports.getAssessments = async (req, res) => {
 
 exports.getAssessmentById = async (req, res) => {
   try {
-    const assessment = await Assessment.findById(req.params.id).populate("questions.question");
-    if (!assessment) return res.status(404).json({ success: false, message: "Assessment not found" });
+    // Populate questions.question and include category field from Question model
+    const assessment = await Assessment.findById(req.params.id)
+      .populate({
+        path: "questions.question",
+        select: "questionText options correctAnswer category"
+      });
+    if (!assessment) {
+      return res.status(404).json({ success: false, message: "Assessment not found" });
+    }
     res.json({ success: true, assessment });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });

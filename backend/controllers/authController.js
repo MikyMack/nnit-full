@@ -1,7 +1,5 @@
 // controllers/authController.js
 const User = require('../models/User'); 
-const Cart  = require('../models/Cart'); 
-const Product = require("../models/Product");
 
 const sendEmail = require('../utils/nodemailer');
 const otpGenerator = require('otp-generator');
@@ -49,35 +47,40 @@ exports.verifyOTP = async (req, res) => {
     try {
         const { email, otp } = req.body;
 
-        // Find user by email
+
         const user = await User.findOne({ email });
         if (!user) return res.status(400).json({ success: false, message: 'User not found!' });
 
-        // Check OTP & expiry
+
         if (user.otp !== otp || user.otpExpires < Date.now()) {
             return res.status(400).json({ success: false, message: 'Invalid or expired OTP!' });
         }
 
-        // Clear OTP and mark user as verified
         user.otp = undefined;
         user.otpExpires = undefined;
-        user.isVerified = true; // Add this field to your schema if needed
+        user.isVerified = true; 
+
+        if (!user.studentId) {
+          
+            const randomDigits = Math.floor(100000 + Math.random() * 900000).toString();
+            const idSuffix = user._id.toString().slice(-4);
+            user.studentId = `IIMF${randomDigits}${idSuffix}`;
+        }
+
         await user.save();
 
-        // -------------------
-        // AUTO LOGIN: Generate JWT token
+    
         const token = jwt.sign({ id: user._id, email: user.email }, process.env.SESSION_SECRET, {
             expiresIn: '7d'
         });
 
-        // Set token in httpOnly cookie
         res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
 
-        // Return success
+
         res.status(200).json({ success: true, message: 'OTP verified successfully! You are now logged in.' });
     } catch (error) {
         console.error("OTP verification error:", error);
@@ -306,4 +309,42 @@ exports.unblockUser = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+
+
+exports.editUser = async (req, res) => {
+ 
+    try {
+        const userId = req.params.id;
+        const {
+            name,      
+            email,    
+            mobile,   
+            dateOfBirth, 
+            address     
+        } = req.body;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found!' });
+        }
+
+
+        if (name !== undefined) user.name = name;
+        if (email !== undefined) user.email = email;
+        if (mobile !== undefined) user.mobile = mobile;
+        if (dateOfBirth !== undefined) user.dateOfBirth = dateOfBirth;
+        if (address !== undefined) user.address = address;
+
+        await user.save();
+
+        const userObj = user.toObject();
+        delete userObj.password;
+
+        res.status(200).json({ success: true, message: 'User updated successfully.', user: userObj });
+    } catch (error) {
+        console.error("Error in editUser:", error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
 
