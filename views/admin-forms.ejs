@@ -273,29 +273,40 @@
                         </div>
 
                         <script>
-                        $(document).on('click', '.mark-replied-btn', function() {
-                            var btn = $(this);
-                            var id = btn.data('id');
-                            if (!id) return;
-                            btn.prop('disabled', true).text('Updating...');
-                            $.ajax({
-                                url: '/replied/' + id,
-                                type: 'PATCH',
-                                success: function(res) {
-                                    if (res && res.success) {
-                                        // Update status in table row
-                                        var row = btn.closest('tr');
-                                        row.find('td:eq(6)').html('<span class="badge bg-success">Replied</span>');
-                                        btn.replaceWith('<span class="text-muted">-</span>');
-                                    } else {
-                                        alert(res && res.message ? res.message : 'Failed to update.');
+                        // Wait for DOMContentLoaded to ensure $ is defined
+                        document.addEventListener('DOMContentLoaded', function() {
+                            if (typeof window.$ === 'undefined') {
+                                // fallback: try to get jQuery from window.jQuery
+                                window.$ = window.jQuery;
+                            }
+                            if (typeof $ === 'undefined') {
+                                console.error('jQuery is not loaded.');
+                                return;
+                            }
+                            $(document).on('click', '.mark-replied-btn', function() {
+                                var btn = $(this);
+                                var id = btn.data('id');
+                                if (!id) return;
+                                btn.prop('disabled', true).text('Updating...');
+                                $.ajax({
+                                    url: '/replied/' + id,
+                                    type: 'PATCH',
+                                    success: function(res) {
+                                        if (res && res.success) {
+                                            // Update status in table row
+                                            var row = btn.closest('tr');
+                                            row.find('td:eq(6)').html('<span class="badge bg-success">Replied</span>');
+                                            btn.replaceWith('<span class="text-muted">-</span>');
+                                        } else {
+                                            alert(res && res.message ? res.message : 'Failed to update.');
+                                            btn.prop('disabled', false).text('Mark as Replied');
+                                        }
+                                    },
+                                    error: function(xhr) {
+                                        alert('Error: ' + (xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Could not update.'));
                                         btn.prop('disabled', false).text('Mark as Replied');
                                     }
-                                },
-                                error: function(xhr) {
-                                    alert('Error: ' + (xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Could not update.'));
-                                    btn.prop('disabled', false).text('Mark as Replied');
-                                }
+                                });
                             });
                         });
                         </script>
