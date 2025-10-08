@@ -12,14 +12,24 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// Multer storage
 const storage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
-    let folder = "courses";
-    return { folder, resource_type: file.mimetype.includes("pdf") ? "raw" : "image" };
-  }
+    const isPDF = file.mimetype === "application/pdf";
+
+    return {
+      folder: "courses",
+      resource_type: isPDF ? "raw" : "image",
+      type: "upload",         
+      access_mode: "public",   
+      use_filename: true,      
+      unique_filename: false,  
+      format: isPDF ? "pdf" : undefined,
+    };
+  },
 });
+
+
 const upload = multer({ storage });
 
 // Routes

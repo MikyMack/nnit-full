@@ -237,9 +237,9 @@
 
                             </li>
 
-                            <li>
+                            <!-- <li>
                                 <a href="/studyAbroad">Study Abroad</a>
-                            </li>
+                            </li> -->
                             <li>
                                 <a href="/assesment">Skill Challenge</a>
                             </li>
@@ -273,13 +273,12 @@
                                 </ul>
                             </li>
 
-                            <li>
-                                <a href="/blogs">News</a>
+                            <li class="active">
+                                <a href="/gallery">Gallery</a>
 
                             </li>
 
-
-                            <li class="active">
+                            <li>
                                 <a href="/about">About</a>
 
                             </li>
@@ -330,7 +329,7 @@
 
                 <!-- Start Course Area -->
                 <!-- Gallery Section with Image Popup -->
-                <section class="ed-team ed-team__page position-relative section-gap">
+                <section class="ed-team ed-team__page position-relative">
                     <div class="container ed-container">
                         <div class="row">
                             <% if (galleryItems && galleryItems.length > 0) { %>
@@ -401,41 +400,107 @@
                     .gallery-modal-backdrop {
                         position: fixed;
                         top: 0; left: 0; right: 0; bottom: 0;
-                        background: rgba(0,0,0,0.85);
+                        background: rgba(0,0,0,0.92);
                         z-index: 9999;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         transition: opacity 0.2s;
                     }
-                    .gallery-modal-img {
-                        max-width: 90vw;
-                        max-height: 85vh;
-                        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-                        border-radius: 8px;
+                    .gallery-modal-container {
+                        position: relative;
+                        width: 100vw;
+                        max-width: 100vw;
+                        height: 100vh;
+                        max-height: 100vh;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        background: transparent;
+                    }
+                    .gallery-modal-img-wrapper {
+                        position: relative;
+                        width: 100vw;
+                        max-width: 100vw;
+                        max-height: 90vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                         background: #fff;
+                        border-radius: 0;
+                        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+                        overflow: hidden;
+                    }
+                    .gallery-modal-img {
+                        width: 100vw;
+                        height: auto;
+                        max-width: 100vw;
+                        max-height: 90vh;
+                        object-fit: contain;
                         display: block;
+                        margin: 0 auto;
+                        background: #fff;
                     }
                     .gallery-modal-close {
                         position: absolute;
-                        top: 30px;
-                        right: 40px;
-                        font-size: 2.5rem;
+                        top: 18px;
+                        right: 24px;
+                        font-size: 4rem;
                         color: #fff;
-                        background: none;
+                        background: rgba(0,0,0,0.35);
                         border: none;
                         cursor: pointer;
                         z-index: 10001;
                         font-family: inherit;
                         line-height: 1;
+                        border-radius: 50%;
+                        width: 64px;
+                        height: 64px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: background 0.2s;
+                    }
+                    .gallery-modal-close:hover {
+                        background: rgba(0,0,0,0.6);
+                        color: #ff4444;
                     }
                     .gallery-modal-caption {
                         color: #fff;
-                        margin-top: 18px;
+                        background: rgba(0,0,0,0.6);
+                        padding: 16px 24px 18px 24px;
                         text-align: center;
-                        font-size: 1.15rem;
-                        max-width: 90vw;
+                        font-size: 1.25rem;
+                        width: 100vw;
+                        max-width: 100vw;
                         text-shadow: 0 2px 8px #000;
+                        position: absolute;
+                        left: 0;
+                        bottom: 0;
+                        border-bottom-left-radius: 0;
+                        border-bottom-right-radius: 0;
+                        box-sizing: border-box;
+                        margin: 0;
+                    }
+                    @media (max-width: 600px) {
+                        .gallery-modal-close {
+                            top: 8px;
+                            right: 8px;
+                            font-size: 2.5rem;
+                            width: 40px;
+                            height: 40px;
+                        }
+                        .gallery-modal-caption {
+                            font-size: 1rem;
+                            padding: 10px 8px 12px 8px;
+                        }
+                        .gallery-modal-img-wrapper {
+                            max-height: 60vh;
+                        }
+                        .gallery-modal-img {
+                            max-height: 60vh;
+                        }
                     }
                 </style>
                 <script>
@@ -449,24 +514,35 @@
                             const anchor = e.target.closest('.gallery-popup');
                             if (anchor) {
                                 e.preventDefault();
-                                // Remove any existing modal
                                 closeModal();
-                                // Create modal elements
+
+                                // Modal backdrop
                                 const modal = document.createElement('div');
                                 modal.className = 'gallery-modal-backdrop';
                                 modal.id = 'gallery-modal-backdrop';
 
-                                // Close button
-                                const closeBtn = document.createElement('button');
-                                closeBtn.className = 'gallery-modal-close';
-                                closeBtn.innerHTML = '&times;';
-                                closeBtn.onclick = closeModal;
+                                // Modal container for layout
+                                const container = document.createElement('div');
+                                container.className = 'gallery-modal-container';
+
+                                // Image wrapper (for close button positioning)
+                                const imgWrapper = document.createElement('div');
+                                imgWrapper.className = 'gallery-modal-img-wrapper';
 
                                 // Image
                                 const img = document.createElement('img');
                                 img.className = 'gallery-modal-img';
                                 img.src = anchor.getAttribute('href');
                                 img.alt = anchor.querySelector('img') ? anchor.querySelector('img').alt : '';
+
+                                // Close button (inside image, top right)
+                                const closeBtn = document.createElement('button');
+                                closeBtn.className = 'gallery-modal-close';
+                                closeBtn.innerHTML = '&times;';
+                                closeBtn.onclick = closeModal;
+
+                                imgWrapper.appendChild(img);
+                                imgWrapper.appendChild(closeBtn);
 
                                 // Caption
                                 const captionText = anchor.getAttribute('data-caption');
@@ -477,9 +553,11 @@
                                     caption.textContent = captionText;
                                 }
 
-                                // Close on backdrop click
+                                // Only close if click is outside the image wrapper (not on image or close button or caption)
                                 modal.addEventListener('click', function(ev) {
-                                    if (ev.target === modal) closeModal();
+                                    if (!imgWrapper.contains(ev.target) && (!caption || !caption.contains(ev.target))) {
+                                        closeModal();
+                                    }
                                 });
 
                                 // Close on ESC
@@ -490,9 +568,9 @@
                                     }
                                 });
 
-                                modal.appendChild(closeBtn);
-                                modal.appendChild(img);
-                                if (caption) modal.appendChild(caption);
+                                container.appendChild(imgWrapper);
+                                if (caption) container.appendChild(caption);
+                                modal.appendChild(container);
                                 document.body.appendChild(modal);
                             }
                         });

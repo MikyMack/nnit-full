@@ -421,10 +421,10 @@
                                                         <div class="col-md-2">
                                                             <input type="text" name="courseInformation[duration]" class="form-control" placeholder="Duration">
                                                         </div>
-                                                        <div class="col-md-1">
-                                                            <input type="text" name="courseInformation[language]" class="form-control" placeholder="Lang">
+                                                        <div class="col-md-2">
+                                                            <input type="text" name="courseInformation[language]" class="form-control" placeholder="Language">
                                                         </div>
-                                                        <div class="col-md-1">
+                                                        <div class="col-md-2">
                                                             <input type="text" name="courseInformation[students]" class="form-control" placeholder="Students">
                                                         </div>
                                                     </div>
@@ -700,10 +700,12 @@
                                                             <div class="col-md-2">
                                                                 <input type="text" name="courseInformation[duration]" class="form-control" placeholder="Duration" value="${course.courseInformation && course.courseInformation.duration ? course.courseInformation.duration : ''}">
                                                             </div>
-                                                            <div class="col-md-1">
+                                                        </div>
+                                                        <div class="row g-2 mt-1">
+                                                            <div class="col-md-2">
                                                                 <input type="text" name="courseInformation[language]" class="form-control" placeholder="Lang" value="${course.courseInformation && course.courseInformation.language ? course.courseInformation.language : ''}">
                                                             </div>
-                                                            <div class="col-md-1">
+                                                            <div class="col-md-2">
                                                                 <input type="text" name="courseInformation[students]" class="form-control" placeholder="Students" value="${course.courseInformation && course.courseInformation.students ? course.courseInformation.students : ''}">
                                                             </div>
                                                         </div>
