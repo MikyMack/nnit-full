@@ -429,6 +429,46 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!-- Job Market (NEW) -->
+                                                <div class="col-12">
+                                                    <label class="form-label">Job Market</label>
+                                                    <div id="jobMarketList" class="tag-input-list"></div>
+                                                    <div class="input-group mb-2">
+                                                        <input type="text" id="jobMarketInput" class="form-control" placeholder="Add a job market point and press Enter">
+                                                        <button type="button" class="btn btn-outline-primary" id="addJobMarketBtn"><i class="icon-plus"></i></button>
+                                                    </div>
+                                                    <input type="hidden" name="jobMarket" id="jobMarketHidden">
+                                                </div>
+                                                <!-- Job Market Trends (NEW) -->
+                                                <div class="col-12">
+                                                    <label class="form-label">Job Market Trends</label>
+                                                    <div id="jobMarketTrendsList" class="tag-input-list"></div>
+                                                    <div class="input-group mb-2">
+                                                        <input type="text" id="jobMarketTrendsInput" class="form-control" placeholder="Add a trend and press Enter">
+                                                        <button type="button" class="btn btn-outline-primary" id="addJobMarketTrendsBtn"><i class="icon-plus"></i></button>
+                                                    </div>
+                                                    <input type="hidden" name="jobMarketTrends" id="jobMarketTrendsHidden">
+                                                </div>
+                                                <!-- Typical Salary (NEW) -->
+                                                <div class="col-12">
+                                                    <label class="form-label">Typical Salary (Annual, Entry-Level/Early Career)</label>
+                                                    <div id="typicalSalaryList" class="tag-input-list"></div>
+                                                    <div class="input-group mb-2">
+                                                        <input type="text" id="typicalSalaryInput" class="form-control" placeholder="Add a salary and press Enter">
+                                                        <button type="button" class="btn btn-outline-primary" id="addTypicalSalaryBtn"><i class="icon-plus"></i></button>
+                                                    </div>
+                                                    <input type="hidden" name="typicalSalary" id="typicalSalaryHidden">
+                                                </div>
+                                                <!-- Major Employers (NEW) -->
+                                                <div class="col-12">
+                                                    <label class="form-label">Major Employers</label>
+                                                    <div id="majorEmployersList" class="tag-input-list"></div>
+                                                    <div class="input-group mb-2">
+                                                        <input type="text" id="majorEmployersInput" class="form-control" placeholder="Add an employer and press Enter">
+                                                        <button type="button" class="btn btn-outline-primary" id="addMajorEmployersBtn"><i class="icon-plus"></i></button>
+                                                    </div>
+                                                    <input type="hidden" name="majorEmployers" id="majorEmployersHidden">
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer bg-light">
@@ -451,38 +491,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <style>
-                        .tag-input-list {
-                            min-height: 38px;
-                            padding: 4px 0;
-                        }
-                        .tag-badge {
-                            display: inline-flex;
-                            align-items: center;
-                            background: #e3f2fd;
-                            color: #1976d2;
-                            border-radius: 20px;
-                            padding: 4px 12px 4px 10px;
-                            margin: 2px 4px 2px 0;
-                            font-size: 0.95em;
-                            font-weight: 500;
-                            transition: background 0.2s;
-                        }
-                        .tag-badge .remove-tag {
-                            color: #d32f2f;
-                            margin-left: 8px;
-                            cursor: pointer;
-                            font-size: 1.1em;
-                        }
-                        .tag-badge:hover {
-                            background: #bbdefb;
-                        }
-                        .modal-header.bg-gradient-primary {
-                            background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
-                            color: #fff;
-                        }
-                        </style>
 
                         <script>
                         document.addEventListener('DOMContentLoaded', function() {
@@ -552,6 +560,7 @@
 
                             // Setup tag inputs for create modal
                             var coreModulesTag, learningOutcomesTag, opportunitiesTag, whyChooseTag;
+                            var jobMarketTag, jobMarketTrendsTag, typicalSalaryTag, majorEmployersTag;
                             if (window.jQuery) {
                                 $('.table-responsive').css('overflow-x', 'auto');
 
@@ -559,6 +568,12 @@
                                 learningOutcomesTag = setupTagInput('learningOutcomesInput', 'learningOutcomesList', 'learningOutcomesHidden', 'addLearningOutcomeBtn');
                                 opportunitiesTag = setupTagInput('opportunitiesInput', 'opportunitiesList', 'opportunitiesHidden', 'addOpportunityBtn');
                                 whyChooseTag = setupTagInput('whyChooseInput', 'whyChooseList', 'whyChooseHidden', 'addWhyChooseBtn');
+
+                                // New fields
+                                jobMarketTag = setupTagInput('jobMarketInput', 'jobMarketList', 'jobMarketHidden', 'addJobMarketBtn');
+                                jobMarketTrendsTag = setupTagInput('jobMarketTrendsInput', 'jobMarketTrendsList', 'jobMarketTrendsHidden', 'addJobMarketTrendsBtn');
+                                typicalSalaryTag = setupTagInput('typicalSalaryInput', 'typicalSalaryList', 'typicalSalaryHidden', 'addTypicalSalaryBtn');
+                                majorEmployersTag = setupTagInput('majorEmployersInput', 'majorEmployersList', 'majorEmployersHidden', 'addMajorEmployersBtn');
                             }
 
                             // Create Course AJAX
@@ -577,6 +592,12 @@
                                     $('#learningOutcomesHidden').val(JSON.stringify(learningOutcomesTag.getTags()));
                                     $('#opportunitiesHidden').val(JSON.stringify(opportunitiesTag.getTags()));
                                     $('#whyChooseHidden').val(JSON.stringify(whyChooseTag.getTags()));
+
+                                    // New fields
+                                    $('#jobMarketHidden').val(JSON.stringify(jobMarketTag.getTags()));
+                                    $('#jobMarketTrendsHidden').val(JSON.stringify(jobMarketTrendsTag.getTags()));
+                                    $('#typicalSalaryHidden').val(JSON.stringify(typicalSalaryTag.getTags()));
+                                    $('#majorEmployersHidden').val(JSON.stringify(majorEmployersTag.getTags()));
 
                                     var formData = new FormData(this);
 
@@ -710,6 +731,46 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!-- Job Market (NEW) -->
+                                                    <div class="col-12">
+                                                        <label class="form-label">Job Market</label>
+                                                        <div id="editJobMarketList" class="tag-input-list"></div>
+                                                        <div class="input-group mb-2">
+                                                            <input type="text" id="editJobMarketInput" class="form-control" placeholder="Add a job market point and press Enter">
+                                                            <button type="button" class="btn btn-outline-primary" id="editAddJobMarketBtn"><i class="icon-plus"></i></button>
+                                                        </div>
+                                                        <input type="hidden" name="jobMarket" id="editJobMarketHidden">
+                                                    </div>
+                                                    <!-- Job Market Trends (NEW) -->
+                                                    <div class="col-12">
+                                                        <label class="form-label">Job Market Trends</label>
+                                                        <div id="editJobMarketTrendsList" class="tag-input-list"></div>
+                                                        <div class="input-group mb-2">
+                                                            <input type="text" id="editJobMarketTrendsInput" class="form-control" placeholder="Add a trend and press Enter">
+                                                            <button type="button" class="btn btn-outline-primary" id="editAddJobMarketTrendsBtn"><i class="icon-plus"></i></button>
+                                                        </div>
+                                                        <input type="hidden" name="jobMarketTrends" id="editJobMarketTrendsHidden">
+                                                    </div>
+                                                    <!-- Typical Salary (NEW) -->
+                                                    <div class="col-12">
+                                                        <label class="form-label">Typical Salary (Annual, Entry-Level/Early Career)</label>
+                                                        <div id="editTypicalSalaryList" class="tag-input-list"></div>
+                                                        <div class="input-group mb-2">
+                                                            <input type="text" id="editTypicalSalaryInput" class="form-control" placeholder="Add a salary and press Enter">
+                                                            <button type="button" class="btn btn-outline-primary" id="editAddTypicalSalaryBtn"><i class="icon-plus"></i></button>
+                                                        </div>
+                                                        <input type="hidden" name="typicalSalary" id="editTypicalSalaryHidden">
+                                                    </div>
+                                                    <!-- Major Employers (NEW) -->
+                                                    <div class="col-12">
+                                                        <label class="form-label">Major Employers</label>
+                                                        <div id="editMajorEmployersList" class="tag-input-list"></div>
+                                                        <div class="input-group mb-2">
+                                                            <input type="text" id="editMajorEmployersInput" class="form-control" placeholder="Add an employer and press Enter">
+                                                            <button type="button" class="btn btn-outline-primary" id="editAddMajorEmployersBtn"><i class="icon-plus"></i></button>
+                                                        </div>
+                                                        <input type="hidden" name="majorEmployers" id="editMajorEmployersHidden">
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer bg-light">
@@ -728,12 +789,22 @@
                                     var editLearningOutcomesTag = setupTagInput('editLearningOutcomesInput', 'editLearningOutcomesList', 'editLearningOutcomesHidden', 'editAddLearningOutcomeBtn');
                                     var editOpportunitiesTag = setupTagInput('editOpportunitiesInput', 'editOpportunitiesList', 'editOpportunitiesHidden', 'editAddOpportunityBtn');
                                     var editWhyChooseTag = setupTagInput('editWhyChooseInput', 'editWhyChooseList', 'editWhyChooseHidden', 'editAddWhyChooseBtn');
+                                    // New fields
+                                    var editJobMarketTag = setupTagInput('editJobMarketInput', 'editJobMarketList', 'editJobMarketHidden', 'editAddJobMarketBtn');
+                                    var editJobMarketTrendsTag = setupTagInput('editJobMarketTrendsInput', 'editJobMarketTrendsList', 'editJobMarketTrendsHidden', 'editAddJobMarketTrendsBtn');
+                                    var editTypicalSalaryTag = setupTagInput('editTypicalSalaryInput', 'editTypicalSalaryList', 'editTypicalSalaryHidden', 'editAddTypicalSalaryBtn');
+                                    var editMajorEmployersTag = setupTagInput('editMajorEmployersInput', 'editMajorEmployersList', 'editMajorEmployersHidden', 'editAddMajorEmployersBtn');
 
                                     // Set initial tags
                                     editCoreModulesTag.setTags(course.coreModules || []);
                                     editLearningOutcomesTag.setTags(course.learningOutcomes || []);
                                     editOpportunitiesTag.setTags(course.opportunities || []);
                                     editWhyChooseTag.setTags(course.whyChoose || []);
+                                    // New fields
+                                    editJobMarketTag.setTags(course.jobMarket || []);
+                                    editJobMarketTrendsTag.setTags(course.jobMarketTrends || []);
+                                    editTypicalSalaryTag.setTags(course.typicalSalary || []);
+                                    editMajorEmployersTag.setTags(course.majorEmployers || []);
 
                                     // Edit Course AJAX
                                     $('#editCourseForm').on('submit', function(e) {
@@ -750,6 +821,11 @@
                                         $('#editLearningOutcomesHidden').val(JSON.stringify(editLearningOutcomesTag.getTags()));
                                         $('#editOpportunitiesHidden').val(JSON.stringify(editOpportunitiesTag.getTags()));
                                         $('#editWhyChooseHidden').val(JSON.stringify(editWhyChooseTag.getTags()));
+                                        // New fields
+                                        $('#editJobMarketHidden').val(JSON.stringify(editJobMarketTag.getTags()));
+                                        $('#editJobMarketTrendsHidden').val(JSON.stringify(editJobMarketTrendsTag.getTags()));
+                                        $('#editTypicalSalaryHidden').val(JSON.stringify(editTypicalSalaryTag.getTags()));
+                                        $('#editMajorEmployersHidden').val(JSON.stringify(editMajorEmployersTag.getTags()));
 
                                         var formData = new FormData(this);
 
@@ -840,6 +916,11 @@
                                     if (learningOutcomesTag) learningOutcomesTag.setTags([]);
                                     if (opportunitiesTag) opportunitiesTag.setTags([]);
                                     if (whyChooseTag) whyChooseTag.setTags([]);
+                                    // New fields
+                                    if (jobMarketTag) jobMarketTag.setTags([]);
+                                    if (jobMarketTrendsTag) jobMarketTrendsTag.setTags([]);
+                                    if (typicalSalaryTag) typicalSalaryTag.setTags([]);
+                                    if (majorEmployersTag) majorEmployersTag.setTags([]);
                                 });
                                 $('#editCourseModal').on('hidden.bs.modal', function() {
                                     $('#editCourseModalContent').html('');
@@ -847,6 +928,38 @@
                             }
                         }); // end DOMContentLoaded
                         </script>
+
+<style>
+    .tag-input-list {
+        min-height: 38px;
+        padding: 4px 0;
+    }
+    .tag-badge {
+        display: inline-flex;
+        align-items: center;
+        background: #e3f2fd;
+        color: #1976d2;
+        border-radius: 20px;
+        padding: 4px 12px 4px 10px;
+        margin: 2px 4px 2px 0;
+        font-size: 0.95em;
+        font-weight: 500;
+        transition: background 0.2s;
+    }
+    .tag-badge .remove-tag {
+        color: #d32f2f;
+        margin-left: 8px;
+        cursor: pointer;
+        font-size: 1.1em;
+    }
+    .tag-badge:hover {
+        background: #bbdefb;
+    }
+    .modal-header.bg-gradient-primary {
+        background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+        color: #fff;
+    }
+    </style>
                         </div>
                         <!-- /main-content-wrap -->
                         <!-- bottom-page -->

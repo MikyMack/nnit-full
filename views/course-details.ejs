@@ -441,6 +441,49 @@
                                             </ul>
                                         </div>
                                     <% } %>
+                                <% if (course.jobMarket && course.jobMarket.length) { %>
+                                    <div class="ed-course__details-list mt-4">
+                                        <h5>Job Market</h5>
+                                        <ul>
+                                            <% course.jobMarket.forEach(function(item) { %>
+                                                <li><img src="/images/icons/icon-check-blue.svg" alt="icon-check-blue" /> <%= item %></li>
+                                            <% }) %>
+                                        </ul>
+                                    </div>
+                                <% } %>
+
+                                <% if (course.jobMarketTrends && course.jobMarketTrends.length) { %>
+                                    <div class="ed-course__details-list mt-4">
+                                        <h5>Job Market Trends</h5>
+                                        <ul>
+                                            <% course.jobMarketTrends.forEach(function(item) { %>
+                                                <li><img src="/images/icons/icon-check-blue.svg" alt="icon-check-blue" /> <%= item %></li>
+                                            <% }) %>
+                                        </ul>
+                                    </div>
+                                <% } %>
+
+                                <% if (course.typicalSalary && course.typicalSalary.length) { %>
+                                    <div class="ed-course__details-list mt-4">
+                                        <h5>Typical Salary</h5>
+                                        <ul>
+                                            <% course.typicalSalary.forEach(function(item) { %>
+                                                <li><img src="/images/icons/icon-check-blue.svg" alt="icon-check-blue" /> <%= item %></li>
+                                            <% }) %>
+                                        </ul>
+                                    </div>
+                                <% } %>
+
+                                <% if (course.majorEmployers && course.majorEmployers.length) { %>
+                                    <div class="ed-course__details-list mt-4">
+                                        <h5>Major Employers</h5>
+                                        <ul>
+                                            <% course.majorEmployers.forEach(function(item) { %>
+                                                <li><img src="/images/icons/icon-check-blue.svg" alt="icon-check-blue" /> <%= item %></li>
+                                            <% }) %>
+                                        </ul>
+                                    </div>
+                                <% } %>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-12">
