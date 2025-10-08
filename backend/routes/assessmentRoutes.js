@@ -128,7 +128,6 @@ router.get('/start/:assessmentId', async (req, res) => {
     }
 });
 
-// Route to take assessment
 router.get('/take-assessment/:attemptId', async (req, res) => {
     try {
         const attempt = await Attempt.findById(req.params.attemptId)
@@ -167,7 +166,6 @@ router.get('/take-assessment/:attemptId', async (req, res) => {
     }
 });
 
-// Route to view result (with unlock options)
 router.get('/result/:attemptId', async (req, res) => {
     try {
         const attempt = await Attempt.findById(req.params.attemptId)
@@ -187,7 +185,6 @@ router.get('/result/:attemptId', async (req, res) => {
 
         const courseCategories = await Course.getCategoriesWithCount();
 
-        // Prepare detailed analysis
         const assessment = attempt.assessment;
         const answers = attempt.answers || [];
         const totalQuestions = assessment && assessment.questions ? assessment.questions.length : 0;
@@ -195,7 +192,6 @@ router.get('/result/:attemptId', async (req, res) => {
         let questionAnalysis = [];
         let categoryStats = {};
 
-        // Map answers by question id for quick lookup
         const answerMap = {};
         answers.forEach(ans => {
             if (ans.question) {
@@ -242,12 +238,12 @@ router.get('/result/:attemptId', async (req, res) => {
                     selected: selected,
                     isCorrect: isCorrect,
                     correctOption: q.correctAnswer,
-                    category: q.category || null
+                    category: q.category || null,
+                    explanation: q.explanation || null
                 });
             });
         }
 
-        // For graph: Pie chart data
         const graphData = {
             correct: correct,
             incorrect: incorrect,
@@ -255,7 +251,6 @@ router.get('/result/:attemptId', async (req, res) => {
             total: totalQuestions
         };
 
-        // Prepare category-wise summary
         const categoryAnalysis = Object.entries(categoryStats).map(([cat, stats]) => {
             const percent = stats.total > 0 ? (stats.correct / stats.total) * 100 : 0;
             return {
@@ -268,7 +263,6 @@ router.get('/result/:attemptId', async (req, res) => {
             };
         });
 
-        // FIND RELATED COURSES BASED ON ASSESSMENT CATEGORY
         let relatedCourses = [];
         if (assessment && assessment.category) {
             relatedCourses = await Course.find({
@@ -276,13 +270,11 @@ router.get('/result/:attemptId', async (req, res) => {
                 isactive: true
             })
             .select('title description category image specialization courseInformation.duration')
-            .limit(4) // Limit to 4 related courses
+            .limit(4)
             .lean();
         }
 
-        // If no courses found by exact category match, find courses by weak categories
         if (relatedCourses.length === 0 && categoryAnalysis.length > 0) {
-            // Find weak categories (below 60% performance)
             const weakCategories = categoryAnalysis
                 .filter(cat => cat.percentage < 60)
                 .map(cat => cat.category);
@@ -298,7 +290,6 @@ router.get('/result/:attemptId', async (req, res) => {
             }
         }
 
-        // If still no courses, get popular courses
         if (relatedCourses.length === 0) {
             relatedCourses = await Course.find({ isactive: true })
                 .select('title description category image specialization courseInformation.duration')
@@ -306,7 +297,6 @@ router.get('/result/:attemptId', async (req, res) => {
                 .lean();
         }
 
-        // Generate analysis message
         let analysisMessage = "";
         const percentage = totalQuestions > 0 ? (correct / totalQuestions) * 100 : 0;
         
@@ -324,7 +314,6 @@ router.get('/result/:attemptId', async (req, res) => {
 
         if (attempt.user && attempt.user.email) {
             if (isUnlocked) {
-                // Send result email
                 let performanceMsg = "";
                 if (percentage >= 80) {
                     performanceMsg = "🌟 Outstanding! You aced your assessment!";
@@ -354,7 +343,6 @@ router.get('/result/:attemptId', async (req, res) => {
                 `;
                 sendMail({ to: attempt.user.email, subject, html });
             } else {
-                // Send "unlock to view result" email
                 const subject = `🔒 Unlock Your Assessment Result for "${assessment.title}"`;
                 const html = `
                     <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;">
@@ -383,7 +371,7 @@ router.get('/result/:attemptId', async (req, res) => {
             questionAnalysis: questionAnalysis,
             analysisMessage: analysisMessage,
             categoryAnalysis: categoryAnalysis,
-            relatedCourses: relatedCourses // Pass related courses to the view
+            relatedCourses: relatedCourses
         });
 
     } catch (error) {

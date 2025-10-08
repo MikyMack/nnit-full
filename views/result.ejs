@@ -487,6 +487,7 @@
                                                                 <th>Question</th>
                                                                 <th style="width:180px;">Your Answer</th>
                                                                 <th style="width:180px;">Correct Answer</th>
+                                                                <th style="width:260px;">Explanation</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -505,7 +506,6 @@
                                                                                 <% }); %>
                                                                             </ul>
                                                                         <% } %>
-                                                                   
                                                                     </td>
                                                                     <td>
                                                                         <% if (q.selected !== null && typeof q.selected !== 'undefined') { %>
@@ -523,6 +523,13 @@
                                                                             </span>
                                                                         <% } else { %>
                                                                             <span class="text-muted">N/A</span>
+                                                                        <% } %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <% if (q.explanation && q.explanation.trim().length > 0) { %>
+                                                                            <span class="text-dark"><%= q.explanation %></span>
+                                                                        <% } else { %>
+                                                                            <span class="text-muted">No explanation provided.</span>
                                                                         <% } %>
                                                                     </td>
                                                                 </tr>
