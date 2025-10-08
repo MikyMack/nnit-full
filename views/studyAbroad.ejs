@@ -579,11 +579,11 @@
                                             <div class="col-lg-6 col-xl-4 col-md-6 col-12">
                                                 <div class="ed-course__card ed-course__card--style3 wow fadeInUp"
                                                     data-wow-delay="<%= 0.3 + (idx % 3) * 0.2 %>s" data-wow-duration="1s">
-                                                    <a href="javascript:void(0);" class="ed-course__img" onclick="showStudyAbroadDetails('<%= item._id %>')">
+                                                    <a href="/studyAbroadDetails/<%= encodeURIComponent(item.title.replace(/\s+/g, '-')) %>" class="ed-course__img">
                                                         <img src="<%= item.image ? item.image : '/images/iimf/study.jpg' %>" alt="<%= item.country || 'Study Abroad' %>" />
                                                     </a>
 
-                                                    <a href="javascript:void(0);" class="ed-course__tag" onclick="showStudyAbroadDetails('<%= item._id %>')"><%= item.country %></a>
+                                                    <a href="/studyAbroadDetails/<%= encodeURIComponent(item.title.replace(/\s+/g, '-')) %>" class="ed-course__tag"><%= item.country %></a>
 
                                                     <div class="ed-course__body">
                                                         <div class="ed-course__lesson">
@@ -613,13 +613,13 @@
                                                             </div>
                                                         </div>
 
-                                                        <a href="javascript:void(0);" class="ed-course__title" onclick="showStudyAbroadDetails('<%= item._id %>')">
+                                                        <a href="/studyAbroadDetails/<%= encodeURIComponent(item.title.replace(/\s+/g, '-')) %>" class="ed-course__title">
                                                             <h5>
                                                                 <%= item.title && item.title.length > 0 ? item.title : ('Study in ' + (item.country || 'Abroad')) %>
                                                             </h5>
                                                         </a>
-                                                        <!-- Hide description here, only show in modal -->
-                                                        <button class="ed-btn mt-2" onclick="showStudyAbroadDetails('<%= item._id %>')">More Details</button>
+                                                        <!-- Hide description here, only show in details page -->
+                                                        <a href="/studyAbroadDetails/<%= encodeURIComponent(item.title.replace(/\s+/g, '-')) %>" class="ed-btn mt-2">More Details</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -648,121 +648,12 @@
                                                     </ul>
                                                 </nav>
                                             <% } %>
-                                      
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
                         <!-- End Study Abroad Area -->
-
-                        <!-- Study Abroad Details Modal (Custom Responsive Overlay) -->
-                        <div id="studyAbroadDetailsOverlay" class="study-abroad-details-overlay" style="display:none;">
-                            <div class="study-abroad-details-modal">
-                                <div class="study-abroad-details-header">
-                                    <h5 id="studyAbroadDetailsModalLabel" class="mb-0">Study Abroad Details</h5>
-                                    <button type="button" class="close-btn" onclick="closeStudyAbroadDetails()">&times;</button>
-                                </div>
-                                <div class="study-abroad-details-body" id="studyAbroadDetailsModalBody">
-                                    <div class="text-center py-5">
-                                        <div class="spinner-border text-primary" role="status">
-                                            <span class="visually-hidden">Loading...</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                       
-                        <script>
-                            function showStudyAbroadDetails(id) {
-                                var overlay = document.getElementById('studyAbroadDetailsOverlay');
-                                var modalBody = document.getElementById('studyAbroadDetailsModalBody');
-                                overlay.style.display = 'flex';
-                                modalBody.innerHTML = `
-                                    <div class="d-flex justify-content-center align-items-center" style="min-height:180px;">
-                                        <div class="spinner-border text-primary" role="status">
-                                            <span class="visually-hidden">Loading...</span>
-                                        </div>
-                                    </div>
-                                `;
-
-                                fetch('/getStudyAbroadById/' + id)
-                                    .then(res => res.json())
-                                    .then(data => {
-                                        var item = data.studyAbroad || data.entry;
-                                        if (data && data.success && item) {
-                                            // Split fields for two columns
-                                            var col1 = [
-                                                { label: "Country", value: item.country || "" },
-                                                { label: "Top Universities", value: (item.universities && item.universities.length > 0 ? item.universities.join(', ') : "") }
-                                            ];
-                                            var col2 = [
-                                                { label: "Description", value: item.description || "" },
-                                                { label: "Visa Info", value: item.visa || "" },
-                                                { label: "More Details", value: item.moreDetails || "" }
-                                            ];
-                                            modalBody.innerHTML = `
-                                                <div class="study-abroad-details-img-wrap">
-                                                    <img src="${item.image ? item.image : '/images/iimf/study.jpg'}" alt="${item.country || 'Study Abroad'}" />
-                                                </div>
-                                                <div class="study-abroad-details-fields">
-                                                    <div class="study-abroad-details-fields-col">
-                                                        <div>
-                                                            <div class="field-label">${col1[0].label}</div>
-                                                            <div class="field-value">${col1[0].value || '-'}</div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="field-label">${col1[1].label}</div>
-                                                            <div class="field-value">${col1[1].value || '-'}</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="study-abroad-details-fields-col">
-                                                        <div>
-                                                            <div class="field-label">${col2[0].label}</div>
-                                                            <div class="field-value">${col2[0].value || '-'}</div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="field-label">${col2[1].label}</div>
-                                                            <div class="field-value">${col2[1].value || '-'}</div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="field-label">${col2[2].label}</div>
-                                                            <div class="field-value">${col2[2].value || '-'}</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            `;
-                                        } else {
-                                            modalBody.innerHTML = '<div class="alert alert-danger text-center my-4">Failed to load details.</div>';
-                                        }
-                                    })
-                                    .catch(() => {
-                                        modalBody.innerHTML = '<div class="alert alert-danger text-center my-4">Failed to load details.</div>';
-                                    });
-
-                                // Prevent background scroll
-                                document.body.style.overflow = 'hidden';
-                            }
-
-                            function closeStudyAbroadDetails() {
-                                var overlay = document.getElementById('studyAbroadDetailsOverlay');
-                                overlay.style.display = 'none';
-                                document.body.style.overflow = '';
-                            }
-
-                            // Close overlay on click outside modal
-                            document.addEventListener('DOMContentLoaded', function() {
-                                var overlay = document.getElementById('studyAbroadDetailsOverlay');
-                                if (overlay) {
-                                    overlay.addEventListener('click', function(e) {
-                                        if (e.target === overlay) {
-                                            closeStudyAbroadDetails();
-                                        }
-                                    });
-                                }
-                            });
-                        </script>
                     </div>
 
 <section class="ed-course__details">
