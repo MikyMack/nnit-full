@@ -19,8 +19,9 @@ exports.createCourse = async (req, res) => {
         isactive
       } = req.body;
   
-      const image = req.files?.image?.[0]?.path || null;
-      const pdf = req.files?.pdf?.[0]?.path || null;
+      const image = req.files?.image?.[0]?.path || req.files?.image?.[0]?.secure_url || null;
+      const pdf = req.files?.pdf?.[0]?.path || req.files?.pdf?.[0]?.secure_url || null;
+      
   
       // ✅ Safely parse only JSON string fields
       const parsedCoreModules = coreModules
@@ -67,7 +68,87 @@ exports.createCourse = async (req, res) => {
     }
   };
   
-  
+  // Update course
+exports.updateCourse = async (req, res) => {
+  try {
+    const {
+      title,
+      description,
+      category,
+      coreModules,
+      learningOutcomes,
+      specialization,
+      opportunities,
+      youtubeLink,
+      whyChoose,
+      courseInformation,
+      isactive
+    } = req.body;
+
+    // ✅ Safely parse JSON string fields
+    const parsedCoreModules = coreModules
+      ? (typeof coreModules === "string" ? JSON.parse(coreModules) : coreModules)
+      : [];
+
+    const parsedLearningOutcomes = learningOutcomes
+      ? (typeof learningOutcomes === "string" ? JSON.parse(learningOutcomes) : learningOutcomes)
+      : [];
+
+    const parsedOpportunities = opportunities
+      ? (typeof opportunities === "string" ? JSON.parse(opportunities) : opportunities)
+      : [];
+
+    const parsedWhyChoose = whyChoose
+      ? (typeof whyChoose === "string" ? JSON.parse(whyChoose) : whyChoose)
+      : [];
+
+    const parsedCourseInfo = courseInformation || {};
+
+    // ✅ Construct update object safely
+    const updatedData = {
+      ...(title && { title }),
+      ...(description && { description }),
+      ...(category && { category }),
+      ...(specialization && { specialization }),
+      ...(youtubeLink && { youtubeLink }),
+      ...(typeof isactive !== "undefined" && { isactive }),
+      coreModules: parsedCoreModules,
+      learningOutcomes: parsedLearningOutcomes,
+      opportunities: parsedOpportunities,
+      whyChoose: parsedWhyChoose,
+      courseInformation: parsedCourseInfo
+    };
+
+    // ✅ Handle Cloudinary files properly
+    if (req.files?.image?.length) {
+      updatedData.image =
+        req.files.image[0].secure_url ||
+        req.files.image[0].path ||
+        null;
+    }
+
+    if (req.files?.pdf?.length) {
+      updatedData.pdf =
+        req.files.pdf[0].secure_url ||
+        req.files.pdf[0].path ||
+        null;
+    }
+
+    // ✅ Update the course
+    const course = await Course.findByIdAndUpdate(req.params.id, updatedData, { new: true });
+
+    if (!course) {
+      return res.status(404).json({ success: false, message: "Course not found" });
+    }
+
+    res.status(200).json({ success: true, message: "Course updated successfully", course });
+
+  } catch (err) {
+    console.error("Error updating course:", err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
 
 // Get all courses
 exports.getCourses = async (req, res) => {
@@ -90,68 +171,7 @@ exports.getCourseById = async (req, res) => {
   }
 };
 
-// Update course
-exports.updateCourse = async (req, res) => {
-  try {
-    const {
-      title,
-      description,
-      category,
-      coreModules,
-      learningOutcomes,
-      specialization,
-      opportunities,
-      youtubeLink,
-      whyChoose,
-      courseInformation,
-      isactive
-    } = req.body;
 
-    // Parse array fields if needed
-    const parsedCoreModules = coreModules
-      ? (typeof coreModules === "string" ? JSON.parse(coreModules) : coreModules)
-      : [];
-
-    const parsedLearningOutcomes = learningOutcomes
-      ? (typeof learningOutcomes === "string" ? JSON.parse(learningOutcomes) : learningOutcomes)
-      : [];
-
-    const parsedOpportunities = opportunities
-      ? (typeof opportunities === "string" ? JSON.parse(opportunities) : opportunities)
-      : [];
-
-    const parsedWhyChoose = whyChoose
-      ? (typeof whyChoose === "string" ? JSON.parse(whyChoose) : whyChoose)
-      : [];
-
-    // courseInformation is already an object from the form
-    const parsedCourseInfo = courseInformation || {};
-
-    const updatedData = {
-      ...(typeof title !== "undefined" && { title }),
-      ...(typeof description !== "undefined" && { description }),
-      ...(typeof category !== "undefined" && { category }),
-      ...(typeof specialization !== "undefined" && { specialization }),
-      ...(typeof youtubeLink !== "undefined" && { youtubeLink }),
-      ...(typeof isactive !== "undefined" && { isactive }),
-      coreModules: parsedCoreModules,
-      learningOutcomes: parsedLearningOutcomes,
-      opportunities: parsedOpportunities,
-      whyChoose: parsedWhyChoose,
-      courseInformation: parsedCourseInfo
-    };
-
-    if (req.files?.image) updatedData.image = req.files.image[0].path;
-    if (req.files?.pdf) updatedData.pdf = req.files.pdf[0].path;
-
-    const course = await Course.findByIdAndUpdate(req.params.id, updatedData, { new: true });
-    if (!course) return res.status(404).json({ success: false, message: "Course not found" });
-
-    res.status(200).json({ success: true, message: "Course updated", course });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
-};
 
 
 exports.toggleCourseActive = async (req, res) => {
