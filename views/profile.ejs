@@ -262,17 +262,18 @@
         .mobile-toggle {
             display: none;
             position: fixed;
-            top: 6.5%;
-            left: 11%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
+            top: 80px;
+            right: 16px;
+            z-index: 1200;
             background: #083057;
             color: white;
             border: none;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 18px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-size: 20px;
+            line-height: 1;
             cursor: pointer;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
         }
 
         /* Responsive Design */
@@ -285,7 +286,7 @@
                 width: 100%;
                 transform: translateX(-100%);
                 position: fixed;
-                top: 0;
+                top: 100px;
                 left: 0;
                 height: 100vh;
                 z-index: 999;
@@ -302,6 +303,11 @@
 
             .mobile-toggle {
                 display: block;
+                position: fixed !important;
+                top: 150px !important;
+                right: 16px !important;
+                left: auto !important;
+                transform: none !important;
             }
 
             .stats-grid {
@@ -600,7 +606,7 @@
                     <!-- Start Bredcrumbs Area -->
                     <section class="ed-breadcrumbs background-image"
                         style="background-image: url('/images/breadcrumbs-bg.png');">
-                        <div class="container">
+                        <div style="max-width: 100%!important;" class="container" >
                             <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
 
                             <div class="dashboard">
