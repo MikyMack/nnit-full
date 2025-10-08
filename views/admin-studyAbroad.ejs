@@ -440,10 +440,12 @@
                                 </div>
                             </div>
                             <!-- Create Modal -->
+                       
+
                             <div class="modal fade" id="createStudyAbroadModal" tabindex="-1" aria-labelledby="createStudyAbroadModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
-                                  <form id="createStudyAbroadForm" enctype="multipart/form-data">
+                                  <form id="createStudyAbroadForm" enctype="multipart/form-data" autocomplete="off">
                                     <div class="modal-header">
                                       <h5 class="modal-title" id="createStudyAbroadModalLabel">Add Study Abroad</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -451,23 +453,31 @@
                                     <div class="modal-body">
                                       <div class="row g-3">
                                         <div class="col-md-6">
-                                          <label class="form-label">Title</label>
-                                          <input type="text" name="title" class="form-control" required>
+                                          <div class="form-floating-label">
+                                            <input type="text" name="title" class="form-control" placeholder=" " required autocomplete="off">
+                                            <label>Title</label>
+                                          </div>
                                         </div>
                                         <div class="col-md-6">
-                                          <label class="form-label">Country</label>
-                                          <input type="text" name="country" class="form-control" required>
+                                          <div class="form-floating-label">
+                                            <input type="text" name="country" class="form-control" placeholder=" " required autocomplete="off">
+                                            <label>Country</label>
+                                          </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Description</label>
-                                          <textarea name="description" class="form-control" rows="2"></textarea>
+                                          <div class="form-floating-label">
+                                            <textarea name="description" class="form-control" rows="2" placeholder=" "></textarea>
+                                            <label>Description</label>
+                                          </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Image</label>
-                                          <input type="file" name="image" class="form-control" accept="image/*">
+                                          <div class="form-floating-label">
+                                            <input type="file" name="image" class="form-control" accept="image/*" placeholder=" ">
+                                            <label>Image</label>
+                                          </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Top Universities</label>
+                                          <div class="form-section-title">Top Universities</div>
                                           <div id="create_topUniversities_list"></div>
                                           <div class="input-group mb-2">
                                             <input type="text" class="form-control" id="create_topUniversities_input" placeholder="Add university">
@@ -475,15 +485,19 @@
                                           </div>
                                         </div>
                                         <div class="col-md-4">
-                                          <label class="form-label">Work Opportunities (Indian Students)</label>
-                                          <input type="text" name="workOpportunitiesIndianStudents" class="form-control">
+                                          <div class="form-floating-label">
+                                            <input type="text" name="workOpportunitiesIndianStudents" class="form-control" placeholder=" ">
+                                            <label>Work Opportunities (Indian Students)</label>
+                                          </div>
                                         </div>
                                         <div class="col-md-4">
-                                          <label class="form-label">Investment</label>
-                                          <input type="text" name="investment" class="form-control">
+                                          <div class="form-floating-label">
+                                            <input type="text" name="investment" class="form-control" placeholder=" ">
+                                            <label>Investment</label>
+                                          </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Why Choose</label>
+                                          <div class="form-section-title">Why Choose</div>
                                           <div id="create_whyChoose_list"></div>
                                           <div class="input-group mb-2">
                                             <input type="text" class="form-control" id="create_whyChoose_input" placeholder="Add reason">
@@ -491,41 +505,51 @@
                                           </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">US Educational System</label>
+                                          <div class="form-section-title">US Educational System</div>
                                           <div id="create_usEducationalSystem_list"></div>
                                           <div class="row g-2 mb-2">
                                             <div class="col-6">
-                                              <input type="text" class="form-control" id="create_usEducationalSystem_title" placeholder="Title">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control" id="create_usEducationalSystem_title" placeholder=" ">
+                                                <label>Title</label>
+                                              </div>
                                             </div>
                                             <div class="col-6">
-                                              <input type="text" class="form-control" id="create_usEducationalSystem_description" placeholder="Description">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control" id="create_usEducationalSystem_description" placeholder=" ">
+                                                <label>Description</label>
+                                              </div>
                                             </div>
                                             <div class="col-12">
                                               <button type="button" class="btn btn-outline-primary w-100 mt-1" onclick="addToComplexList('create_usEducationalSystem_title','create_usEducationalSystem_description','create_usEducationalSystem_list','usEducationalSystem')">Add</button>
                                             </div>
                                           </div>
-                                          <!-- Hidden field for US Educational System -->
                                           <input type="hidden" name="usEducationalSystem" id="create_usEducationalSystem_hidden">
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Admission Requirements</label>
+                                          <div class="form-section-title">Admission Requirements</div>
                                           <div id="create_admissionRequirements_list"></div>
                                           <div class="row g-2 mb-2">
                                             <div class="col-6">
-                                              <input type="text" class="form-control" id="create_admissionRequirements_title" placeholder="Title">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control" id="create_admissionRequirements_title" placeholder=" ">
+                                                <label>Title</label>
+                                              </div>
                                             </div>
                                             <div class="col-6">
-                                              <input type="text" class="form-control" id="create_admissionRequirements_point" placeholder="Point">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control" id="create_admissionRequirements_point" placeholder=" ">
+                                                <label>Point</label>
+                                              </div>
                                             </div>
                                             <div class="col-12">
                                               <button type="button" class="btn btn-outline-primary w-100 mt-1" onclick="addAdmissionRequirement('create_admissionRequirements_title','create_admissionRequirements_point','create_admissionRequirements_list','admissionRequirements')">Add</button>
                                             </div>
                                           </div>
-                                          <!-- Hidden field for Admission Requirements -->
                                           <input type="hidden" name="admissionRequirements" id="create_admissionRequirements_hidden">
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Top Courses</label>
+                                          <div class="form-section-title">Top Courses</div>
                                           <div id="create_topCourses_list"></div>
                                           <div class="input-group mb-2">
                                             <input type="text" class="form-control" id="create_topCourses_input" placeholder="Add course">
@@ -533,36 +557,50 @@
                                           </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Visa Process</label>
+                                          <div class="form-section-title">Visa Process</div>
                                           <div id="create_visaProcess_list"></div>
                                           <div class="row g-2 mb-2">
                                             <div class="col-6">
-                                              <input type="text" class="form-control" id="create_visaProcess_title" placeholder="Title">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control" id="create_visaProcess_title" placeholder=" ">
+                                                <label>Title</label>
+                                              </div>
                                             </div>
                                             <div class="col-6">
-                                              <input type="text" class="form-control" id="create_visaProcess_description" placeholder="Description">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control" id="create_visaProcess_description" placeholder=" ">
+                                                <label>Description</label>
+                                              </div>
                                             </div>
                                             <div class="col-12">
                                               <button type="button" class="btn btn-outline-primary w-100 mt-1" onclick="addToComplexList('create_visaProcess_title','create_visaProcess_description','create_visaProcess_list','visaProcess')">Add</button>
                                             </div>
                                           </div>
-                                          <!-- Hidden field for Visa Process -->
                                           <input type="hidden" name="visaProcess" id="create_visaProcess_hidden">
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Country Details</label>
+                                          <div class="form-section-title">Country Details</div>
                                           <div class="row g-2">
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="capital" placeholder="Capital">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="capital" placeholder=" ">
+                                                <label>Capital</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="currency" placeholder="Currency">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="currency" placeholder=" ">
+                                                <label>Currency</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="language" placeholder="Language">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="language" placeholder=" ">
+                                                <label>Language</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-6">
-                                              <label class="form-label">Top Cities</label>
+                                              <div class="form-section-title">Top Cities</div>
                                               <div id="create_topCities_list"></div>
                                               <div class="input-group mb-2">
                                                 <input type="text" class="form-control" id="create_topCities_input" placeholder="Add city">
@@ -570,7 +608,7 @@
                                               </div>
                                             </div>
                                             <div class="col-md-6">
-                                              <label class="form-label">Universities</label>
+                                              <div class="form-section-title">Universities</div>
                                               <div id="create_countryUniversities_list"></div>
                                               <div class="input-group mb-2">
                                                 <input type="text" class="form-control" id="create_countryUniversities_input" placeholder="Add university">
@@ -578,26 +616,38 @@
                                               </div>
                                             </div>
                                             <div class="col-12">
-                                              <input type="text" class="form-control mb-2" name="indianStudents" placeholder="Indian Students">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="indianStudents" placeholder=" ">
+                                                <label>Indian Students</label>
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Intake Period</label>
+                                          <div class="form-section-title">Intake Period</div>
                                           <div class="row g-2">
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="fallIntake" placeholder="Fall Intake">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="fallIntake" placeholder=" ">
+                                                <label>Fall Intake</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="springIntake" placeholder="Spring Intake">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="springIntake" placeholder=" ">
+                                                <label>Spring Intake</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="summerIntake" placeholder="Summer Intake">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="summerIntake" placeholder=" ">
+                                                <label>Summer Intake</label>
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Popular Scholarships</label>
+                                          <div class="form-section-title">Popular Scholarships</div>
                                           <div id="create_popularScholarships_list"></div>
                                           <div class="input-group mb-2">
                                             <input type="text" class="form-control" id="create_popularScholarships_input" placeholder="Add scholarship">
@@ -605,27 +655,42 @@
                                           </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Financial Requirements</label>
+                                          <div class="form-section-title">Financial Requirements</div>
                                           <div class="row g-2">
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="tuitionFees" placeholder="Tuition Fees">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="tuitionFees" placeholder=" ">
+                                                <label>Tuition Fees</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="livingCosts" placeholder="Living Costs">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="livingCosts" placeholder=" ">
+                                                <label>Living Costs</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="totalProofRequired" placeholder="Total Proof Required">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="totalProofRequired" placeholder=" ">
+                                                <label>Total Proof Required</label>
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Work Opportunities</label>
+                                          <div class="form-section-title">Work Opportunities</div>
                                           <div class="row g-2">
                                             <div class="col-md-6">
-                                              <input type="text" class="form-control mb-2" name="duringStudies" placeholder="During Studies">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="duringStudies" placeholder=" ">
+                                                <label>During Studies</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-6">
-                                              <input type="text" class="form-control mb-2" name="afterGraduation" placeholder="After Graduation">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="afterGraduation" placeholder=" ">
+                                                <label>After Graduation</label>
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
@@ -644,7 +709,7 @@
                             <div class="modal fade" id="editStudyAbroadModal" tabindex="-1" aria-labelledby="editStudyAbroadModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
-                                  <form id="editStudyAbroadForm" enctype="multipart/form-data">
+                                  <form id="editStudyAbroadForm" enctype="multipart/form-data" autocomplete="off">
                                     <input type="hidden" name="id" id="edit_id">
                                     <div class="modal-header">
                                       <h5 class="modal-title" id="editStudyAbroadModalLabel">Edit Study Abroad</h5>
@@ -653,24 +718,32 @@
                                     <div class="modal-body">
                                       <div class="row g-3">
                                         <div class="col-md-6">
-                                          <label class="form-label">Title</label>
-                                          <input type="text" name="title" id="edit_title" class="form-control" required>
+                                          <div class="form-floating-label">
+                                            <input type="text" name="title" id="edit_title" class="form-control" placeholder=" " required autocomplete="off">
+                                            <label>Title</label>
+                                          </div>
                                         </div>
                                         <div class="col-md-6">
-                                          <label class="form-label">Country</label>
-                                          <input type="text" name="country" id="edit_country" class="form-control" required>
+                                          <div class="form-floating-label">
+                                            <input type="text" name="country" id="edit_country" class="form-control" placeholder=" " required autocomplete="off">
+                                            <label>Country</label>
+                                          </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Description</label>
-                                          <textarea name="description" id="edit_description" class="form-control" rows="2"></textarea>
+                                          <div class="form-floating-label">
+                                            <textarea name="description" id="edit_description" class="form-control" rows="2" placeholder=" "></textarea>
+                                            <label>Description</label>
+                                          </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Image</label>
-                                          <input type="file" name="image" class="form-control" accept="image/*">
+                                          <div class="form-floating-label">
+                                            <input type="file" name="image" class="form-control" accept="image/*" placeholder=" ">
+                                            <label>Image</label>
+                                          </div>
                                           <div class="mt-2" id="edit_image_preview"></div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Top Universities</label>
+                                          <div class="form-section-title">Top Universities</div>
                                           <div id="edit_topUniversities_list"></div>
                                           <div class="input-group mb-2">
                                             <input type="text" class="form-control" id="edit_topUniversities_input" placeholder="Add university">
@@ -678,15 +751,19 @@
                                           </div>
                                         </div>
                                         <div class="col-md-4">
-                                          <label class="form-label">Work Opportunities (Indian Students)</label>
-                                          <input type="text" name="workOpportunitiesIndianStudents" id="edit_workOpportunitiesIndianStudents" class="form-control">
+                                          <div class="form-floating-label">
+                                            <input type="text" name="workOpportunitiesIndianStudents" id="edit_workOpportunitiesIndianStudents" class="form-control" placeholder=" ">
+                                            <label>Work Opportunities (Indian Students)</label>
+                                          </div>
                                         </div>
                                         <div class="col-md-4">
-                                          <label class="form-label">Investment</label>
-                                          <input type="text" name="investment" id="edit_investment" class="form-control">
+                                          <div class="form-floating-label">
+                                            <input type="text" name="investment" id="edit_investment" class="form-control" placeholder=" ">
+                                            <label>Investment</label>
+                                          </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Why Choose</label>
+                                          <div class="form-section-title">Why Choose</div>
                                           <div id="edit_whyChoose_list"></div>
                                           <div class="input-group mb-2">
                                             <input type="text" class="form-control" id="edit_whyChoose_input" placeholder="Add reason">
@@ -694,41 +771,51 @@
                                           </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">US Educational System</label>
+                                          <div class="form-section-title">US Educational System</div>
                                           <div id="edit_usEducationalSystem_list"></div>
                                           <div class="row g-2 mb-2">
                                             <div class="col-6">
-                                              <input type="text" class="form-control" id="edit_usEducationalSystem_title" placeholder="Title">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control" id="edit_usEducationalSystem_title" placeholder=" ">
+                                                <label>Title</label>
+                                              </div>
                                             </div>
                                             <div class="col-6">
-                                              <input type="text" class="form-control" id="edit_usEducationalSystem_description" placeholder="Description">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control" id="edit_usEducationalSystem_description" placeholder=" ">
+                                                <label>Description</label>
+                                              </div>
                                             </div>
                                             <div class="col-12">
                                               <button type="button" class="btn btn-outline-primary w-100 mt-1" onclick="addToComplexList('edit_usEducationalSystem_title','edit_usEducationalSystem_description','edit_usEducationalSystem_list','usEducationalSystem', true)">Add</button>
                                             </div>
                                           </div>
-                                          <!-- Hidden field for US Educational System -->
                                           <input type="hidden" name="usEducationalSystem" id="edit_usEducationalSystem_hidden">
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Admission Requirements</label>
+                                          <div class="form-section-title">Admission Requirements</div>
                                           <div id="edit_admissionRequirements_list"></div>
                                           <div class="row g-2 mb-2">
                                             <div class="col-6">
-                                              <input type="text" class="form-control" id="edit_admissionRequirements_title" placeholder="Title">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control" id="edit_admissionRequirements_title" placeholder=" ">
+                                                <label>Title</label>
+                                              </div>
                                             </div>
                                             <div class="col-6">
-                                              <input type="text" class="form-control" id="edit_admissionRequirements_point" placeholder="Point">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control" id="edit_admissionRequirements_point" placeholder=" ">
+                                                <label>Point</label>
+                                              </div>
                                             </div>
                                             <div class="col-12">
                                               <button type="button" class="btn btn-outline-primary w-100 mt-1" onclick="addAdmissionRequirement('edit_admissionRequirements_title','edit_admissionRequirements_point','edit_admissionRequirements_list','admissionRequirements', true)">Add</button>
                                             </div>
                                           </div>
-                                          <!-- Hidden field for Admission Requirements -->
                                           <input type="hidden" name="admissionRequirements" id="edit_admissionRequirements_hidden">
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Top Courses</label>
+                                          <div class="form-section-title">Top Courses</div>
                                           <div id="edit_topCourses_list"></div>
                                           <div class="input-group mb-2">
                                             <input type="text" class="form-control" id="edit_topCourses_input" placeholder="Add course">
@@ -736,36 +823,50 @@
                                           </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Visa Process</label>
+                                          <div class="form-section-title">Visa Process</div>
                                           <div id="edit_visaProcess_list"></div>
                                           <div class="row g-2 mb-2">
                                             <div class="col-6">
-                                              <input type="text" class="form-control" id="edit_visaProcess_title" placeholder="Title">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control" id="edit_visaProcess_title" placeholder=" ">
+                                                <label>Title</label>
+                                              </div>
                                             </div>
                                             <div class="col-6">
-                                              <input type="text" class="form-control" id="edit_visaProcess_description" placeholder="Description">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control" id="edit_visaProcess_description" placeholder=" ">
+                                                <label>Description</label>
+                                              </div>
                                             </div>
                                             <div class="col-12">
                                               <button type="button" class="btn btn-outline-primary w-100 mt-1" onclick="addToComplexList('edit_visaProcess_title','edit_visaProcess_description','edit_visaProcess_list','visaProcess', true)">Add</button>
                                             </div>
                                           </div>
-                                          <!-- Hidden field for Visa Process -->
                                           <input type="hidden" name="visaProcess" id="edit_visaProcess_hidden">
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Country Details</label>
+                                          <div class="form-section-title">Country Details</div>
                                           <div class="row g-2">
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="capital" id="edit_capital" placeholder="Capital">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="capital" id="edit_capital" placeholder=" ">
+                                                <label>Capital</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="currency" id="edit_currency" placeholder="Currency">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="currency" id="edit_currency" placeholder=" ">
+                                                <label>Currency</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="language" id="edit_language" placeholder="Language">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="language" id="edit_language" placeholder=" ">
+                                                <label>Language</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-6">
-                                              <label class="form-label">Top Cities</label>
+                                              <div class="form-section-title">Top Cities</div>
                                               <div id="edit_topCities_list"></div>
                                               <div class="input-group mb-2">
                                                 <input type="text" class="form-control" id="edit_topCities_input" placeholder="Add city">
@@ -773,7 +874,7 @@
                                               </div>
                                             </div>
                                             <div class="col-md-6">
-                                              <label class="form-label">Universities</label>
+                                              <div class="form-section-title">Universities</div>
                                               <div id="edit_countryUniversities_list"></div>
                                               <div class="input-group mb-2">
                                                 <input type="text" class="form-control" id="edit_countryUniversities_input" placeholder="Add university">
@@ -781,26 +882,38 @@
                                               </div>
                                             </div>
                                             <div class="col-12">
-                                              <input type="text" class="form-control mb-2" name="indianStudents" id="edit_indianStudents" placeholder="Indian Students">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="indianStudents" id="edit_indianStudents" placeholder=" ">
+                                                <label>Indian Students</label>
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Intake Period</label>
+                                          <div class="form-section-title">Intake Period</div>
                                           <div class="row g-2">
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="fallIntake" id="edit_fallIntake" placeholder="Fall Intake">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="fallIntake" id="edit_fallIntake" placeholder=" ">
+                                                <label>Fall Intake</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="springIntake" id="edit_springIntake" placeholder="Spring Intake">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="springIntake" id="edit_springIntake" placeholder=" ">
+                                                <label>Spring Intake</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="summerIntake" id="edit_summerIntake" placeholder="Summer Intake">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="summerIntake" id="edit_summerIntake" placeholder=" ">
+                                                <label>Summer Intake</label>
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Popular Scholarships</label>
+                                          <div class="form-section-title">Popular Scholarships</div>
                                           <div id="edit_popularScholarships_list"></div>
                                           <div class="input-group mb-2">
                                             <input type="text" class="form-control" id="edit_popularScholarships_input" placeholder="Add scholarship">
@@ -808,27 +921,42 @@
                                           </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Financial Requirements</label>
+                                          <div class="form-section-title">Financial Requirements</div>
                                           <div class="row g-2">
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="tuitionFees" id="edit_tuitionFees" placeholder="Tuition Fees">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="tuitionFees" id="edit_tuitionFees" placeholder=" ">
+                                                <label>Tuition Fees</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="livingCosts" id="edit_livingCosts" placeholder="Living Costs">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="livingCosts" id="edit_livingCosts" placeholder=" ">
+                                                <label>Living Costs</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-4">
-                                              <input type="text" class="form-control mb-2" name="totalProofRequired" id="edit_totalProofRequired" placeholder="Total Proof Required">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="totalProofRequired" id="edit_totalProofRequired" placeholder=" ">
+                                                <label>Total Proof Required</label>
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
                                         <div class="col-12">
-                                          <label class="form-label">Work Opportunities</label>
+                                          <div class="form-section-title">Work Opportunities</div>
                                           <div class="row g-2">
                                             <div class="col-md-6">
-                                              <input type="text" class="form-control mb-2" name="duringStudies" id="edit_duringStudies" placeholder="During Studies">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="duringStudies" id="edit_duringStudies" placeholder=" ">
+                                                <label>During Studies</label>
+                                              </div>
                                             </div>
                                             <div class="col-md-6">
-                                              <input type="text" class="form-control mb-2" name="afterGraduation" id="edit_afterGraduation" placeholder="After Graduation">
+                                              <div class="form-floating-label">
+                                                <input type="text" class="form-control mb-2" name="afterGraduation" id="edit_afterGraduation" placeholder=" ">
+                                                <label>After Graduation</label>
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
@@ -1357,46 +1485,6 @@
         .catch(() => alert('Failed to delete entry'));
     }
 </script>
-                            <style>
-                                @media (max-width: 1200px) {
-                                    .table-responsive table th, .table-responsive table td {
-                                        font-size: 0.95em;
-                                        min-width: 120px;
-                                    }
-                                }
-                                @media (max-width: 992px) {
-                                    .table-responsive {
-                                        font-size: 0.92em;
-                                    }
-                                    .table th, .table td {
-                                        min-width: 100px;
-                                    }
-                                }
-                                @media (max-width: 768px) {
-                                    .table-responsive {
-                                        font-size: 0.9em;
-                                    }
-                                    .table th, .table td {
-                                        min-width: 80px;
-                                    }
-                                    .modal-dialog {
-                                        max-width: 98vw;
-                                        margin: 1rem auto;
-                                    }
-                                }
-                                @media (max-width: 576px) {
-                                    .table-responsive {
-                                        font-size: 0.85em;
-                                    }
-                                    .table th, .table td {
-                                        min-width: 60px;
-                                    }
-                                    .modal-dialog {
-                                        max-width: 100vw;
-                                        margin: 0.5rem auto;
-                                    }
-                                }
-                            </style>
                          </div>
 
                         <!-- /main-content-wrap -->
