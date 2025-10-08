@@ -23,6 +23,7 @@ router.post("/createAssessment", assessmentController.createAssessment);
 router.get("/getAssessments", assessmentController.getAssessments);
 router.get("/getAssessmentById/:id", assessmentController.getAssessmentById);
 router.put("/updateAssessment/:id", assessmentController.updateAssessment);
+router.delete("/deleteAssessment/:id", assessmentController.deleteAssessment);
 
 router.post("/applyCoupon", couponController.applyCoupon);
 router.post("/createCoupon", couponController.createCoupon);

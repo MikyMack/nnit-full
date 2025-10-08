@@ -1047,10 +1047,23 @@
                         }
 
                         // Placeholder for delete assessment
-                        function deleteAssessment(id) {
+                        async function deleteAssessment(id) {
                             if (confirm('Are you sure you want to delete this assessment?')) {
-                                // Implement delete logic here
-                                alert('Delete not implemented in demo.');
+                                try {
+                                    const res = await fetch(`/deleteAssessment/${id}`, {
+                                        method: 'DELETE',
+                                        headers: { 'Content-Type': 'application/json' }
+                                    });
+                                    const data = await res.json();
+                                    if (data.success) {
+                                        alert('Assessment deleted successfully.');
+                                        location.reload();
+                                    } else {
+                                        alert(data.message || 'Error deleting assessment');
+                                    }
+                                } catch (err) {
+                                    alert('Error: ' + err.message);
+                                }
                             }
                         }
                         </script>

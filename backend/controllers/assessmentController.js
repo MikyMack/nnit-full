@@ -132,3 +132,26 @@ exports.getAssessmentById = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
+
+exports.deleteAssessment = async (req, res) => {
+  try {
+    const assessmentId = req.params.id;
+
+    // Find the assessment
+    const assessment = await Assessment.findById(assessmentId);
+    if (!assessment) {
+      return res.status(404).json({ success: false, message: "Assessment not found" });
+    }
+
+    const questionIds = assessment.questions.map(q => q.question);
+    await Question.deleteMany({ _id: { $in: questionIds } });
+
+    // Delete the assessment
+    await Assessment.findByIdAndDelete(assessmentId);
+
+    res.json({ success: true, message: "Assessment deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
