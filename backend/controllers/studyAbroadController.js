@@ -8,46 +8,236 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
+// Create StudyAbroad entry
 exports.createStudyAbroad = async (req, res) => {
   try {
-    const { title, description, moreDetails, universities, visa, country } = req.body;
+    let {
+      title,
+      description,
+      country,
+      additionalInformation,
+      whyChoose,
+      usEducationalSystem,
+      admissionRequirements,
+      topCourses,
+      visaProcess,
+      countryDetails,
+      topUniversities,
+      intakePeriod,
+      popularScholarships,
+      financialRequirements,
+      workOpportunities
+    } = req.body;
 
-    let imageUrl = null;
-    if (req.file) {
-      const result = await cloudinary.uploader.upload(req.file.path, { folder: "studyabroad" });
-      imageUrl = result.secure_url;
-    }
+    // Helper to extract first value if array, else return as is
+    const getString = (val) => {
+      if (Array.isArray(val)) return val[0];
+      return val;
+    };
 
-    let universitiesArray = [];
-    if (universities) {
-      if (Array.isArray(universities)) {
-        universitiesArray = universities;
-      } else if (typeof universities === "string") {
-     
+    // Helper to parse array of objects (for complex fields)
+    const parseArrayOfObjects = (val) => {
+      if (!val) return [];
+      if (typeof val === "string") {
         try {
-          universitiesArray = JSON.parse(universities);
-          if (!Array.isArray(universitiesArray)) {
-            universitiesArray = [universitiesArray];
-          }
-        } catch (e) {
-        
-          universitiesArray = universities.split(",").map(u => u.trim()).filter(u => u.length > 0);
+          const parsed = JSON.parse(val);
+          if (Array.isArray(parsed)) return parsed;
+          if (typeof parsed === "object") return [parsed];
+        } catch {
+          // fallback: not a JSON string, return empty array
+          return [];
         }
+      }
+      if (Array.isArray(val)) return val;
+      return [];
+    };
+
+    // Helper to parse array of strings (for simple string arrays)
+    const parseArray = (val) => {
+      if (!val) return [];
+      if (typeof val === "string") {
+        try {
+          const parsed = JSON.parse(val);
+          if (Array.isArray(parsed)) return parsed;
+          if (typeof parsed === "string") return [parsed];
+        } catch {
+          return val.split(",").map(v => v.trim()).filter(Boolean);
+        }
+      }
+      if (Array.isArray(val)) return val;
+      return [];
+    };
+
+    // Helper to parse object
+    const parseObject = (val) => {
+      if (!val) return {};
+      if (typeof val === "string") {
+        try {
+          return JSON.parse(val);
+        } catch {
+          return {};
+        }
+      }
+      if (typeof val === "object") return val;
+      return {};
+    };
+
+    // Fix for string fields that may come as arrays
+    title = getString(title) || "Default Title";
+    description = getString(description) || "";
+    country = getString(country) || "Default Country";
+
+    additionalInformation = parseObject(additionalInformation);
+    whyChoose = parseArray(whyChoose);
+    // These three fields are arrays of objects, not just strings
+    usEducationalSystem = parseArrayOfObjects(usEducationalSystem);
+    admissionRequirements = parseArrayOfObjects(admissionRequirements);
+    visaProcess = parseArrayOfObjects(visaProcess);
+    topCourses = parseArray(topCourses);
+    countryDetails = parseObject(countryDetails);
+    topUniversities = parseArray(topUniversities);
+    intakePeriod = parseObject(intakePeriod);
+    popularScholarships = parseArray(popularScholarships);
+    financialRequirements = parseObject(financialRequirements);
+    workOpportunities = parseObject(workOpportunities);
+
+    // Handle image upload
+    let imageUrl = "";
+    if (req.file && req.file.path) {
+      try {
+        const result = await cloudinary.uploader.upload(req.file.path, { folder: "studyabroad" });
+        imageUrl = result.secure_url;
+      } catch (uploadError) {
+        // Continue without image instead of crashing
       }
     }
 
     const newEntry = new StudyAbroad({
       title,
       description,
-      moreDetails,
-      universities: universitiesArray,
-      visa,
       country,
-      image: imageUrl
+      image: imageUrl,
+      additionalInformation,
+      whyChoose,
+      usEducationalSystem,
+      admissionRequirements,
+      topCourses,
+      visaProcess,
+      countryDetails,
+      topUniversities,
+      intakePeriod,
+      popularScholarships,
+      financialRequirements,
+      workOpportunities
     });
 
     await newEntry.save();
+
     res.status(201).json({ success: true, entry: newEntry });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message
+    });
+  }
+};
+
+// Update StudyAbroad entry
+exports.updateStudyAbroad = async (req, res) => {
+  try {
+    const { id } = req.params;
+    let updateData = req.body;
+
+    // Helper to extract first value if array, else return as is
+    const getString = (val) => {
+      if (Array.isArray(val)) return val[0];
+      return val;
+    };
+
+    // Helper to parse array of objects (for complex fields)
+    const parseArrayOfObjects = (val) => {
+      if (!val) return [];
+      if (typeof val === "string") {
+        try {
+          const parsed = JSON.parse(val);
+          if (Array.isArray(parsed)) return parsed;
+          if (typeof parsed === "object") return [parsed];
+        } catch {
+          return [];
+        }
+      }
+      if (Array.isArray(val)) return val;
+      return [];
+    };
+
+    // Helper to parse array of strings (for simple string arrays)
+    const parseArray = (val) => {
+      if (!val) return [];
+      if (typeof val === "string") {
+        try {
+          const arr = JSON.parse(val);
+          if (Array.isArray(arr)) return arr;
+          if (typeof arr === "string") return [arr];
+        } catch (e) {
+          return val.split(",").map(x => x.trim()).filter(Boolean);
+        }
+      }
+      if (Array.isArray(val)) return val;
+      return [];
+    };
+
+    const parseObject = (val) => {
+      if (!val) return {};
+      if (typeof val === "string") {
+        try {
+          return JSON.parse(val);
+        } catch (e) {
+          return {};
+        }
+      }
+      if (typeof val === "object") return val;
+      return {};
+    };
+
+    // Fix for string fields that may come as arrays
+    if ("title" in updateData) updateData.title = getString(updateData.title);
+    if ("description" in updateData) updateData.description = getString(updateData.description);
+    if ("country" in updateData) updateData.country = getString(updateData.country);
+
+    if ("additionalInformation" in updateData)
+      updateData.additionalInformation = parseObject(updateData.additionalInformation);
+    if ("whyChoose" in updateData)
+      updateData.whyChoose = parseArray(updateData.whyChoose);
+    // These three fields are arrays of objects, not just strings
+    if ("usEducationalSystem" in updateData)
+      updateData.usEducationalSystem = parseArrayOfObjects(updateData.usEducationalSystem);
+    if ("admissionRequirements" in updateData)
+      updateData.admissionRequirements = parseArrayOfObjects(updateData.admissionRequirements);
+    if ("visaProcess" in updateData)
+      updateData.visaProcess = parseArrayOfObjects(updateData.visaProcess);
+    if ("topCourses" in updateData)
+      updateData.topCourses = parseArray(updateData.topCourses);
+    if ("countryDetails" in updateData)
+      updateData.countryDetails = parseObject(updateData.countryDetails);
+    if ("topUniversities" in updateData)
+      updateData.topUniversities = parseArray(updateData.topUniversities);
+    if ("intakePeriod" in updateData)
+      updateData.intakePeriod = parseObject(updateData.intakePeriod);
+    if ("popularScholarships" in updateData)
+      updateData.popularScholarships = parseArray(updateData.popularScholarships);
+    if ("financialRequirements" in updateData)
+      updateData.financialRequirements = parseObject(updateData.financialRequirements);
+    if ("workOpportunities" in updateData)
+      updateData.workOpportunities = parseObject(updateData.workOpportunities);
+
+    // Handle image upload
+    if (req.file && req.file.path) {
+      const result = await cloudinary.uploader.upload(req.file.path, { folder: "studyabroad" });
+      updateData.image = result.secure_url;
+    }
+
+    const updatedEntry = await StudyAbroad.findByIdAndUpdate(id, updateData, { new: true });
+    res.json({ success: true, entry: updatedEntry });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -74,39 +264,7 @@ exports.getStudyAbroadById = async (req, res) => {
   }
 };
 
-// Update entry
-exports.updateStudyAbroad = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const updateData = req.body;
 
-    // Handle universities: accept either a JSON array string or a comma-separated string
-    if (updateData.universities) {
-      if (Array.isArray(updateData.universities)) {
-        // already array
-      } else if (typeof updateData.universities === "string") {
-        try {
-          updateData.universities = JSON.parse(updateData.universities);
-          if (!Array.isArray(updateData.universities)) {
-            updateData.universities = [updateData.universities];
-          }
-        } catch (e) {
-          updateData.universities = updateData.universities.split(",").map(u => u.trim()).filter(u => u.length > 0);
-        }
-      }
-    }
-
-    if (req.file) {
-      const result = await cloudinary.uploader.upload(req.file.path, { folder: "studyabroad" });
-      updateData.image = result.secure_url;
-    }
-
-    const updatedEntry = await StudyAbroad.findByIdAndUpdate(id, updateData, { new: true });
-    res.json({ success: true, entry: updatedEntry });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
-};
 
 // Delete entry
 exports.deleteStudyAbroad = async (req, res) => {

@@ -342,174 +342,132 @@
                                 <div class="ed-course__details-content">
                                     <!-- Banner Image -->
                                     <div class="ed-course__details-img">
-                                        <img src="/images/course/course-details/details-img-1.png" alt="Study in USA" />
+                                        <img src="<%= studyAbroad.image || '/images/course/course-details/details-img-1.png' %>" alt="Study in <%= studyAbroad.country %>" />
                                     </div>
 
-                                    <h3>Study in the USA</h3>
+                                    <h3><%= studyAbroad.title %></h3>
                                     <p>
-                                        The United States remains the top destination for international students seeking
-                                        world-class education,
-                                        diverse cultural experiences, and excellent career opportunities. With over
-                                        4,500 higher education institutions
-                                        and 50% of the world's top 100 universities, the USA offers unparalleled
-                                        academic excellence.
+                                        <%= studyAbroad.description %>
                                     </p>
 
                                     <!-- Quick Highlights -->
                                     <div class="usa-highlights-grid">
-                                        <div class="usa-highlight-card">
-                                            <div class="highlight-icon">🎓</div>
-                                            <h5>Top Universities</h5>
-                                            <p>50% of world's top 100 universities</p>
-                                        </div>
-                                        <div class="usa-highlight-card">
-                                            <div class="highlight-icon">💼</div>
-                                            <h5>Work Opportunities</h5>
-                                            <p>OPT + STEM extension up to 3 years</p>
-                                        </div>
-                                        <div class="usa-highlight-card">
-                                            <div class="highlight-icon">🌎</div>
-                                            <h5>Indian Students</h5>
-                                            <p>200,000+ currently studying</p>
-                                        </div>
-                                        <div class="usa-highlight-card">
-                                            <div class="highlight-icon">💰</div>
-                                            <h5>Investment</h5>
-                                            <p>$30,000 - $55,000 per year</p>
-                                        </div>
+                                        <% if (studyAbroad.additionalInformation && studyAbroad.additionalInformation.topUniversities && studyAbroad.additionalInformation.topUniversities.length) { %>
+                                            <div class="usa-highlight-card">
+                                                <div class="highlight-icon">🎓</div>
+                                                <h5>Top Universities</h5>
+                                                <p>
+                                                    <%= studyAbroad.additionalInformation.topUniversities.join(', ') %>
+                                                </p>
+                                            </div>
+                                        <% } %>
+                                        <% if (studyAbroad.additionalInformation && studyAbroad.additionalInformation.workOpportunitiesIndianStudents) { %>
+                                            <div class="usa-highlight-card">
+                                                <div class="highlight-icon">💼</div>
+                                                <h5>Work Opportunities</h5>
+                                                <p>
+                                                    <%= studyAbroad.additionalInformation.workOpportunitiesIndianStudents %>
+                                                </p>
+                                            </div>
+                                        <% } %>
+                                        <% if (studyAbroad.countryDetails && studyAbroad.countryDetails.indianStudents) { %>
+                                            <div class="usa-highlight-card">
+                                                <div class="highlight-icon">🌎</div>
+                                                <h5>Indian Students</h5>
+                                                <p>
+                                                    <%= studyAbroad.countryDetails.indianStudents %>
+                                                </p>
+                                            </div>
+                                        <% } %>
+                                        <% if (studyAbroad.additionalInformation && studyAbroad.additionalInformation.investment) { %>
+                                            <div class="usa-highlight-card">
+                                                <div class="highlight-icon">💰</div>
+                                                <h5>Investment</h5>
+                                                <p>
+                                                    <%= studyAbroad.additionalInformation.investment %>
+                                                </p>
+                                            </div>
+                                        <% } %>
                                     </div>
 
-                                    <!-- Why Choose USA Section -->
+                                    <!-- Why Choose Section -->
+                                    <% if (studyAbroad.whyChoose && studyAbroad.whyChoose.length) { %>
                                     <div class="ed-course__details-list">
-                                        <h5>Why Indian Students Choose the USA?</h5>
+                                        <h5>Why Choose <%= studyAbroad.country %>?</h5>
                                         <ul>
-                                            <li><img src="/images/icons/icon-check-blue.svg" alt="check" />World's best
-                                                universities & research opportunities</li>
-                                            <li><img src="/images/icons/icon-check-blue.svg" alt="check" />Flexible
-                                                curriculum with interdisciplinary learning</li>
-                                            <li><img src="/images/icons/icon-check-blue.svg" alt="check" />Access to
-                                                STEM OPT extension (up to 3 years of post-study work)</li>
-                                            <li><img src="/images/icons/icon-check-blue.svg" alt="check" />Huge career
-                                                opportunities in tech, healthcare, business</li>
-                                            <li><img src="/images/icons/icon-check-blue.svg" alt="check" />Diverse
-                                                culture with large Indian student communities</li>
-                                            <li><img src="/images/icons/icon-check-blue.svg" alt="check" />Pathway to
-                                                H-1B work visa & Permanent Residency</li>
+                                            <% studyAbroad.whyChoose.forEach(function(point) { %>
+                                                <li>
+                                                    <img src="/images/icons/icon-check-blue.svg" alt="check" />
+                                                    <%= point %>
+                                                </li>
+                                            <% }) %>
                                         </ul>
                                     </div>
+                                    <% } %>
 
-                                    <!-- US Education System -->
+                                    <!-- Education System -->
+                                    <% if (studyAbroad.usEducationalSystem && studyAbroad.usEducationalSystem.length) { %>
                                     <div class="ed-course__details-list">
-                                        <h5>US Education System</h5>
+                                        <h5><%= studyAbroad.country %> Education System</h5>
                                         <div class="education-system-grid">
-                                            <div class="system-card">
-                                                <h6>Undergraduate</h6>
-                                                <p>4-year Bachelor's degrees with flexible majors/minors</p>
-                                            </div>
-                                            <div class="system-card">
-                                                <h6>Graduate</h6>
-                                                <p>1-2 year Master's programs with coursework + thesis</p>
-                                            </div>
-                                            <div class="system-card">
-                                                <h6>Doctoral</h6>
-                                                <p>4-6 year PhD programs, research-focused</p>
-                                            </div>
-                                            <div class="system-card">
-                                                <h6>Community Colleges</h6>
-                                                <p>2-year associate degrees, affordable pathways</p>
-                                            </div>
+                                            <% studyAbroad.usEducationalSystem.forEach(function(system) { %>
+                                                <div class="system-card">
+                                                    <h6><%= system.title %></h6>
+                                                    <p><%= system.description %></p>
+                                                </div>
+                                            <% }) %>
                                         </div>
                                     </div>
+                                    <% } %>
 
                                     <!-- Admission Requirements -->
+                                    <% if (studyAbroad.admissionRequirements && studyAbroad.admissionRequirements.length) { %>
                                     <div class="ed-course__details-list">
-                                        <h5>Admission Requirements for Indian Students</h5>
+                                        <h5>Admission Requirements</h5>
                                         <div class="requirements-grid">
-                                            <div class="requirement-section">
-                                                <h6>Undergraduate</h6>
-                                                <ul>
-                                                    <li>12th grade completion with strong academics</li>
-                                                    <li>SAT/ACT (optional at many universities)</li>
-                                                    <li>IELTS/TOEFL/Duolingo scores</li>
-                                                </ul>
-                                            </div>
-                                            <div class="requirement-section">
-                                                <h6>Postgraduate</h6>
-                                                <ul>
-                                                    <li>Bachelor's degree (minimum 55-65%)</li>
-                                                    <li>GRE/GMAT (required by some universities)</li>
-                                                    <li>IELTS/TOEFL/PTE scores</li>
-                                                    <li>Work experience (for MBA/MS in some cases)</li>
-                                                </ul>
-                                            </div>
+                                            <% studyAbroad.admissionRequirements.forEach(function(req) { %>
+                                                <div class="requirement-section">
+                                                    <h6><%= req.title %></h6>
+                                                    <ul>
+                                                        <% (req.points || []).forEach(function(point) { %>
+                                                            <li><%= point %></li>
+                                                        <% }) %>
+                                                    </ul>
+                                                </div>
+                                            <% }) %>
                                         </div>
                                     </div>
+                                    <% } %>
 
                                     <!-- Top Courses -->
+                                    <% if (studyAbroad.topCourses && studyAbroad.topCourses.length) { %>
                                     <div class="ed-course__details-list">
-                                        <h5>Top Courses for Indian Students</h5>
+                                        <h5>Top Courses</h5>
                                         <div class="courses-tags">
-                                            <span class="course-tag">Computer Science & IT</span>
-                                            <span class="course-tag">Data Science & AI</span>
-                                            <span class="course-tag">Engineering</span>
-                                            <span class="course-tag">Business & Management (MBA)</span>
-                                            <span class="course-tag">Healthcare & Nursing</span>
-                                            <span class="course-tag">Biotechnology</span>
-                                            <span class="course-tag">Finance & Economics</span>
-                                            <span class="course-tag">Media & Arts</span>
+                                            <% studyAbroad.topCourses.forEach(function(course) { %>
+                                                <span class="course-tag"><%= course %></span>
+                                            <% }) %>
                                         </div>
                                     </div>
+                                    <% } %>
 
                                     <!-- Student Visa Process -->
+                                    <% if (studyAbroad.visaProcess && studyAbroad.visaProcess.length) { %>
                                     <div class="ed-course__details-list">
-                                        <h5>Student Visa (F-1) Process</h5>
+                                        <h5>Student Visa Process</h5>
                                         <div class="visa-steps">
-                                            <div class="visa-step">
-                                                <div class="step-number">1</div>
-                                                <div class="step-content">
-                                                    <h6>Get Admission & I-20</h6>
-                                                    <p>Receive acceptance from SEVP-approved institution</p>
+                                            <% studyAbroad.visaProcess.forEach(function(step, idx) { %>
+                                                <div class="visa-step">
+                                                    <div class="step-number"><%= idx + 1 %></div>
+                                                    <div class="step-content">
+                                                        <h6><%= step.title %></h6>
+                                                        <p><%= step.description %></p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="visa-step">
-                                                <div class="step-number">2</div>
-                                                <div class="step-content">
-                                                    <h6>Pay SEVIS Fee</h6>
-                                                    <p>USD $350 payment through FMJfee.com</p>
-                                                </div>
-                                            </div>
-                                            <div class="visa-step">
-                                                <div class="step-number">3</div>
-                                                <div class="step-content">
-                                                    <h6>Complete DS-160</h6>
-                                                    <p>Online visa application form</p>
-                                                </div>
-                                            </div>
-                                            <div class="visa-step">
-                                                <div class="step-number">4</div>
-                                                <div class="step-content">
-                                                    <h6>Schedule Interview</h6>
-                                                    <p>Biometrics & visa interview appointment</p>
-                                                </div>
-                                            </div>
-                                            <div class="visa-step">
-                                                <div class="step-number">5</div>
-                                                <div class="step-content">
-                                                    <h6>Attend Interview</h6>
-                                                    <p>At US Embassy/Consulate</p>
-                                                </div>
-                                            </div>
-                                            <div class="visa-step">
-                                                <div class="step-number">6</div>
-                                                <div class="step-content">
-                                                    <h6>Get Visa Approval</h6>
-                                                    <p>Receive F-1 visa and travel to USA</p>
-                                                </div>
-                                            </div>
+                                            <% }) %>
                                         </div>
                                     </div>
-
-
+                                    <% } %>
                                 </div>
                             </div>
 
@@ -518,149 +476,234 @@
                                 <div class="ed-course__sidebar">
                                     <!-- Quick Facts Widget -->
                                     <div class="ed-course__sidebar-widget">
-                                        <h4 class="ed-course__sidebar-title">USA Quick Facts</h4>
+                                        <h4 class="ed-course__sidebar-title"><%= studyAbroad.country %> Quick Facts</h4>
                                         <ul class="usa-facts-list">
-                                            <li>Capital: <span>Washington, D.C.</span></li>
-                                            <li>Top Cities: <span>NY, Boston, Chicago, LA</span></li>
-                                            <li>Universities: <span>4,500+</span></li>
-                                            <li>Indian Students: <span>200,000+</span></li>
-                                            <li>Currency: <span>US Dollar (USD)</span></li>
-                                            <li>Language: <span>English</span></li>
+                                            <% if (studyAbroad.countryDetails && studyAbroad.countryDetails.capital) { %>
+                                                <li>Capital: <span><%= studyAbroad.countryDetails.capital %></span></li>
+                                            <% } %>
+                                            <% if (studyAbroad.countryDetails && studyAbroad.countryDetails.topCities && studyAbroad.countryDetails.topCities.length) { %>
+                                                <li>Top Cities: <span><%= studyAbroad.countryDetails.topCities.join(', ') %></span></li>
+                                            <% } %>
+                                            <% if (studyAbroad.countryDetails && studyAbroad.countryDetails.universities && studyAbroad.countryDetails.universities.length) { %>
+                                                <li>Universities: <span><%= studyAbroad.countryDetails.universities.length %>+</span></li>
+                                            <% } %>
+                                            <% if (studyAbroad.countryDetails && studyAbroad.countryDetails.indianStudents) { %>
+                                                <li>Indian Students: <span><%= studyAbroad.countryDetails.indianStudents %></span></li>
+                                            <% } %>
+                                            <% if (studyAbroad.countryDetails && studyAbroad.countryDetails.currency) { %>
+                                                <li>Currency: <span><%= studyAbroad.countryDetails.currency %></span></li>
+                                            <% } %>
+                                            <% if (studyAbroad.countryDetails && studyAbroad.countryDetails.language) { %>
+                                                <li>Language: <span><%= studyAbroad.countryDetails.language %></span></li>
+                                            <% } %>
                                         </ul>
                                     </div>
 
                                     <!-- Top Universities Widget -->
+                                    <% if (studyAbroad.topUniversities && studyAbroad.topUniversities.length) { %>
                                     <div class="ed-course__sidebar-widget">
                                         <h4 class="ed-course__sidebar-title">Top Universities</h4>
                                         <ul class="universities-list">
-                                            <li>Harvard University</li>
-                                            <li>Stanford University</li>
-                                            <li>MIT</li>
-                                            <li>UC Berkeley</li>
-                                            <li>Columbia University</li>
-                                            <li>New York University</li>
+                                            <% studyAbroad.topUniversities.forEach(function(univ) { %>
+                                                <li><%= univ %></li>
+                                            <% }) %>
                                         </ul>
                                     </div>
+                                    <% } %>
 
                                     <!-- Intakes Widget -->
+                                    <% if (studyAbroad.intakePeriod && (studyAbroad.intakePeriod.fallIntake || studyAbroad.intakePeriod.springIntake || studyAbroad.intakePeriod.summerIntake)) { %>
                                     <div class="ed-course__sidebar-widget">
                                         <h4 class="ed-course__sidebar-title">Intake Periods</h4>
                                         <div class="intakes-list">
-                                            <div class="intake-item">
-                                                <strong>Fall Intake</strong>
-                                                <span>Aug-Sep (Major intake)</span>
-                                            </div>
-                                            <div class="intake-item">
-                                                <strong>Spring Intake</strong>
-                                                <span>Jan-Feb (Good alternative)</span>
-                                            </div>
-                                            <div class="intake-item">
-                                                <strong>Summer Intake</strong>
-                                                <span>May-Jun (Limited programs)</span>
-                                            </div>
+                                            <% if (studyAbroad.intakePeriod.fallIntake) { %>
+                                                <div class="intake-item">
+                                                    <strong>Fall Intake</strong>
+                                                    <span><%= studyAbroad.intakePeriod.fallIntake %></span>
+                                                </div>
+                                            <% } %>
+                                            <% if (studyAbroad.intakePeriod.springIntake) { %>
+                                                <div class="intake-item">
+                                                    <strong>Spring Intake</strong>
+                                                    <span><%= studyAbroad.intakePeriod.springIntake %></span>
+                                                </div>
+                                            <% } %>
+                                            <% if (studyAbroad.intakePeriod.summerIntake) { %>
+                                                <div class="intake-item">
+                                                    <strong>Summer Intake</strong>
+                                                    <span><%= studyAbroad.intakePeriod.summerIntake %></span>
+                                                </div>
+                                            <% } %>
                                         </div>
                                     </div>
+                                    <% } %>
 
                                     <!-- Contact Form Widget -->
                                     <div class="ed-course__sidebar-widget">
-                                        <h4 class="ed-course__sidebar-title">Get USA Counseling</h4>
-                                        <form class="ed-assessment-form" id="usaCounselingForm">
+                                        <h4 class="ed-course__sidebar-title">Get <%= studyAbroad.country %> Counseling</h4>
+                                        <form id="studyDetailsContactForm" class="ed-assessment-form">
                                             <div class="form-group mb-3">
-                                                <label for="name">Full Name</label>
-                                                <input type="text" id="name" class="form-control"
-                                                    placeholder="Enter your name" required />
+                                                <input type="text" id="name" name="name" placeholder="Full name" class="form-control" required />
                                             </div>
                                             <div class="form-group mb-3">
-                                                <label for="email">Email Address</label>
-                                                <input type="email" id="email" class="form-control"
-                                                    placeholder="Enter your email" required />
+                                                <input type="email" id="email" name="email" placeholder="Enter your email" class="form-control" required />
                                             </div>
                                             <div class="form-group mb-3">
-                                                <label for="phone">Phone Number</label>
-                                                <input type="tel" id="phone" class="form-control"
-                                                    placeholder="Enter your number" required />
+                                                <input type="tel" id="phone" name="phone" placeholder="Phone number" class="form-control" required />
                                             </div>
                                             <div class="form-group mb-3">
-                                                <label for="program">Interested Program</label>
-                                                <select id="program" class="form-control">
-                                                    <option value="">Select Program</option>
-                                                    <option value="undergraduate">Undergraduate</option>
-                                                    <option value="graduate">Graduate/Master's</option>
-                                                    <option value="phd">PhD/Doctoral</option>
-                                                </select>
+                                                <textarea id="message" name="message" placeholder="How can we help you? Feel free to get in touch!" class="form-control" required></textarea>
                                             </div>
-                                            <button type="submit" class="ed-btn w-100">Get Free Consultation</button>
+                                            <button type="submit" class="ed-btn w-100" id="studyDetailsContactSubmitBtn">Get Free Consultation</button>
                                         </form>
+                                        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+                                        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function () {
+                                                const contactForm = document.getElementById('studyDetailsContactForm');
+                                                const submitBtn = document.getElementById('studyDetailsContactSubmitBtn');
+                                                if (contactForm) {
+                                                    contactForm.addEventListener('submit', async function (e) {
+                                                        e.preventDefault();
+                                                        submitBtn.disabled = true;
+                                                        submitBtn.innerHTML = 'Sending... <i class="fi fi-rr-arrow-small-right"></i>';
+
+                                                        const formData = new FormData(contactForm);
+                                                        const payload = {
+                                                            name: formData.get('name'),
+                                                            email: formData.get('email'),
+                                                            phone: formData.get('phone'),
+                                                            message: formData.get('message')
+                                                        };
+
+                                                        try {
+                                                            const res = await fetch('/send-contact', {
+                                                                method: 'POST',
+                                                                headers: {
+                                                                    'Content-Type': 'application/json'
+                                                                },
+                                                                body: JSON.stringify(payload)
+                                                            });
+
+                                                            if (res.ok) {
+                                                                Toastify({
+                                                                    text: "Thank you! Your message has been sent successfully.",
+                                                                    duration: 4000,
+                                                                    gravity: "top",
+                                                                    position: "center",
+                                                                    backgroundColor: "#28a745",
+                                                                    stopOnFocus: true
+                                                                }).showToast();
+                                                                contactForm.reset();
+                                                            } else {
+                                                                const errorText = await res.text();
+                                                                Toastify({
+                                                                    text: errorText || "Failed to send message.",
+                                                                    duration: 4000,
+                                                                    gravity: "top",
+                                                                    position: "center",
+                                                                    backgroundColor: "#dc3545",
+                                                                    stopOnFocus: true
+                                                                }).showToast();
+                                                            }
+                                                        } catch (err) {
+                                                            Toastify({
+                                                                text: "Something went wrong. Please try again.",
+                                                                duration: 4000,
+                                                                gravity: "top",
+                                                                position: "center",
+                                                                backgroundColor: "#dc3545",
+                                                                stopOnFocus: true
+                                                            }).showToast();
+                                                        } finally {
+                                                            submitBtn.disabled = false;
+                                                            submitBtn.innerHTML = 'Get Free Consultation';
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        </script>
                                     </div>
 
                                     <!-- Scholarship Info -->
+                                    <% if (studyAbroad.popularScholarships && studyAbroad.popularScholarships.length) { %>
                                     <div class="ed-course__sidebar-widget">
                                         <h4 class="ed-course__sidebar-title">Popular Scholarships</h4>
                                         <ul class="scholarships-list">
-                                            <li>Fulbright Program</li>
-                                            <li>Hubert Humphrey Fellowship</li>
-                                            <li>Inlaks Foundation</li>
-                                            <li>Tata Scholarship</li>
-                                            <li>University-specific awards</li>
+                                            <% studyAbroad.popularScholarships.forEach(function(sch) { %>
+                                                <li><%= sch %></li>
+                                            <% }) %>
                                         </ul>
                                     </div>
+                                    <% } %>
                                 </div>
                             </div>
                             <!-- Financial Requirements -->
+                            <% if (studyAbroad.financialRequirements && (studyAbroad.financialRequirements.tuitionFees || studyAbroad.financialRequirements.livingCosts || studyAbroad.financialRequirements.totalProofRequired)) { %>
                             <div class="ed-course__details-list">
                                 <h5>Financial Requirements</h5>
                                 <div class="financial-table">
+                                    <% if (studyAbroad.financialRequirements.tuitionFees) { %>
                                     <div class="financial-row">
                                         <div class="financial-item">Tuition Fees</div>
-                                        <div class="financial-amount">$20,000 - $50,000/year</div>
+                                        <div class="financial-amount"><%= studyAbroad.financialRequirements.tuitionFees %></div>
                                     </div>
+                                    <% } %>
+                                    <% if (studyAbroad.financialRequirements.livingCosts) { %>
                                     <div class="financial-row">
                                         <div class="financial-item">Living Costs</div>
-                                        <div class="financial-amount">$12,000 - $18,000/year</div>
+                                        <div class="financial-amount"><%= studyAbroad.financialRequirements.livingCosts %></div>
                                     </div>
+                                    <% } %>
+                                    <% if (studyAbroad.financialRequirements.totalProofRequired) { %>
                                     <div class="financial-row total">
                                         <div class="financial-item">Total Proof Required</div>
-                                        <div class="financial-amount">$35,000 - $65,000/year</div>
+                                        <div class="financial-amount"><%= studyAbroad.financialRequirements.totalProofRequired %></div>
                                     </div>
+                                    <% } %>
                                 </div>
                             </div>
+                            <% } %>
 
                             <!-- Work Opportunities -->
+                            <% if (studyAbroad.workOpportunities && (studyAbroad.workOpportunities.duringStudies || studyAbroad.workOpportunities.afterGraduation)) { %>
                             <div class="ed-course__details-list">
                                 <h5>Work Opportunities</h5>
                                 <div class="work-opportunities">
+                                    <% if (studyAbroad.workOpportunities.duringStudies) { %>
                                     <div class="work-type">
                                         <h6>During Studies</h6>
                                         <ul>
-                                            <li>On-campus work: 20 hours/week</li>
-                                            <li>CPT: Curricular Practical Training</li>
-                                            <li>Wages: $10-15/hour</li>
+                                            <% studyAbroad.workOpportunities.duringStudies.split('\n').forEach(function(item) { if(item.trim()) { %>
+                                                <li><%= item %></li>
+                                            <% } }) %>
                                         </ul>
                                     </div>
+                                    <% } %>
+                                    <% if (studyAbroad.workOpportunities.afterGraduation) { %>
                                     <div class="work-type">
                                         <h6>After Graduation</h6>
                                         <ul>
-                                            <li>OPT: 12 months work permit</li>
-                                            <li>STEM OPT: 24 months extension</li>
-                                            <li>Total: Up to 36 months for STEM</li>
+                                            <% studyAbroad.workOpportunities.afterGraduation.split('\n').forEach(function(item) { if(item.trim()) { %>
+                                                <li><%= item %></li>
+                                            <% } }) %>
                                         </ul>
                                     </div>
+                                    <% } %>
                                 </div>
                             </div>
-
+                            <% } %>
 
                             <!-- Final CTA Section -->
                             <div class="ed-course__details-list">
-                                <h5>Start Your USA Journey Today!</h5>
+                                <h5>Start Your <%= studyAbroad.country %> Journey Today!</h5>
                                 <p>
-                                    Take the first step towards your American dream with expert guidance on university
-                                    selection,
-                                    visa processing, and financial planning.
+                                    Take the first step towards your dream with expert guidance on university
+                                    selection, visa processing, and financial planning.
                                 </p>
                                 <div class="cta-buttons">
                                     <a href="tel:+914844525521" class="ed-btn">Book Free Consultation <i
                                             class="fi fi-rr-arrow-small-right"></i></a>
-
                                 </div>
                             </div>
                         </div>

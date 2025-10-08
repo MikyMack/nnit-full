@@ -539,7 +539,9 @@ router.get('/course-details/:title', async (req, res) => {
             return res.status(404).render('course-details', { 
                 title: 'Course Not Found', 
                 user, 
-                course: null 
+                course: null,
+                courseCategories,
+                testimonials
             });
         }
 
