@@ -1331,7 +1331,7 @@
                                                         </li>
                                                         <% /* Comments count is not available in Blog model, so skip or show nothing */ %>
                                                     </ul>
-                                                    <a href="/blogs/<%= encodeURIComponent(blog.title) %>" class="ed-blog__title">
+                                                    <a href="/blog-details/<%= encodeURIComponent(blog.title) %>" class="ed-blog__title">
                                                         <h4>
                                                             <%= blog.title ? blog.title : 'Untitled Blog' %>
                                                         </h4>
