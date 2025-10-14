@@ -214,6 +214,52 @@ router.get('/studyAbroad', async (req, res) => {
         });
     }
 });
+
+router.get('/studyAbroadDetails/:title', async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        let user = null;
+        if (token) {
+            try {
+                const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+                user = await User.findById(decoded.id);
+            } catch (err) {
+                console.error("JWT Verification Error:", err);
+            }
+        }
+
+        const title = req.params.title;
+        const normalizedTitle = title.replace(/[-_]/g, ' ');
+        const studyAbroad = await StudyAbroad.findOne({ 
+            title: { $regex: `^${normalizedTitle}$`, $options: 'i' } 
+        });
+
+        if (!studyAbroad) {
+            return res.status(404).render('error', { 
+                message: 'Study Abroad details not found', 
+                user 
+            });
+        }
+
+        const courseCategories = await Course.getCategoriesWithCount();
+        const testimonials = await Testimonial.find({ toggled: true }).sort({ createdAt: -1 }).limit(10);
+
+        res.render('study-details', {
+            title: studyAbroad.title,
+            user,
+            courseCategories,
+            studyAbroad,
+            testimonials
+        });
+    } catch (error) {
+        console.error("Error loading studyAbroad details page:", error);
+        res.status(500).render('error', { 
+            message: 'Internal server error',
+            user: null
+        });
+    }
+});
+
 router.get('/courses', async (req, res) => {
     try {
         const token = req.cookies.token;
@@ -493,7 +539,9 @@ router.get('/course-details/:title', async (req, res) => {
             return res.status(404).render('course-details', { 
                 title: 'Course Not Found', 
                 user, 
-                course: null 
+                course: null,
+                courseCategories,
+                testimonials
             });
         }
 

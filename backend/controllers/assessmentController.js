@@ -7,12 +7,10 @@ exports.createAssessment = async (req, res) => {
   try {
     const { title, description, category, questions } = req.body;
 
-    // Validate required fields
     if (!title || !category || !Array.isArray(questions) || questions.length === 0) {
       return res.status(400).json({ success: false, message: "Title, category, and questions are required." });
     }
     const formattedQuestions = questions.map(q => {
-      // Find the index of the correct answer in options
       const correctIndex = Array.isArray(q.options)
         ? q.options.findIndex(opt => opt === q.correctAnswer)
         : -1;
@@ -29,7 +27,8 @@ exports.createAssessment = async (req, res) => {
         questionText: q.text,
         options: q.options,
         correctAnswer: correctIndex,
-        category: q.category.trim()
+        category: q.category.trim(),
+        explanation: q.explanation || ""
       };
     });
 
@@ -88,7 +87,8 @@ exports.updateAssessment = async (req, res) => {
           questionText: q.text,
           options: q.options,
           correctAnswer: correctIndex,
-          category: q.category.trim()
+          category: q.category.trim(),
+          explanation: q.explanation || ""
         };
       });
 
@@ -105,10 +105,9 @@ exports.updateAssessment = async (req, res) => {
 
 exports.getAssessments = async (req, res) => {
   try {
-    // Populate questions.question and include category field from Question model
     const assessments = await Assessment.find().populate({
       path: "questions.question",
-      select: "questionText options correctAnswer category"
+      select: "questionText options correctAnswer category explanation"
     });
     res.json({ success: true, assessments });
   } catch (err) {
@@ -118,11 +117,10 @@ exports.getAssessments = async (req, res) => {
 
 exports.getAssessmentById = async (req, res) => {
   try {
-    // Populate questions.question and include category field from Question model
     const assessment = await Assessment.findById(req.params.id)
       .populate({
         path: "questions.question",
-        select: "questionText options correctAnswer category"
+        select: "questionText options correctAnswer category explanation"
       });
     if (!assessment) {
       return res.status(404).json({ success: false, message: "Assessment not found" });
@@ -137,7 +135,6 @@ exports.deleteAssessment = async (req, res) => {
   try {
     const assessmentId = req.params.id;
 
-    // Find the assessment
     const assessment = await Assessment.findById(assessmentId);
     if (!assessment) {
       return res.status(404).json({ success: false, message: "Assessment not found" });

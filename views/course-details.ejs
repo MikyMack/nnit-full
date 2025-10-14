@@ -337,7 +337,7 @@
                                 <div class="ed-course__details-content">
                                     <!-- Course Details Image -->
                                     <div class="ed-course__details-img">
-                                        <img src="<%= course.image ? course.image : '/images/course/course-details/details-img-1.png' %>"
+                                        <img src="<%= course.image ? course.image : '/images/course/course-details/1.png' %>"
                                             alt="<%= course.title %>" />
                                     </div>
                                     <h3>
@@ -347,7 +347,7 @@
                                         <%= course.description %>
                                     </p>
                                     <% if (course.coreModules && course.coreModules.length) { %>
-                                        <h5 style="margin-top: 10px;">Core Modules</h5>
+                                        <h5 style="margin-top: 20px;">Core Modules</h5>
                                         <ul>
                                             <% course.coreModules.forEach(function(module) { %>
                                                 <li><img src="/images/icons/icon-check-blue.svg" alt="icon-check-blue" /> <%= module %></li>
@@ -355,7 +355,7 @@
                                         </ul>
                                     <% } %>
                                     <% if (course.learningOutcomes && course.learningOutcomes.length) { %>
-                                        <h5 style="margin-top: 10px;">Learning Outcomes</h5>
+                                        <h5 style="margin-top: 20px;">Learning Outcomes</h5>
                                         <ul>
                                             <% course.learningOutcomes.forEach(function(outcome) { %>
                                                 <li><img src="/images/icons/icon-check-blue.svg" alt="icon-check-blue" /> <%= outcome %></li>
@@ -363,12 +363,12 @@
                                         </ul>
                                     <% } %>
                                     <% if (course.specialization) { %>
-                                        <h5 style="margin-top: 10px;">Specialization</h5>
+                                        <h5 style="margin-top: 20px;">Specialization</h5>
                                         <p><%= course.specialization %></p>
                                     <% } %>
 
                                     <% if (course.pdf) { %>
-                                        <h5 style="margin-top: 10px;">Click below to view or download course details</h5>
+                                        <h5 style="margin-top: 20px;">Click below to view or download course details</h5>
                                         <a href="<%= course.pdf %>" target="_blank" rel="noopener" type="application/pdf"
                                             style="background: linear-gradient(135deg, #24519a, #0f1624, #06090f);
                                             padding: 10px 20px;
@@ -382,7 +382,7 @@
 
                                     <% if (course.opportunities && course.opportunities.length) { %>
                                         <div class="ed-course__details-list">
-                                            <h5>What can I become?</h5>
+                                            <h5 style="margin-top: 20px;">What can I become?</h5>
                                             <ul>
                                                 <% course.opportunities.forEach(function(opp) { %>
                                                     <li><img src="/images/icons/icon-check-blue.svg" alt="icon-check-blue" /> <%= opp %></li>
@@ -433,7 +433,7 @@
 
                                     <% if (course.whyChoose && course.whyChoose.length) { %>
                                         <div class="ed-course__details-list">
-                                            <h5>Why choose this course?</h5>
+                                            <h5 style="margin-top: 20px;">Why choose this course?</h5>
                                             <ul>
                                                 <% course.whyChoose.forEach(function(reason) { %>
                                                     <li><img src="/images/icons/icon-check-blue.svg" alt="icon-check-blue" /> <%= reason %></li>
@@ -441,6 +441,49 @@
                                             </ul>
                                         </div>
                                     <% } %>
+                                <% if (course.jobMarket && course.jobMarket.length) { %>
+                                    <div class="ed-course__details-list mt-4">
+                                        <h5 style="margin-top: 20px;">Job Market</h5>
+                                        <ul>
+                                            <% course.jobMarket.forEach(function(item) { %>
+                                                <li><img src="/images/icons/icon-check-blue.svg" alt="icon-check-blue" /> <%= item %></li>
+                                            <% }) %>
+                                        </ul>
+                                    </div>
+                                <% } %>
+
+                                <% if (course.jobMarketTrends && course.jobMarketTrends.length) { %>
+                                    <div class="ed-course__details-list mt-4">
+                                        <h5 style="margin-top: 20px;">Job Market Trends</h5>
+                                        <ul>
+                                            <% course.jobMarketTrends.forEach(function(item) { %>
+                                                <li><img src="/images/icons/icon-check-blue.svg" alt="icon-check-blue" /> <%= item %></li>
+                                            <% }) %>
+                                        </ul>
+                                    </div>
+                                <% } %>
+
+                                <% if (course.typicalSalary && course.typicalSalary.length) { %>
+                                    <div class="ed-course__details-list mt-4">
+                                        <h5 style="margin-top: 20px;">Typical Salary</h5>
+                                        <ul>
+                                            <% course.typicalSalary.forEach(function(item) { %>
+                                                <li><img src="/images/icons/icon-check-blue.svg" alt="icon-check-blue" /> <%= item %></li>
+                                            <% }) %>
+                                        </ul>
+                                    </div>
+                                <% } %>
+
+                                <% if (course.majorEmployers && course.majorEmployers.length) { %>
+                                    <div class="ed-course__details-list mt-4">
+                                        <h5 style="margin-top: 20px;">Major Employers</h5>
+                                        <ul>
+                                            <% course.majorEmployers.forEach(function(item) { %>
+                                                <li><img src="/images/icons/icon-check-blue.svg" alt="icon-check-blue" /> <%= item %></li>
+                                            <% }) %>
+                                        </ul>
+                                    </div>
+                                <% } %>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-12">

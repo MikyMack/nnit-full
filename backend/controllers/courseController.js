@@ -4,72 +4,6 @@ const cloudinary = require("cloudinary").v2;
 // Create new course
 
 exports.createCourse = async (req, res) => {
-    try {
-      const {
-        title,
-        description,
-        category,
-        coreModules,
-        learningOutcomes,
-        specialization,
-        opportunities,
-        youtubeLink,
-        whyChoose,
-        courseInformation,
-        isactive
-      } = req.body;
-  
-      const image = req.files?.image?.[0]?.path || req.files?.image?.[0]?.secure_url || null;
-      const pdf = req.files?.pdf?.[0]?.path || req.files?.pdf?.[0]?.secure_url || null;
-      
-  
-      // ✅ Safely parse only JSON string fields
-      const parsedCoreModules = coreModules
-        ? (typeof coreModules === "string" ? JSON.parse(coreModules) : coreModules)
-        : [];
-  
-      const parsedLearningOutcomes = learningOutcomes
-        ? (typeof learningOutcomes === "string" ? JSON.parse(learningOutcomes) : learningOutcomes)
-        : [];
-  
-      const parsedOpportunities = opportunities
-        ? (typeof opportunities === "string" ? JSON.parse(opportunities) : opportunities)
-        : [];
-  
-      const parsedWhyChoose = whyChoose
-        ? (typeof whyChoose === "string" ? JSON.parse(whyChoose) : whyChoose)
-        : [];
-  
-      // ✅ Do NOT JSON.parse courseInformation — it's already an object
-      const parsedCourseInfo = courseInformation || {};
-  
-      const newCourse = new Course({
-        title,
-        description,
-        category,
-        coreModules: parsedCoreModules,
-        learningOutcomes: parsedLearningOutcomes,
-        specialization,
-        image,
-        pdf,
-        opportunities: parsedOpportunities,
-        youtubeLink,
-        whyChoose: parsedWhyChoose,
-        courseInformation: parsedCourseInfo,
-        isactive: typeof isactive !== "undefined" ? isactive : true
-      });
-  
-      await newCourse.save();
-      res.status(201).json({ success: true, message: "Course created", course: newCourse });
-  
-    } catch (err) {
-      console.error("Error creating course:", err);
-      res.status(500).json({ success: false, message: err.message });
-    }
-  };
-  
-  // Update course
-exports.updateCourse = async (req, res) => {
   try {
     const {
       title,
@@ -82,10 +16,17 @@ exports.updateCourse = async (req, res) => {
       youtubeLink,
       whyChoose,
       courseInformation,
-      isactive
+      isactive,
+      jobMarket,
+      jobMarketTrends,
+      typicalSalary,
+      majorEmployers
     } = req.body;
 
-    // ✅ Safely parse JSON string fields
+    const image = req.files?.image?.[0]?.path || req.files?.image?.[0]?.secure_url || null;
+    const pdf = req.files?.pdf?.[0]?.path || req.files?.pdf?.[0]?.secure_url || null;
+
+    // Safely parse only JSON string fields
     const parsedCoreModules = coreModules
       ? (typeof coreModules === "string" ? JSON.parse(coreModules) : coreModules)
       : [];
@@ -102,9 +43,113 @@ exports.updateCourse = async (req, res) => {
       ? (typeof whyChoose === "string" ? JSON.parse(whyChoose) : whyChoose)
       : [];
 
+    // New fields: parse as arrays if needed
+    const parsedJobMarket = jobMarket
+      ? (typeof jobMarket === "string" ? JSON.parse(jobMarket) : jobMarket)
+      : [];
+
+    const parsedJobMarketTrends = jobMarketTrends
+      ? (typeof jobMarketTrends === "string" ? JSON.parse(jobMarketTrends) : jobMarketTrends)
+      : [];
+
+    const parsedTypicalSalary = typicalSalary
+      ? (typeof typicalSalary === "string" ? JSON.parse(typicalSalary) : typicalSalary)
+      : [];
+
+    const parsedMajorEmployers = majorEmployers
+      ? (typeof majorEmployers === "string" ? JSON.parse(majorEmployers) : majorEmployers)
+      : [];
+
+    // Do NOT JSON.parse courseInformation — it's already an object
     const parsedCourseInfo = courseInformation || {};
 
-    // ✅ Construct update object safely
+    const newCourse = new Course({
+      title,
+      description,
+      category,
+      coreModules: parsedCoreModules,
+      learningOutcomes: parsedLearningOutcomes,
+      specialization,
+      image,
+      pdf,
+      opportunities: parsedOpportunities,
+      youtubeLink,
+      whyChoose: parsedWhyChoose,
+      courseInformation: parsedCourseInfo,
+      isactive: typeof isactive !== "undefined" ? isactive : true,
+      jobMarket: parsedJobMarket,
+      jobMarketTrends: parsedJobMarketTrends,
+      typicalSalary: parsedTypicalSalary,
+      majorEmployers: parsedMajorEmployers
+    });
+
+    await newCourse.save();
+    res.status(201).json({ success: true, message: "Course created", course: newCourse });
+
+  } catch (err) {
+    console.error("Error creating course:", err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Update course
+exports.updateCourse = async (req, res) => {
+  try {
+    const {
+      title,
+      description,
+      category,
+      coreModules,
+      learningOutcomes,
+      specialization,
+      opportunities,
+      youtubeLink,
+      whyChoose,
+      courseInformation,
+      isactive,
+      jobMarket,
+      jobMarketTrends,
+      typicalSalary,
+      majorEmployers
+    } = req.body;
+
+    // Safely parse JSON string fields
+    const parsedCoreModules = coreModules
+      ? (typeof coreModules === "string" ? JSON.parse(coreModules) : coreModules)
+      : [];
+
+    const parsedLearningOutcomes = learningOutcomes
+      ? (typeof learningOutcomes === "string" ? JSON.parse(learningOutcomes) : learningOutcomes)
+      : [];
+
+    const parsedOpportunities = opportunities
+      ? (typeof opportunities === "string" ? JSON.parse(opportunities) : opportunities)
+      : [];
+
+    const parsedWhyChoose = whyChoose
+      ? (typeof whyChoose === "string" ? JSON.parse(whyChoose) : whyChoose)
+      : [];
+
+    // New fields: parse as arrays if needed
+    const parsedJobMarket = jobMarket
+      ? (typeof jobMarket === "string" ? JSON.parse(jobMarket) : jobMarket)
+      : [];
+
+    const parsedJobMarketTrends = jobMarketTrends
+      ? (typeof jobMarketTrends === "string" ? JSON.parse(jobMarketTrends) : jobMarketTrends)
+      : [];
+
+    const parsedTypicalSalary = typicalSalary
+      ? (typeof typicalSalary === "string" ? JSON.parse(typicalSalary) : typicalSalary)
+      : [];
+
+    const parsedMajorEmployers = majorEmployers
+      ? (typeof majorEmployers === "string" ? JSON.parse(majorEmployers) : majorEmployers)
+      : [];
+
+    const parsedCourseInfo = courseInformation || {};
+
+    // Construct update object safely
     const updatedData = {
       ...(title && { title }),
       ...(description && { description }),
@@ -116,10 +161,14 @@ exports.updateCourse = async (req, res) => {
       learningOutcomes: parsedLearningOutcomes,
       opportunities: parsedOpportunities,
       whyChoose: parsedWhyChoose,
-      courseInformation: parsedCourseInfo
+      courseInformation: parsedCourseInfo,
+      jobMarket: parsedJobMarket,
+      jobMarketTrends: parsedJobMarketTrends,
+      typicalSalary: parsedTypicalSalary,
+      majorEmployers: parsedMajorEmployers
     };
 
-    // ✅ Handle Cloudinary files properly
+    // Handle Cloudinary files properly
     if (req.files?.image?.length) {
       updatedData.image =
         req.files.image[0].secure_url ||
@@ -134,7 +183,7 @@ exports.updateCourse = async (req, res) => {
         null;
     }
 
-    // ✅ Update the course
+    // Update the course
     const course = await Course.findByIdAndUpdate(req.params.id, updatedData, { new: true });
 
     if (!course) {

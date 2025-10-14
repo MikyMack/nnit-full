@@ -24,7 +24,13 @@ const courseSchema = new mongoose.Schema({
     language: { type: String, trim: true },
     students: { type: String, trim: true },
   },
-  isactive: { type: Boolean, default: true }
+  isactive: { type: Boolean, default: true },
+
+ 
+  jobMarket: [{ type: String, trim: true }],
+  jobMarketTrends: [{ type: String, trim: true }],
+  typicalSalary: [{ type: String, trim: true }], 
+  majorEmployers: [{ type: String, trim: true }]
 }, { timestamps: true });
 
 courseSchema.statics.getAllCategories = async function() {

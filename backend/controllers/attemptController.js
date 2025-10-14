@@ -185,13 +185,15 @@ exports.submitAttempt = async (req, res) => {
 exports.getResult = async (req, res) => {
   try {
     const attempt = await Attempt.findById(req.params.id)
-      .populate("answers.question")
+      .populate({
+        path: "answers.question",
+        select: "questionText options correctAnswer category explanation"
+      })
       .populate("assessment");
 
     if (!attempt) return res.status(404).json({ success: false, message: "Attempt not found" });
 
     if (!attempt.isResultUnlocked) {
-      // Send locked mail again if accessed while locked
       const guest = attempt.guestDetails || {};
       const email = guest.email;
       const name = guest.name;
@@ -214,7 +216,6 @@ exports.getResult = async (req, res) => {
       }
       return res.status(403).json({ success: false, message: "Result is locked. Please unlock with coupon or payment." });
     } else {
-      // Send unlocked mail if not already sent (for idempotency, you may want to track this in DB)
       const guest = attempt.guestDetails || {};
       const email = guest.email;
       const name = guest.name;

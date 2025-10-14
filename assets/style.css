@@ -492,4 +492,103 @@
 }
 
 
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    background: #fff;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(34,34,59,0.04);
+}
 
+.table th, .table td {
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+    border: 1px solid #e3e6ed;
+    text-align: left;
+    background-clip: padding-box;
+}
+
+.table th {
+    background: #f5f7fa;
+    font-weight: 700;
+    color: #053783;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.table thead th {
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody tr {
+    transition: background 0.15s;
+}
+
+.table tbody tr:hover {
+    background: #f0f4fa;
+}
+
+.table-bordered {
+    border: 1px solid #e3e6ed;
+}
+
+.table-sm th, .table-sm td {
+    padding: 0.5rem 0.75rem;
+}
+
+.table th:nth-child(1), .table td:nth-child(1) {
+    width: 60%;
+    min-width: 60px;
+    text-align: center;
+}
+.table th:nth-child(2), .table td:nth-child(2) {
+    width: 32%;
+    min-width: 200px;
+}
+.table th:nth-child(3), .table td:nth-child(3),
+.table th:nth-child(4), .table td:nth-child(4),
+.table th:nth-child(5), .table td:nth-child(5) {
+    width: 12%;
+    min-width: 80px;
+    text-align: center;
+}
+.table th:nth-child(6), .table td:nth-child(6) {
+    width: 12%;
+    min-width: 90px;
+    text-align: center;
+}
+.table th:nth-child(5), .table td:nth-child(5) {
+    width: 20%;
+    min-width: 140px;
+}
+
+.table .badge {
+    font-size: 0.98em;
+    padding: 0.45em 0.9em;
+    border-radius: 0.5em;
+}
+
+@media (max-width: 767.98px) {
+    .table th, .table td {
+        padding: 0.5rem 0.4rem;
+        font-size: 0.97rem;
+    }
+    .table th, .table td {
+        min-width: 60px;
+    }
+    .table th:nth-child(2), .table td:nth-child(2) {
+        min-width: 120px;
+    }
+    .table th:nth-child(5), .table td:nth-child(5) {
+        min-width: 90px;
+    }
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1.5rem;
+    border-radius: 0.7rem;
+    box-shadow: 0 1px 4px rgba(34,34,59,0.04);
+}
