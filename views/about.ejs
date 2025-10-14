@@ -35,6 +35,218 @@
     <link rel="stylesheet" href="/style.css" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
     <style>
+        .founder-profile-section {
+    background: white;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    padding: 60px 20px;
+    min-height: 100vh;
+}
+
+.founder-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.founder-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.founder-role {
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    color: #24519a;
+}
+
+.founder-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #24519a, #0f1624, #06090f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.founder-name {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-top: 15px;
+    color: #24519a;
+    font-style: italic;
+}
+
+.title-decoration {
+    height: 4px;
+    width: 100px;
+    background: linear-gradient(135deg, #24519a, #0f1624, #06090f);
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+.founder-content {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.prologue-section {
+    margin-bottom: 40px;
+}
+
+.section-divider {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.1);
+    margin: 40px 0;
+    width: 100%;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #24519a, #0f1624, #06090f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+    padding-left: 15px;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background: linear-gradient(135deg, #24519a, #0f1624, #06090f);
+    border-radius: 3px;
+}
+
+.section-text {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    text-align: justify;
+    color: #444;
+}
+
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    margin: 25px 0;
+}
+
+.expertise-item {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 3px solid #24519a;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.expertise-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.expertise-subtitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #24519a;
+}
+
+.expertise-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+}
+
+.cta-section {
+    text-align: center;
+    margin-top: 50px;
+    padding: 30px;
+    background: linear-gradient(135deg, #24519a, #0f1624, #06090f);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cta-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .founder-title {
+        font-size: 2.4rem;
+    }
+    
+    .founder-content {
+        padding: 30px;
+    }
+    
+    .expertise-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .founder-profile-section {
+        padding: 40px 15px;
+    }
+    
+    .founder-title {
+        font-size: 2rem;
+    }
+    
+    .founder-content {
+        padding: 20px;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .section-text {
+        font-size: 1rem;
+    }
+    
+    .founder-name {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .founder-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 1.4rem;
+    }
+    
+    .cta-text {
+        font-size: 1.1rem;
+    }
+    
+    .founder-role {
+        font-size: 1.1rem;
+    }
+}
 .chairman-profile-section {
     background: white;
     color: #333;
@@ -1044,6 +1256,216 @@
                 <div class="cta-section">
                     <p class="cta-text">Join us at IIMF, where under Rajesh's visionary leadership, your aspirations transform into achievements that resonate across the world.</p>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="founder-profile-section">
+    <div class="founder-container">
+        <div class="founder-header">
+            <h2 class="founder-role">Our FOUNDER & CEO</h2>
+            <h1 class="founder-title">Meet Our Founder: A Visionary in Education & Career Development</h1>
+            <div class="title-decoration"></div>
+            <h3 class="founder-name">K.S. Dileep Kumar - Founder & CEO, Mentornets: A Legacy of Guiding Success.</h3>
+        </div>
+        
+        <div class="founder-content">
+            <div class="prologue-section">
+                <h2 class="section-title">PROLOGUE - PROFESSIONAL SUMMARY</h2>
+                <p class="section-text">K.S. Dileep Kumar, the visionary Founder & CEO of Mentornets, is a highly accomplished and seasoned education domain expert with over three decades of comprehensive experience. Renowned for his meticulous ability to assess student potential, he collaboratively designs bespoke academic roadmaps that strategically facilitate successful transitions from school to college, college to corporate, and ultimately to fulfilling careers.</p>
+                <p class="section-text">His approach is deeply rooted in career aptitude alignment, fostering innovation, building strategic partnerships, and empowering both learners and institutions to achieve their fullest potential. His diverse portfolio encompasses Education Management, Skill Development, Career Planning, and International Career Transition Guiding.</p>
+                <p class="section-text">Driven by insightful, applied creativity and a "Think out of the Box" methodology, his application concept and methodology are underscoring by three decades of ongoing success as a mentor for national and international career transitions, entrepreneurship, and startupreneurship skilling. His core philosophy centers on a deep commitment to understanding and nurturing the unique potential within each individual.</p>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="expertise-section">
+                <h2 class="section-title">About Mentornets</h2>
+                <div class="expertise-grid">
+                    <div class="expertise-item">
+                        <p class="expertise-desc">Conceptualized, developed, and launched Mentornets (www.mentornets.in), an online platform offering scientifically designed Career Aptitude Assessments.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <p class="expertise-desc">Guided 10th & +2 students in making informed career choices based on Career Aptitude Analysis and Career Mapping.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="expertise-section">
+                <h2 class="section-title">Mentor for Graduate Entrepreneurship & Start-Up Development</h2>
+                <div class="expertise-grid">
+                    <div class="expertise-item">
+                        <p class="expertise-desc">Provided strategic mentoring for young graduates aspiring to become entrepreneurs.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <p class="expertise-desc">Facilitated ideation workshops, business model development, and start-up incubation support.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <p class="expertise-desc">Helped align academic learning with real-world entrepreneurial challenges through case studies, simulations, and accelerator programs.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="expertise-section">
+                <h2 class="section-title">Trainer for Design Thinking & Disruptive Innovation</h2>
+                <div class="expertise-grid">
+                    <div class="expertise-item">
+                        <p class="expertise-desc">Designed and delivered customized training modules on Design Thinking Methodology and Disruptive Innovation Strategies.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <p class="expertise-desc">Conducted workshops and master classes for students, faculty, and corporate teams, fostering a culture of creative problem-solving and innovation.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <p class="expertise-desc">Integrated industry case studies to help participants translate theory into practical, impactful solutions.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="expertise-section">
+                <h2 class="section-title">Upskilling and Reskilling Specialist</h2>
+                <div class="expertise-grid">
+                    <div class="expertise-item">
+                        <p class="expertise-desc">Developed and executed structured Upskilling and Reskilling programs tailored for emerging industries and market demands.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <p class="expertise-desc">Focused on future-ready competencies such as Digital Literacy, Critical Thinking, AI Literacy, and Financial Acumen.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <p class="expertise-desc">Enabled career transitions for professionals through targeted learning paths and micro-credentialing.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="expertise-section">
+                <h2 class="section-title">Pedagogy and Andragogy - Curriculum Design</h2>
+                <div class="expertise-grid">
+                    <div class="expertise-item">
+                        <p class="expertise-desc">Designed outcome-driven curriculum frameworks adhering to the latest Bloom's Taxonomy principles.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <p class="expertise-desc">Customized content for diverse learner demographics, incorporating both pedagogical (K-12) and andragogical (adult learning) methodologies.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <p class="expertise-desc">Integrated project-based, experiential, and competency-based learning approaches to improve learning efficacy.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="expertise-section">
+                <h2 class="section-title">International Education & Global Partnerships</h2>
+                <div class="expertise-grid">
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">International University Liaisoning</h3>
+                        <p class="expertise-desc">Established and nurtured strategic relationships with international universities to foster global academic collaboration.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">International Internship and Exchange Program Development</h3>
+                        <p class="expertise-desc">Designed and managed cross-border internship and exchange programs to enrich student exposure and global competencies.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Immigration Policies & Compliance Guidance</h3>
+                        <p class="expertise-desc">Provided expert consultation on international immigration policies, visa documentation, and compliance regulations.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Global Partnerships & Institutional Collaborations</h3>
+                        <p class="expertise-desc">Forged enduring partnerships between educational institutions across continents to enhance academic, research, and cultural exchanges.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">International University Campus Setup in India</h3>
+                        <p class="expertise-desc">Actively engaged in end-to-end support for setting up foreign university branch campuses in India.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Cross-Cultural Communication & Relationship Building</h3>
+                        <p class="expertise-desc">Developed expertise in building relationships across diverse cultural backgrounds to foster trust and collaboration.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="expertise-section">
+                <h2 class="section-title">Strategic Management & Policy Development</h2>
+                <div class="expertise-grid">
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Academic Liaison & Policy Development</h3>
+                        <p class="expertise-desc">Acted as a bridge between academic institutions, regulatory bodies, and industry to align educational programs with policy requirements.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Career Architect for Graduate Career Transition</h3>
+                        <p class="expertise-desc">Created comprehensive career transition blueprints for final-year graduates and postgraduates.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Regulatory Compliance & Visa Processing</h3>
+                        <p class="expertise-desc">Ensured compliance with regulatory frameworks governing international education.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Educational Market Research & International Outreach</h3>
+                        <p class="expertise-desc">Conducted in-depth educational market analysis to identify opportunities for growth, partnerships, and outreach.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">National and International Education Partnership Development</h3>
+                        <p class="expertise-desc">Developed strategic national and global alliances to expand institutional footprint and student recruitment pipelines.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Policy Development & Implementation</h3>
+                        <p class="expertise-desc">Authored institutional and academic policies to foster a culture of continuous improvement and quality assurance.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="expertise-section">
+                <h2 class="section-title">Global Education Initiatives</h2>
+                <div class="expertise-grid">
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Study in India Advocacy</h3>
+                        <p class="expertise-desc">Actively promoted India as a global education hub by showcasing its rich academic heritage, affordability, and global curriculum.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Global Partnerships in Education & Institutional Collaborations</h3>
+                        <p class="expertise-desc">Established consortiums and global knowledge networks to foster innovation and shared learning among institutions.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Exchange Programs & Study Abroad Initiatives</h3>
+                        <p class="expertise-desc">Conceptualized and implemented student and faculty exchange programs to enhance global learning experiences.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Twinning Programs & Foreign Campus Setup</h3>
+                        <p class="expertise-desc">Designed and managed twinning programs (2+2, 1+1 pathways) with foreign universities.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Strategic Enrollment Management</h3>
+                        <p class="expertise-desc">Developed comprehensive strategic enrollment plans to increase admissions and improve student retention.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">International Student Journey Mapping</h3>
+                        <p class="expertise-desc">Deep insight into the needs and challenges faced by international students at each stage, allowing for the creation of supportive and effective admissions processes.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Curriculum Alignment for Credit Transfer</h3>
+                        <p class="expertise-desc">Understanding and facilitating the process of academic credit transfer between institutions.</p>
+                    </div>
+                    <div class="expertise-item">
+                        <h3 class="expertise-subtitle">Deep Understanding of Foreign Education Regulations</h3>
+                        <p class="expertise-desc">Staying abreast of and ensuring compliance with the regulations governing foreign education providers and international collaborations in relevant jurisdictions.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <p class="cta-text">Join us at Mentornets, where under K.S. Dileep Kumar's visionary leadership, your educational journey transforms into a successful global career.</p>
             </div>
         </div>
     </div>
