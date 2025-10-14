@@ -34,6 +34,210 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="/style.css" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <style>
+.chairman-profile-section {
+    background: white;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    padding: 60px 20px;
+    min-height: 100vh;
+}
+
+.chairman-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.chairman-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.chairman-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #24519a, #0f1624, #06090f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.title-decoration {
+    height: 4px;
+    width: 100px;
+    background: linear-gradient(135deg, #24519a, #0f1624, #06090f);
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+.chairman-content {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.intro-section {
+    margin-bottom: 40px;
+}
+
+.intro-text {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    text-align: justify;
+    color: #444;
+}
+
+.section-divider {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.1);
+    margin: 40px 0;
+    width: 100%;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #24519a, #0f1624, #06090f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+    padding-left: 15px;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background: linear-gradient(135deg, #24519a, #0f1624, #06090f);
+    border-radius: 3px;
+}
+
+.section-text {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    text-align: justify;
+    color: #444;
+}
+
+.achievements-grid, .corporate-grid, .vision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.achievement-item, .corporate-item, .vision-item {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 3px solid #24519a;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.achievement-item:hover, .corporate-item:hover, .vision-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.achievement-title, .corporate-title, .vision-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #24519a;
+}
+
+.achievement-desc, .corporate-desc, .vision-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.conclusion-text {
+    font-size: 1.2rem;
+    margin: 40px 0;
+    text-align: justify;
+    font-style: italic;
+    color: #444;
+}
+
+.cta-section {
+    text-align: center;
+    margin-top: 50px;
+    padding: 30px;
+    background: linear-gradient(135deg, #24519a, #0f1624, #06090f);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cta-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .chairman-title {
+        font-size: 2.4rem;
+    }
+    
+    .chairman-content {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .chairman-profile-section {
+        padding: 40px 15px;
+    }
+    
+    .chairman-title {
+        font-size: 2rem;
+    }
+    
+    .chairman-content {
+        padding: 20px;
+    }
+    
+    .achievements-grid, .corporate-grid, .vision-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .intro-text, .section-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .chairman-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 1.4rem;
+    }
+    
+    .cta-text {
+        font-size: 1.1rem;
+    }
+}
+</style>
 </head>
 
 <body class="element-wrapper">
@@ -660,7 +864,7 @@
                     </div>
                 </section>
                 <!-- End Call Action Area -->
-                <section class="ed-team position-relative section-gap">
+                <!-- <section class="ed-team position-relative section-gap">
                     <div class="container ed-container">
                         <div class="row justify-content-center">
                             <div class="col-lg-6 col-md-8 col-12">
@@ -673,7 +877,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <!-- CEO -->
+                      
                             <div class="col-md-6 col-12">
                                 <div class="ed-team__card wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
                                     <div class="ed-team__cover">
@@ -698,7 +902,7 @@
                                 </div>
                             </div>
 
-                            <!-- Manager -->
+                        
                             <div class="col-md-6 col-12">
                                 <div class="ed-team__card wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1s">
                                     <div class="ed-team__cover">
@@ -725,9 +929,125 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> -->
 
-
+<div class="chairman-profile-section">
+    <div class="chairman-container">
+        <div class="chairman-header">
+            <h1 class="chairman-title">Meet Our Chairman: Rajesh Damodharan</h1>
+            <div class="title-decoration"></div>
+        </div>
+        
+        <div class="chairman-content">
+            <div class="intro-section">
+                <p class="intro-text">In the dynamic world of global education and professional development, few leaders embody the perfect fusion of visionary foresight, practical expertise, and transformative mentorship quite like Rajesh Damodharan.</p>
+                
+                <p class="intro-text">As the Chairman and Co-Founder of the International Institute of Management and Finance (IIMF), Rajesh stands as a beacon of inspiration, guiding the institution toward unparalleled excellence in banking, management, and finance education. With a career that spans more than two decades, he has dedicated his life to empowering individuals, fostering confidence, and equipping a new generation of professionals with the tools to thrive on the international stage.</p>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="expertise-section">
+                <h2 class="section-title">A Legacy of Educational Excellence</h2>
+                <p class="section-text">Rajesh Damodharan's expertise is deeply rooted in his extensive experience across language training, corporate upskilling, and academic mentorship.</p>
+                
+                <h2 class="section-title">A Foundation Built on Educational Mastery and Innovation</h2>
+                <p class="section-text">Rajesh Damodharan's journey is a testament to his profound impact on education, rooted in a diverse array of experiences that blend language proficiency, corporate training, and academic leadership. His passion for education began with a focus on bridging gaps in communication and skill development, evolving into a comprehensive approach that prepares students for the complexities of the modern workforce.</p>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="achievements-section">
+                <h2 class="section-title">Revolutionizing Language Training and Career Pathways</h2>
+                <p class="section-text">At the heart of Rajesh's early achievements is his role as the Founder and CEO of GOOD WAY Language Academy in Punjab—a pioneering institution that has set new standards in holistic professional preparation. Under his guidance, the academy has become synonymous with transformative learning experiences, specializing in:</p>
+                
+                <div class="achievements-grid">
+                    <div class="achievement-item">
+                        <h3 class="achievement-title">Advanced English Language Mastery</h3>
+                        <p class="achievement-desc">Through meticulously designed programs, students achieve not just fluency and precision but also the nuanced confidence required to excel in multicultural environments.</p>
+                    </div>
+                    
+                    <div class="achievement-item">
+                        <h3 class="achievement-title">Career Enhancement Strategies</h3>
+                        <p class="achievement-desc">Rajesh emphasizes practical soft skills, from resume crafting and interview techniques to networking and personal branding, ensuring graduates are ready to seize opportunities in competitive job markets.</p>
+                    </div>
+                    
+                    <div class="achievement-item">
+                        <h3 class="achievement-title">Holistic Personality Development</h3>
+                        <p class="achievement-desc">His mentorship extends beyond academics, focusing on self-awareness, resilience, and personal growth to help individuals unlock their innate potential and navigate life's challenges with poise.</p>
+                    </div>
+                </div>
+                
+                <p class="section-text">Rajesh's global stature is further elevated by his certifications from esteemed international organizations, including IDP, Cambridge, and the British Council. These credentials affirm his expertise in administering and preparing candidates for rigorous examinations such as IELTS and PTE.</p>
+                
+                <p class="section-text">Moreover, his specialized training in Business English, Corporate Communication, Group Dynamics, and Public Speaking has equipped countless professionals with the eloquence and presence needed to lead discussions, deliver presentations, and influence stakeholders in high-stakes settings.</p>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="corporate-section">
+                <h2 class="section-title">Bridging Corporate Realities with Educational Ideals</h2>
+                <p class="section-text">Rajesh's influence extends deeply into the corporate realm, where his tenure as a Corporate Trainer at Infosys honed his understanding of real-world business demands. In this fast-paced, innovation-driven environment, he played a pivotal role in upskilling teams across various domains, including:</p>
+                
+                <div class="corporate-grid">
+                    <div class="corporate-item">
+                        <h3 class="corporate-title">Strategic Leadership Initiatives</h3>
+                        <p class="corporate-desc">Developing frameworks that encourage forward-thinking decision-making and long-term vision alignment.</p>
+                    </div>
+                    
+                    <div class="corporate-item">
+                        <h3 class="corporate-title">People Management Excellence</h3>
+                        <p class="corporate-desc">Training managers in motivational techniques, conflict resolution, and team-building to foster high-performing, cohesive units.</p>
+                    </div>
+                    
+                    <div class="corporate-item">
+                        <h3 class="corporate-title">Workplace Communication Optimization</h3>
+                        <p class="corporate-desc">Enhancing interpersonal and professional dialogue to improve collaboration, productivity, and organizational culture.</p>
+                    </div>
+                </div>
+                
+                <p class="section-text">This hands-on corporate exposure infuses IIMF's programs with authenticity, ensuring that theoretical knowledge is always complemented by practical insights tailored to the evolving needs of industries like finance, banking, and management.</p>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="vision-section">
+                <h2 class="section-title">Steering IIMF Toward Global Eminence</h2>
+                <p class="section-text">As Chairman of IIMF, Rajesh Damodharan channels his vast expertise into a leadership philosophy that prioritizes innovation, inclusivity, and impact. His vision is to elevate IIMF as a premier global academy, where education is not confined to classrooms but extends into the realms of real-world application and lifelong learning. He envisions an institution that produces not just skilled professionals, but ethical leaders and innovative thinkers who drive positive change in the global economy.</p>
+                
+                <p class="section-text">Under Rajesh's astute direction, IIMF operates on a robust foundation of three interconnected pillars:</p>
+                
+                <div class="vision-grid">
+                    <div class="vision-item">
+                        <h3 class="vision-title">Future-Oriented Curriculum Design</h3>
+                        <p class="vision-desc">By integrating emerging trends such as fintech, sustainable finance, and digital transformation, IIMF's programs prepare students for the jobs of tomorrow, blending cutting-edge theory with hands-on projects and industry simulations.</p>
+                    </div>
+                    
+                    <div class="vision-item">
+                        <h3 class="vision-title">Excellence in Global Communication</h3>
+                        <p class="vision-desc">Recognizing communication as the linchpin of success, Rajesh has embedded advanced English and professional discourse training into every facet of the curriculum, enabling students to articulate ideas with clarity, persuasion, and cultural sensitivity.</p>
+                    </div>
+                    
+                    <div class="vision-item">
+                        <h3 class="vision-title">Cultivating Leadership and Corporate Competencies</h3>
+                        <p class="vision-desc">Core to IIMF's ethos is the development of soft and hard skills alike—critical thinking, emotional intelligence, ethical decision-making, and adaptability—empowering graduates to excel as leaders in dynamic, high-pressure environments.</p>
+                    </div>
+                    
+                    <div class="vision-item">
+                        <h3 class="vision-title">Leadership & Corporate Skill Integration</h3>
+                        <p class="vision-desc">Embedding essential corporate skills—such as critical thinking, emotional intelligence, and professional ethics—as key enablers of career growth and high-performance leadership.</p>
+                    </div>
+                </div>
+                
+                <p class="conclusion-text">Rajesh Damodharan's unique amalgamation of international certifications, corporate acumen, and educational passion positions him as the driving force behind IIMF's ascent to global prominence. His commitment goes beyond institutional growth; it is a personal mission to mentor students toward not only securing their initial career milestones but also achieving sustained influence and fulfillment in the ever-evolving landscapes of business, finance, and beyond.</p>
+                
+                <div class="cta-section">
+                    <p class="cta-text">Join us at IIMF, where under Rajesh's visionary leadership, your aspirations transform into achievements that resonate across the world.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
                 <!-- Start About Area -->
                 <section class="ed-about section-gap position-relative">
                     <div class="container ed-container">
@@ -1275,7 +1595,7 @@
                                         </div>
                                         <div class="ed-footer__contact-info">
                                             <span>Our Location</span>
-                                            <a href="#" target="_blank">Trivandrum, Kerala, India</a>
+                                            <a href="#" target="_blank">Kochi, Kerala, India</a>
                                         </div>
                                     </div>
                                 </div>
@@ -1848,7 +2168,7 @@
                     </div>
                     <div class="ed-contact__info-content">
                         <span>Our Locati0n</span>
-                        <a href="#">IIMF Trivandrum ,Keala,673641</a>
+                        <a href="#">IIMF Kochi ,Keala,India</a>
                     </div>
                 </div>
             </div>
