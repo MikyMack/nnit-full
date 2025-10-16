@@ -121,10 +121,67 @@ router.get('/about', async (req, res) => {
     }
 });
 // About Page
+router.get('/events', async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        let user = null;
+        if (token) {
+            try {
+                const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+                user = await User.findById(decoded.id);
+            } catch (err) {
+                console.error("JWT Verification Error:", err);
+            }
+        }
 
+        const courseCategories = await Course.getCategoriesWithCount();
+        const testimonials = await Testimonial.find({ toggled: true }).sort({ createdAt: -1 }).limit(10);
 
+        // Pagination
+        const search = req.query.search ? req.query.search.trim() : '';
+        const page = parseInt(req.query.page) > 0 ? parseInt(req.query.page) : 1;
+        const limit = 6;
 
-// Contact Page
+        let query = {};
+        if (search) {
+            query.$or = [
+                { title: { $regex: search, $options: 'i' } },
+                { description: { $regex: search, $options: 'i' } }
+            ];
+        }
+
+        // You need to have Event model added to the top
+        const totalEvents = await Event.countDocuments(query);
+        const events = await Event.find(query)
+            .sort({ startDate: 1 })
+            .skip((page - 1) * limit)
+            .limit(limit);
+
+        const totalPages = Math.ceil(totalEvents / limit);
+
+        res.render('events', {
+            title: 'Events',
+            user,
+            courseCategories,
+            testimonials,
+            events,
+            currentPage: page,
+            totalPages,
+            search
+        });
+    } catch (error) {
+        res.status(500).render('events', {
+            title: 'Events',
+            user: null,
+            courseCategories: [],
+            testimonials: [],
+            events: [],
+            currentPage: 1,
+            totalPages: 1,
+            search: ''
+        });
+    }
+});
 router.get('/school-campus', async (req, res) => {
     try {
         const token = req.cookies.token;
