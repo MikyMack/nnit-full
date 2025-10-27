@@ -652,7 +652,22 @@
                         </div>
                         <div class="row">
                             <% if (courses && courses.length > 0) { %>
-                                <% courses.forEach(function(course, idx) { %>
+                                <% 
+                                    // Shuffle courses array to randomize displayed courses
+                                    function shuffle(array) {
+                                        for (let i = array.length - 1; i > 0; i--) {
+                                            const j = Math.floor(Math.random() * (i + 1));
+                                            [array[i], array[j]] = [array[j], array[i]];
+                                        }
+                                        return array;
+                                    }
+                                    let displayedCourses = [];
+                                    if (courses && courses.length > 0) {
+                                        let shuffledCourses = shuffle(courses.slice()); // Clone and shuffle
+                                        displayedCourses = shuffledCourses.slice(0, 6);
+                                    }
+                                %>
+                                <% displayedCourses.forEach(function(course, idx) { %>
                                     <div class="col-lg-6 col-xl-4 col-md-6 col-12">
                                         <div class="ed-course__card wow fadeInUp" data-wow-delay="<%= 0.2 + (idx * 0.1) %>s" data-wow-duration="1s">
                                             <a href="/course-details/<%= encodeURIComponent(course.title) %>" class="ed-course__img">
@@ -1561,6 +1576,306 @@
 
             <!-- End Footer Area  -->
         </div>
+        <!-- Lead Popup -->
+<div id="leadPopup" class="popup-overlay">
+    <div class="popup-content" id="leadPopupContent">
+      <button id="closeFormBtn" class="close-btn">&times;</button>
+  
+      <h2 class="popup-title">Your Global Career Starts Here 🌏</h2>
+      <p class="popup-subtitle">Enroll with <strong>IIMF Academy</strong> Today!</p>
+  
+      <form id="leadForm" class="popup-form">
+        <input type="text" name="fullName" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email Address" required />
+        <input type="tel" name="phone" placeholder="Phone Number" required />
+  
+        <select name="courseInterest" required>
+          <option value="">Select Course Interest</option>
+          <% courses.forEach(course => { %>
+            <option value="<%= course.title %>"><%= course.title %></option>
+          <% }) %>
+        </select>
+  
+        <p class="privacy-note">
+          🔒 Your privacy is our priority — your information will be kept strictly confidential.
+        </p>
+  
+        <button type="submit" class="submit-btn" id="leadSubmitBtn">
+          <span class="btn-text">Get Free Consultation</span>
+          <span class="btn-loading" style="display:none;">
+            <svg class="spinner" width="18" height="18" viewBox="0 0 50 50">
+              <circle
+                class="path"
+                cx="25"
+                cy="25"
+                r="20"
+                fill="none"
+                stroke="#fff"
+                stroke-width="5"
+                stroke-linecap="round"
+              />
+            </svg>
+            Loading...
+          </span>
+        </button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Thank You Popup -->
+  <div id="thankYouPopup" class="popup-overlay">
+    <div class="popup-content small" id="thankYouContent">
+      <h2 class="popup-title success">🎉 Thank You!</h2>
+      <p>We appreciate your interest! Our admissions team will contact you within 24 hours.</p>
+      <button id="closeThankYou" class="submit-btn success">Close</button>
+    </div>
+  </div>
+  
+  <!-- CSS -->
+  <style>
+  /* Overlay */
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Popup Box */
+  .popup-content {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px 30px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: center;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 999999;
+  }
+  
+  .popup-content.small {
+    max-width: 350px;
+  }
+  
+  /* Show Animation */
+  .popup-overlay.active {
+    display: flex;
+    animation: fadeIn 0.3s forwards;
+  }
+  
+  .popup-content.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  /* Close Button */
+  .close-btn {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    font-size: 24px;
+    color: #888;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .close-btn:hover {
+    color: #d33;
+  }
+  
+  /* Titles */
+  .popup-title {
+    font-size: 22px;
+    color: #1e3a8a;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .popup-title.success {
+    color: #138a35;
+  }
+  .popup-subtitle {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  /* Form Styles */
+  .popup-form input,
+  .popup-form select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+  .popup-form input:focus,
+  .popup-form select:focus {
+    border-color: #1e3a8a;
+    outline: none;
+    box-shadow: 0 0 4px rgba(30,58,138,0.4);
+  }
+  
+  /* Button */
+  .submit-btn {
+    background: linear-gradient(135deg, #1e3a8a, #16255e);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+    min-height: 44px;
+  }
+  .submit-btn:hover {
+    opacity: 0.9;
+  }
+  .submit-btn.success {
+    background: linear-gradient(135deg, #138a35, #0c5e24);
+  }
+  /* Spinner loading inside button */
+  .submit-btn .spinner {
+    animation: rotate 1s linear infinite;
+    vertical-align: middle;
+    margin-right: 7px;
+  }
+  @keyframes rotate {
+    100% { transform: rotate(360deg); }
+  }
+  .submit-btn .btn-loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  /* Privacy Note */
+  .privacy-note {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 10px;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 480px) {
+    .popup-content {
+      padding: 20px;
+      max-width: 90%;
+    }
+    .popup-title {
+      font-size: 18px;
+    }
+  }
+  </style>
+  
+  <!-- JS -->
+  <script>
+  function showPopup(id) {
+    const popup = document.getElementById(id);
+    const content = popup.querySelector(".popup-content");
+    popup.classList.add("active");
+    setTimeout(() => content.classList.add("active"), 100);
+  }
+  
+  function hidePopup(id) {
+    const popup = document.getElementById(id);
+    const content = popup.querySelector(".popup-content");
+    content.classList.remove("active");
+    setTimeout(() => {
+      popup.classList.remove("active");
+      popup.style.display = "none";
+    }, 200);
+  }
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    // Show popup after 5s
+    setTimeout(() => {
+      showPopup("leadPopup");
+    }, 5000);
+  
+    // Re-show every 20s if not submitted
+    setInterval(() => {
+      if (!document.getElementById("leadPopup").classList.contains("active")) {
+        showPopup("leadPopup");
+      }
+    }, 20000);
+  
+    // Close buttons
+    document.getElementById("closeFormBtn").onclick = () => hidePopup("leadPopup");
+    document.getElementById("closeThankYou").onclick = () => hidePopup("thankYouPopup");
+  
+    // Form submission
+    const form = document.getElementById("leadForm");
+    const submitBtn = document.getElementById("leadSubmitBtn");
+    const btnText = submitBtn.querySelector(".btn-text");
+    const btnLoading = submitBtn.querySelector(".btn-loading");
+
+    form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  // Show loading
+  btnText.style.display = "none";
+  btnLoading.style.display = "inline-flex";
+  submitBtn.disabled = true;
+
+  const formData = {
+    fullName: form.fullName.value.trim(),
+    email: form.email.value.trim(),
+    phone: form.phone.value.trim(),
+    courseInterest: form.courseInterest.value,
+  };
+
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxYWR1xenZpVQca-qXb_jdFJ2BSJfKEATB4rD56A7QH_pS_evgMsWmsZ0Ltwc8aQ-qG/exec";
+
+  try {
+    // Use FormData instead of JSON for better compatibility
+    const formDataToSend = new FormData();
+    formDataToSend.append('fullName', formData.fullName);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('phone', formData.phone);
+    formDataToSend.append('courseInterest', formData.courseInterest);
+
+    const response = await fetch(scriptURL, {
+      method: "POST",
+      mode: 'no-cors', // Add this line
+      body: formDataToSend
+    });
+
+  
+    hidePopup("leadPopup");
+    showPopup("thankYouPopup");
+    form.reset();
+    
+  } catch (err) {
+    alert("Error submitting form. Please try again.");
+  } finally {
+    // Hide loading
+    btnText.style.display = "";
+    btnLoading.style.display = "none";
+    submitBtn.disabled = false;
+  }
+});
+  });
+  </script>
     </div>
     <a href="/assesment"> <button class="magnetwave-task-orb attract">
 
@@ -2150,6 +2465,11 @@
         </div>
         <!-- End Back To Top -->
 
+  
+
+  
+  
+    
         <!-- Jquery JS -->
         <script src="/plugins/js/jquery.min.js"></script>
         <script src="/plugins/js/jquery-migrate.js"></script>
