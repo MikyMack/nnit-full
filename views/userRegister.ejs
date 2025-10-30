@@ -141,6 +141,36 @@
     <!--===== Custom script for this template =====-->
     <script src="/js/script.js"></script>
     <script src="/js/gsap-script.js"></script>
+    <script>
+        const phoneNumber = '919184400799';
+        const widgetContainer = document.querySelector('.ctw__contact-widget-container');
+        const scrollThreshold = 200; // Show icons after scrolling 200px
+
+        // Show/hide widget based on scroll position
+        function handleScroll() {
+            if (window.scrollY > scrollThreshold) {
+                widgetContainer.classList.add('ctw__visible');
+            } else {
+                widgetContainer.classList.remove('ctw__visible');
+            }
+        }
+
+        // Listen to scroll events
+        window.addEventListener('scroll', handleScroll);
+
+        // Check initial scroll position
+        handleScroll();
+
+        function openWhatsApp() {
+            const message = encodeURIComponent('Hello! I would like to get in touch.');
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function makeCall() {
+            window.location.href = `tel:+${phoneNumber}`;
+        }
+    </script>
 </body>
 
 </html>
