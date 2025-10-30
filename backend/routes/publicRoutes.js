@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
             testimonials,
             blogs
         ] = await Promise.all([
-            Course.find({ isactive: true }).sort({ createdAt: -1 }).limit(6),
+            Course.find({ isactive: true }).sort({ createdAt: -1 }),
             Course.getCategoriesWithCount(),
             Event.find({ isActive: true }).sort({ createdAt: -1 }).limit(3),
             Testimonial.find({ toggled: true }).sort({ createdAt: -1 }).limit(10),
